@@ -14,9 +14,9 @@ if (toggle && links) {
   });
 }
 
-// Duplicate strip for infinite scroll
-const strip = document.querySelector('.strip-inner');
-if (strip) {
-  const clone = strip.cloneNode(true);
-  strip.parentElement.appendChild(clone);
-}
+// // Duplicate strip for infinite scroll
+// const strip = document.querySelector('.strip-inner');
+// if (strip) {
+//   const clone = strip.cloneNode(true);
+//   strip.parentElement.appendChild(clone);
+// }
