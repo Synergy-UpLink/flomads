@@ -1,238 +1,175 @@
-<!DOCTYPE html>
-<html lang="en">
+---
+layout: default
+title: false
+description: "Two humans, one pirate hedgehog, and the open road — living full-time across the globe one petsit at a time."
+---
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Flomads — noMADS going with the FLOw</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=Cinzel+Decorative:wght@700&display=swap"
-    rel="stylesheet" />
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Flomads" />
-  <link rel="manifest" href="/site.webmanifest" />
-</head>
-
-<body>
-
-  <!-- NAV -->
-  <nav id="main-nav">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo">
-        <img src="images/henry.png" alt="Henry S. Pricklesworth III" class="nav-henry" />
-        <span class="nav-title">FLOMADS</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="now.html">Now</a></li>
-      </ul>
-      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="wave wave1"></div>
+    <div class="wave wave2"></div>
+    <div class="wave wave3"></div>
+    <div class="stars"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">⚓ est. 2020</p>
+    <h1 class="hero-headline">
+      <span class="line1">no<em>MADS</em></span>
+      <span class="line2">going with</span>
+      <span class="line3">the <em>FLO</em></span>
+    </h1>
+    <p class="hero-sub">Two humans, one pirate hedgehog, and the open road — living full-time across the globe one petsit at a time.</p>
+    <div class="hero-cta">
+      <a href="{{ '/about/' | relative_url }}" class="btn btn-primary">Meet the Crew</a>
+      <a href="{{ '/now/' | relative_url }}" class="btn btn-ghost">Where Are We Now?</a>
     </div>
-  </nav>
+  </div>
+  <div class="hero-henry">
+    <img src="{{ '/assets/images/henry.png' | relative_url }}" alt="Henry S. Pricklesworth III, Chief Navigator" />
+    <p class="henry-caption">Chief Navigator &amp; Morale Officer</p>
+  </div>
+</section>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg">
-      <div class="wave wave1"></div>
-      <div class="wave wave2"></div>
-      <div class="wave wave3"></div>
-      <div class="stars"></div>
-    </div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">⚓ est. 2020</p>
-      <h1 class="hero-headline">
-        <span class="line1">no<em>MADS</em></span>
-        <span class="line2">going with</span>
-        <span class="line3">the <em>FLO</em></span>
-      </h1>
-      <p class="hero-sub">Two humans, one pirate hedgehog, and the open road — living full-time across the globe one
-        petsit at a time.</p>
-      <div class="hero-cta">
-        <a href="about.html" class="btn btn-primary">Meet the Crew</a>
-        <a href="now.html" class="btn btn-ghost">Where Are We Now?</a>
+<!-- INTRO STRIP -->
+<section class="intro-strip">
+  <div class="strip-inner">
+    <span>🌍 Full-Time Travelers</span>
+    <span class="divider">✦</span>
+    <span>⛵ Former Liveaboards</span>
+    <span class="divider">✦</span>
+    <span>🐾 TrustedHouseSitters</span>
+    <span class="divider">✦</span>
+    <span>🌿 Future Finca Farmers</span>
+    <span class="divider">✦</span>
+    <span>🌍 Full-Time Travelers</span>
+    <span class="divider">✦</span>
+    <span>⛵ Former Liveaboards</span>
+    <span class="divider">✦</span>
+    <span>🐾 TrustedHouseSitters</span>
+    <span class="divider">✦</span>
+    <span>🌿 Future Finca Farmers</span>
+    <span class="divider">✦</span>
+  </div>
+</section>
+
+<!-- WHAT IS A FLOMAD -->
+<section class="section what-section">
+  <div class="container">
+    <div class="what-grid">
+      <div class="what-text">
+        <h2>What's a Flomad?</h2>
+        <p>We used to call ourselves FLOating noMADS — two people who sold the house, shed the stuff, and moved aboard a sailboat. These days the boat's ashore, but the spirit lives on: noMADS going with the FLO.</p>
+        <p>Since 2020 we've been threading our way across the planet — petsitting in exchange for a home, renting long enough to really <em>live</em> somewhere, and slowly building toward a permanent base on a finca in Ecuador where we can grow food, make things with our hands, and host the kind of community we've always wanted.</p>
+        <p>Along the way: birds, boats, wood carving, harmonica noodling, rooftop drinks, and a hedgehog named Henry.</p>
       </div>
-    </div>
-    <div class="hero-henry">
-      <img src="images/henry.png" alt="Henry S. Pricklesworth III, Chief Navigator" />
-      <p class="henry-caption">Chief Navigator &amp; Morale Officer</p>
-    </div>
-  </section>
-
-  <!-- INTRO STRIP -->
-  <section class="intro-strip">
-    <div class="strip-inner">
-      <span>🌍 Full-Time Travelers</span>
-      <span class="divider">✦</span>
-      <span>⛵ Former Liveaboards</span>
-      <span class="divider">✦</span>
-      <span>🐾 TrustedHouseSitters</span>
-      <span class="divider">✦</span>
-      <span>🌿 Future Finca Farmers</span>
-      <span class="divider">✦</span>
-    </div>
-  </section>
-
-  <!-- WHAT IS A FLOMAD -->
-  <section class="section what-section">
-    <div class="container">
-      <div class="what-grid">
-        <div class="what-text">
-          <h2>What's a Flomad?</h2>
-          <p>We used to call ourselves FLOating noMADS — two people who sold the house, shed the stuff, and moved aboard
-            a sailboat. These days the boat's ashore, but the spirit lives on: noMADS going with the FLO.</p>
-          <p>Since 2020 we've been threading our way across the planet — petsitting in exchange for a home, renting long
-            enough to really <em>live</em> somewhere, and slowly building toward a permanent base on a finca in Ecuador
-            where we can grow food, make things with our hands, and host the kind of community we've always wanted.</p>
-          <p>Along the way: birds, boats, wood carving, harmonica noodling, rooftop drinks, and a hedgehog named Henry.
-          </p>
+      <div class="what-cards">
+        <div class="stat-card">
+          <span class="stat-num">4+</span>
+          <span class="stat-label">Years on the Road</span>
         </div>
-        <div class="what-cards">
-          <div class="stat-card">
-            <span class="stat-num">4+</span>
-            <span class="stat-label">Years on the Road</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-num">10+</span>
-            <span class="stat-label">Countries & Destinations</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-num">1</span>
-            <span class="stat-label">Pirate Hedgehog</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-num">∞</span>
-            <span class="stat-label">Gnomes Left Behind</span>
-          </div>
+        <div class="stat-card">
+          <span class="stat-num">10+</span>
+          <span class="stat-label">Countries &amp; Destinations</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">1</span>
+          <span class="stat-label">Pirate Hedgehog</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">∞</span>
+          <span class="stat-label">Gnomes Left Behind</span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- HOW WE TRAVEL -->
-  <section class="section travel-section">
-    <div class="container">
-      <h2 class="section-title center">How We Do It</h2>
-      <div class="travel-grid">
-        <div class="travel-card">
-          <div class="travel-icon">🐾</div>
-          <h3>Petsitting</h3>
-          <p>We trade care for accommodation through TrustedHouseSitters. Dogs, cats, chickens — we've loved them all.
-            Currently bunking with a pair of scruffy, lovable mutts in the English countryside.</p>
-        </div>
-        <div class="travel-card">
-          <div class="travel-icon">🏡</div>
-          <h3>Long-Term Rentals</h3>
-          <p>We prefer to stay put long enough to find the good coffee shop, learn the neighborhood rhythms, and feel
-            like locals. Two months is a minimum; longer is better.</p>
-        </div>
-        <div class="travel-card">
-          <div class="travel-icon">⛵</div>
-          <h3>By Sea (Formerly)</h3>
-          <p>We spent years living aboard a Pearson 365 ketch, sailing the Florida coast and spending all of 2024 in the
-            Bahamas. The boat chapter is closing — but the salt's still in us.</p>
-        </div>
-        <div class="travel-card">
-          <div class="travel-icon">💻</div>
-          <h3>Working Remotely</h3>
-          <p>Tech consulting, software engineering, and whatever the internet makes possible keeps us funded and mobile.
-            Wi-fi is a prerequisite; dress codes are not.</p>
-        </div>
+<!-- HOW WE TRAVEL -->
+<section class="section travel-section">
+  <div class="container">
+    <h2 class="section-title center">How We Do It</h2>
+    <div class="travel-grid">
+      <div class="travel-card">
+        <div class="travel-icon">🐾</div>
+        <h3>Petsitting</h3>
+        <p>We trade care for accommodation through TrustedHouseSitters. Dogs, cats, chickens — we've loved them all. Currently bunking with a pair of scruffy, lovable mutts in the English countryside.</p>
+      </div>
+      <div class="travel-card">
+        <div class="travel-icon">🏡</div>
+        <h3>Long-Term Rentals</h3>
+        <p>We prefer to stay put long enough to find the good coffee shop, learn the neighborhood rhythms, and feel like locals. Two months is a minimum; longer is better.</p>
+      </div>
+      <div class="travel-card">
+        <div class="travel-icon">⛵</div>
+        <h3>By Sea (Formerly)</h3>
+        <p>We spent years living aboard a Pearson 365 ketch, sailing the Florida coast and spending all of 2024 in the Bahamas. The boat chapter is closing — but the salt's still in us.</p>
+      </div>
+      <div class="travel-card">
+        <div class="travel-icon">💻</div>
+        <h3>Working Remotely</h3>
+        <p>Tech consulting, software engineering, and whatever the internet makes possible keeps us funded and mobile. Wi-fi is a prerequisite; dress codes are not.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PASSIONS -->
-  <section class="section passion-section">
-    <div class="container">
-      <h2 class="section-title center">Things We Love</h2>
-      <div class="passion-list">
-        <div class="passion-item">
-          <span class="passion-icon">🦜</span>
-          <div>
-            <h4>Birding</h4>
-            <p>From Bahamian shorebirds to English robins perched on fence posts — birds are everywhere if you slow down
-              enough to look.</p>
-          </div>
-        </div>
-        <div class="passion-item">
-          <span class="passion-icon">🪵</span>
-          <div>
-            <h4>Wood & Stone Carving</h4>
-            <p>One of us carves gnomes, animals, and figures from wood and stone. They get left behind at every sit —
-              little gifts for the next person who opens the garden shed.</p>
-          </div>
-        </div>
-        <div class="passion-item">
-          <span class="passion-icon">🎵</span>
-          <div>
-            <h4>Harmonica</h4>
-            <p>The other one is learning. Slowly. Inconsistently. But with great enthusiasm.</p>
-          </div>
-        </div>
-        <div class="passion-item">
-          <span class="passion-icon">🌱</span>
-          <div>
-            <h4>Growing Things</h4>
-            <p>The long game is a finca — land, soil, seeds, and the kind of self-sufficiency that feels less like
-              prepping and more like common sense.</p>
-          </div>
-        </div>
-        <div class="passion-item">
-          <span class="passion-icon">🍹</span>
-          <div>
-            <h4>Rooftop Hours</h4>
-            <p>Drinks on a terrace, a park grill at golden hour, a table outside a mercado — this is how we like to
-              socialize. Al fresco, always.</p>
-          </div>
-        </div>
-        <div class="passion-item">
-          <span class="passion-icon">🗺️</span>
-          <div>
-            <h4>Slow Travel</h4>
-            <p>We're not collecting passport stamps. We're learning where the sun goes in the afternoon and which bakery
-              opens first.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA BANNER -->
-  <section class="cta-banner">
-    <div class="container center">
-      <h2>Come along for the ride.</h2>
-      <p>We don't have a newsletter (yet). But you can find out where we are right now, and what we're up to.</p>
-      <a href="now.html" class="btn btn-primary">See Our Now Page →</a>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <img src="images/henry.png" alt="Henry" class="footer-henry" />
+<!-- PASSIONS -->
+<section class="section passion-section">
+  <div class="container">
+    <h2 class="section-title center">Things We Love</h2>
+    <div class="passion-list">
+      <div class="passion-item">
+        <span class="passion-icon">🦜</span>
         <div>
-          <p class="footer-title">The Flomads</p>
-          <p class="footer-sub">noMADS going with the FLO</p>
+          <h4>Birding</h4>
+          <p>From Bahamian shorebirds to English robins perched on fence posts — birds are everywhere if you slow down enough to look.</p>
         </div>
       </div>
-      <nav class="footer-nav">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="now.html">Now</a>
-      </nav>
-      <p class="footer-copy">Made with ☕ &amp; 🗺️ somewhere in the world · flomads.com</p>
+      <div class="passion-item">
+        <span class="passion-icon">🪵</span>
+        <div>
+          <h4>Wood &amp; Stone Carving</h4>
+          <p>One of us carves gnomes, animals, and figures from wood and stone. They get left behind at every sit — little gifts for the next person who opens the garden shed.</p>
+        </div>
+      </div>
+      <div class="passion-item">
+        <span class="passion-icon">🎵</span>
+        <div>
+          <h4>Harmonica</h4>
+          <p>The other one is learning. Slowly. Inconsistently. But with great enthusiasm.</p>
+        </div>
+      </div>
+      <div class="passion-item">
+        <span class="passion-icon">🌱</span>
+        <div>
+          <h4>Growing Things</h4>
+          <p>The long game is a finca — land, soil, seeds, and the kind of self-sufficiency that feels less like prepping and more like common sense.</p>
+        </div>
+      </div>
+      <div class="passion-item">
+        <span class="passion-icon">🍹</span>
+        <div>
+          <h4>Rooftop Hours</h4>
+          <p>Drinks on a terrace, a park grill at golden hour, a table outside a mercado — this is how we like to socialize. Al fresco, always.</p>
+        </div>
+      </div>
+      <div class="passion-item">
+        <span class="passion-icon">🗺️</span>
+        <div>
+          <h4>Slow Travel</h4>
+          <p>We're not collecting passport stamps. We're learning where the sun goes in the afternoon and which bakery opens first.</p>
+        </div>
+      </div>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script src="js/nav.js"></script>
-</body>
-
-</html>
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="container center">
+    <h2>Come along for the ride.</h2>
+    <p>We don't have a newsletter (yet). But you can find out where we are right now, and what we're up to.</p>
+    <a href="{{ '/now/' | relative_url }}" class="btn btn-primary">See Our Now Page →</a>
+  </div>
+</section>

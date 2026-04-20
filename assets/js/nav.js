@@ -12,11 +12,19 @@ if (toggle && links) {
     links.classList.toggle('open');
     toggle.textContent = links.classList.contains('open') ? '✕' : '☰';
   });
+
+  // Close mobile nav when a link is clicked
+  links.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      links.classList.remove('open');
+      toggle.textContent = '☰';
+    });
+  });
 }
 
-// // Duplicate strip for infinite scroll
-// const strip = document.querySelector('.strip-inner');
-// if (strip) {
-//   const clone = strip.cloneNode(true);
-//   strip.parentElement.appendChild(clone);
-// }
+// Duplicate intro strip for seamless infinite scroll
+const strip = document.querySelector('.strip-inner');
+if (strip) {
+  const clone = strip.cloneNode(true);
+  strip.parentElement.appendChild(clone);
+}

@@ -1,0 +1,39 @@
+title: "The Flomads"
+tagline: "noMADS going with the FLO"
+description: "Two humans, one pirate hedgehog, and the open road — living full-time across the globe one petsit at a time."
+url: "https://flomads.com"
+baseurl: ""
+
+author:
+  name: "The Flomads"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - .gitignore
+  - node_modules/
+
+# Plugins (safe for GitHub Pages)
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Collections (for future use, e.g. posts/journal)
+# collections:
+#   journal:
+#     output: true
+#     permalink: /journal/:slug/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"

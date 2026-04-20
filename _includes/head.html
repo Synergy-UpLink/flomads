@@ -1,0 +1,23 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }} — {{ site.tagline }}{% endif %}</title>
+<meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet" />
+
+<!-- Styles -->
+<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}" />
+
+<!-- Favicons -->
+<link rel="icon" type="image/png" href="{{ '/favicon-96x96.png' | relative_url }}" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="{{ '/favicon.svg' | relative_url }}" />
+<link rel="shortcut icon" href="{{ '/favicon.ico' | relative_url }}" />
+<link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | relative_url }}" />
+<meta name="apple-mobile-web-app-title" content="Flomads" />
+<link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}" />
+
+<!-- SEO -->
+{% seo %}
