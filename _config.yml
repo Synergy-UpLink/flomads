@@ -37,3 +37,12 @@ defaults:
       path: ""
     values:
       layout: "default"
+  - scope:
+      path: "sit-with-us"
+    values:
+      sitemap: false
+      robots: "noindex, nofollow"
+
+# Exclude hidden reference page from sitemap
+defaults_sitemap_exclude:
+  - sit-with-us

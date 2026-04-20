@@ -1,0 +1,584 @@
+---
+layout: default
+title: "Flomads — Sitter References"
+description: "Private reference page for prospective homeowners."
+sitemap: false
+robots: noindex
+---
+
+{% assign cfg = site.data.sits.access %}
+
+<style>
+/* ── Gate overlay ─────────────────────────────────────── */
+#gate {
+  position: fixed; inset: 0; z-index: 9000;
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  padding: 2rem;
+  transition: opacity 0.4s ease;
+}
+#gate.unlocked { opacity: 0; pointer-events: none; }
+.gate-box {
+  max-width: 420px; width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.5rem;
+  text-align: center;
+}
+.gate-box img { width: 72px; border-radius: 50%; border: 2px solid var(--gold); margin: 0 auto 1.5rem; }
+.gate-box h2 { font-size: 1.6rem; margin-bottom: 0.4rem; }
+.gate-box p { color: var(--cream-dim); font-size: 0.95rem; margin-bottom: 1.8rem; }
+.gate-input {
+  width: 100%; padding: 0.75rem 1rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius);
+  color: var(--cream); font-family: var(--font-body); font-size: 1rem;
+  margin-bottom: 1rem; outline: none;
+  transition: border-color 0.2s;
+}
+.gate-input:focus { border-color: var(--gold); }
+.gate-error { color: #e74c3c; font-size: 0.85rem; margin-bottom: 1rem; display: none; }
+.gate-error.show { display: block; }
+
+/* ── Page layout ──────────────────────────────────────── */
+.ref-page { padding-top: 5rem; }
+
+/* ── Section headings ─────────────────────────────────── */
+.ref-section { padding: 4rem 1.5rem; }
+.ref-section + .ref-section { border-top: 1px solid rgba(255,255,255,0.06); }
+.ref-header { text-align: center; margin-bottom: 3rem; }
+.ref-header h2 { margin-bottom: 0.5rem; }
+.ref-header p { color: var(--cream-dim); max-width: 560px; margin: 0 auto; }
+
+/* ── Hero strip ───────────────────────────────────────── */
+.ref-hero {
+  background: linear-gradient(135deg, var(--navy-mid), var(--navy));
+  border-bottom: 1px solid var(--border);
+  padding: 4rem 1.5rem 3rem;
+  text-align: center;
+}
+.ref-hero img { width: 80px; border-radius: 50%; border: 3px solid var(--gold); margin: 0 auto 1.2rem; }
+.ref-hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 0.5rem; }
+.ref-hero p { color: var(--cream-dim); max-width: 600px; margin: 0 auto; }
+
+/* ── Contact ──────────────────────────────────────────── */
+.contact-grid {
+  display: flex; flex-wrap: wrap; gap: 1rem;
+  justify-content: center; max-width: 700px; margin: 0 auto;
+}
+.contact-card {
+  display: flex; align-items: center; gap: 0.8rem;
+  background: rgba(201,146,42,0.08);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  transition: all 0.2s;
+  color: var(--cream);
+}
+.contact-card:hover { background: rgba(201,146,42,0.16); border-color: var(--gold); color: var(--gold-light); transform: translateY(-2px); }
+.contact-card .cc-icon { font-size: 1.4rem; }
+.contact-card .cc-label { font-size: 0.88rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.1rem; }
+.contact-card .cc-value { font-size: 0.95rem; color: var(--cream-dim); }
+
+/* ── Map ──────────────────────────────────────────────── */
+#sit-map { height: 420px; border-radius: var(--radius-lg); border: 1px solid var(--border); overflow: hidden; }
+
+/* ── Testimonials grid ────────────────────────────────── */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px; margin: 0 auto;
+}
+.testi-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  position: relative;
+  transition: all 0.2s;
+}
+.testi-card:hover { border-color: var(--border); background: rgba(255,255,255,0.06); }
+.testi-card::before { content: '\201C'; font-family: var(--font-display); font-size: 4rem; color: var(--gold); opacity: 0.3; position: absolute; top: 0.5rem; left: 1.2rem; line-height: 1; }
+.testi-card blockquote { font-family: var(--font-display); font-style: italic; font-size: 1rem; line-height: 1.7; color: var(--cream); margin-bottom: 1.2rem; padding-top: 1.5rem; }
+.testi-meta { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 0.8rem; }
+.testi-name { font-weight: 600; font-size: 0.9rem; color: var(--gold-light); }
+.testi-loc { font-size: 0.8rem; color: var(--text-muted); }
+.testi-platform { display: inline-block; font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--navy); background: var(--gold); border-radius: 20px; padding: 0.15rem 0.6rem; margin-top: 0.4rem; }
+
+/* ── Sit entries ──────────────────────────────────────── */
+.sit-entry {
+  max-width: 960px; margin: 0 auto 5rem;
+  padding: 2.5rem;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-lg);
+}
+.sit-entry.is-current { border-color: rgba(201,146,42,0.4); background: rgba(201,146,42,0.04); }
+.sit-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+.sit-title-group h3 { font-size: 1.5rem; margin-bottom: 0.2rem; }
+.sit-meta { font-size: 0.82rem; color: var(--text-muted); letter-spacing: 0.05em; }
+.sit-badge { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; background: var(--gold); color: var(--navy); padding: 0.25rem 0.8rem; border-radius: 20px; white-space: nowrap; align-self: flex-start; }
+
+/* Slideshow */
+.slideshow { position: relative; border-radius: var(--radius); overflow: hidden; background: rgba(0,0,0,0.3); margin-bottom: 1.5rem; aspect-ratio: 16/9; }
+.slideshow-track { display: flex; height: 100%; transition: transform 0.45s cubic-bezier(0.4,0,0.2,1); }
+.slide { flex: 0 0 100%; height: 100%; }
+.slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.slide-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.04); color: var(--text-muted); font-size: 0.85rem; flex-direction: column; gap: 0.5rem; }
+.slide-placeholder span { font-size: 2rem; }
+.slideshow-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(13,31,53,0.75); border: 1px solid var(--border);
+  color: var(--cream); width: 40px; height: 40px;
+  border-radius: 50%; cursor: pointer; font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; backdrop-filter: blur(4px);
+}
+.slideshow-btn:hover { background: rgba(201,146,42,0.3); border-color: var(--gold); }
+.slideshow-btn.prev { left: 0.75rem; }
+.slideshow-btn.next { right: 0.75rem; }
+.slideshow-dots { display: flex; gap: 0.4rem; justify-content: center; margin-top: 0.6rem; }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.2); cursor: pointer; transition: background 0.2s; }
+.dot.active { background: var(--gold); }
+.album-link { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--gold-light); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.4rem 0.9rem; margin-top: 0.5rem; transition: all 0.2s; }
+.album-link:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Sit testimonial inline */
+.sit-testimonial {
+  margin: 1.5rem 0;
+  padding: 1.2rem 1.5rem;
+  background: rgba(201,146,42,0.07);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.sit-testimonial blockquote { font-family: var(--font-display); font-style: italic; color: var(--cream); line-height: 1.65; margin-bottom: 0.5rem; }
+.sit-testimonial cite { font-size: 0.82rem; color: var(--gold); }
+
+/* Animal profiles */
+.animals-heading { font-size: 1rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin: 2rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+.animals-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; }
+.animal-card {
+  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all 0.2s;
+}
+.animal-card:hover { border-color: var(--border); transform: translateY(-2px); }
+.animal-photo { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+.animal-photo-placeholder { width: 100%; aspect-ratio: 4/3; background: rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+.animal-body { padding: 1.2rem; }
+.animal-name { font-family: var(--font-display); font-size: 1.15rem; color: var(--cream); margin-bottom: 0.2rem; }
+.animal-breed { font-size: 0.8rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.8rem; }
+.animal-section { margin-bottom: 0.7rem; }
+.animal-section h6 { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.2rem; font-family: var(--font-body); font-weight: 600; }
+.animal-section p { font-size: 0.88rem; color: var(--cream-dim); line-height: 1.55; margin: 0; }
+.challenge-badge { display: inline-block; font-size: 0.7rem; background: rgba(192,57,43,0.2); border: 1px solid rgba(192,57,43,0.4); color: #e88; border-radius: 4px; padding: 0.1rem 0.5rem; margin-bottom: 0.4rem; }
+
+/* ── Access controls panel ────────────────────────────── */
+.access-panel {
+  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 500;
+}
+.access-toggle-btn {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(13,31,53,0.9); border: 1px solid var(--border);
+  color: var(--gold); cursor: pointer; font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(8px); transition: all 0.2s;
+}
+.access-toggle-btn:hover { border-color: var(--gold); background: rgba(201,146,42,0.15); }
+.access-drawer {
+  position: absolute; bottom: 54px; right: 0;
+  background: var(--navy-mid); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 1.2rem 1.5rem;
+  min-width: 260px; display: none; box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+.access-drawer.open { display: block; }
+.access-drawer h4 { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+.access-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.8rem; gap: 1rem; }
+.access-row label { font-size: 0.88rem; color: var(--cream-dim); }
+.toggle-switch { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.toggle-track {
+  position: absolute; inset: 0; border-radius: 11px;
+  background: rgba(255,255,255,0.15); cursor: pointer; transition: background 0.2s;
+}
+.toggle-track::after {
+  content: ''; position: absolute; width: 16px; height: 16px;
+  border-radius: 50%; background: white; top: 3px; left: 3px;
+  transition: transform 0.2s;
+}
+.toggle-switch input:checked + .toggle-track { background: var(--gold); }
+.toggle-switch input:checked + .toggle-track::after { transform: translateX(18px); }
+.access-note { font-size: 0.75rem; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.07); padding-top: 0.8rem; margin-top: 0.4rem; }
+
+@media (max-width: 640px) {
+  .sit-entry { padding: 1.5rem 1rem; }
+  .animals-grid { grid-template-columns: 1fr; }
+  .contact-grid { flex-direction: column; align-items: stretch; }
+}
+</style>
+
+<!-- ── Gate overlay ──────────────────────────────────────── -->
+<div id="gate">
+  <div class="gate-box">
+    <img src="{{ '/assets/images/henry.png' | relative_url }}" alt="Henry" />
+    <h2>Flomads References</h2>
+    <p>This page is private. Please enter the password to continue.</p>
+    <p class="gate-error" id="gate-error">That's not right — try again.</p>
+    <input type="password" id="gate-pw" class="gate-input" placeholder="Password" autocomplete="current-password" />
+    <button class="btn btn-primary" id="gate-submit" style="width:100%">Enter →</button>
+  </div>
+</div>
+
+<!-- ── Page content (hidden until unlocked) ─────────────── -->
+<div id="ref-content" style="display:none">
+
+  <!-- Hero -->
+  <div class="ref-hero">
+    <img src="{{ '/assets/images/henry.png' | relative_url }}" alt="Henry S. Pricklesworth III" />
+    <h1>The Flomads — Sitter References</h1>
+    <p>Full-time house and pet sitters. Below you'll find testimonials from previous homeowners, profiles of animals in our care, and how to reach us.</p>
+  </div>
+
+  <!-- Contact -->
+  <section class="ref-section" style="background: var(--navy-mid);">
+    <div class="container">
+      <div class="ref-header">
+        <h2>Get In Touch</h2>
+        <p>We'd love to hear about your sit. Reach out through any of the channels below.</p>
+      </div>
+      <div class="contact-grid">
+        {% for c in site.data.sits.contact %}{% if c.primary %}
+        <a href="{% if c.type == 'email' %}mailto:{{ c.value }}{% elsif c.type == 'phone' %}tel:{{ c.value }}{% else %}{{ c.value }}{% endif %}"
+           class="contact-card" {% unless c.type == 'email' or c.type == 'phone' %}target="_blank" rel="noopener"{% endunless %}>
+          <span class="cc-icon">{% if c.type == 'email' %}✉️{% elsif c.type == 'phone' %}📞{% elsif c.type == 'trustedhousesitters' %}🐾{% elsif c.type == 'facebook' %}📘{% elsif c.type == 'instagram' %}📸{% elsif c.type == 'twitter' %}🐦{% elsif c.type == 'whatsapp' %}💬{% else %}🔗{% endif %}</span>
+          <div>
+            <div class="cc-label">{{ c.type | replace: '-', ' ' | replace: '_', ' ' }}</div>
+            <div class="cc-value">{{ c.label }}</div>
+          </div>
+        </a>
+        {% endif %}{% endfor %}
+      </div>
+      {% assign secondary = site.data.sits.contact | where_exp: "c", "c.primary != true" %}
+      {% if secondary.size > 0 %}
+      <div class="contact-grid" style="margin-top:1rem">
+        {% for c in secondary %}
+        <a href="{% if c.type == 'email' %}mailto:{{ c.value }}{% elsif c.type == 'phone' %}tel:{{ c.value }}{% else %}{{ c.value }}{% endif %}"
+           class="contact-card" {% unless c.type == 'email' or c.type == 'phone' %}target="_blank" rel="noopener"{% endunless %}>
+          <span class="cc-icon">{% if c.type == 'email' %}✉️{% elsif c.type == 'phone' %}📞{% elsif c.type == 'trustedhousesitters' %}🐾{% elsif c.type == 'facebook' %}📘{% elsif c.type == 'instagram' %}📸{% else %}🔗{% endif %}</span>
+          <div>
+            <div class="cc-label">{{ c.type }}</div>
+            <div class="cc-value">{{ c.label }}</div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- Map -->
+  <section class="ref-section">
+    <div class="container">
+      <div class="ref-header">
+        <h2>Where We've Sat</h2>
+        <p>Every location we've called home for a sit. Gold pin = current.</p>
+      </div>
+      <div id="sit-map"></div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="ref-section" style="background: var(--navy-mid);">
+    <div class="container">
+      <div class="ref-header">
+        <h2>What Homeowners Say</h2>
+      </div>
+      <div class="testimonials-grid">
+        {% for t in site.data.sits.testimonials %}{% if t.quote != "" %}
+        <div class="testi-card">
+          <blockquote>{{ t.quote }}</blockquote>
+          <div class="testi-meta">
+            <div class="testi-name">{{ t.name }}</div>
+            <div class="testi-loc">{{ t.location }}</div>
+            {% if t.platform %}<span class="testi-platform">{{ t.platform }}</span>{% endif %}
+          </div>
+        </div>
+        {% endif %}{% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Sit entries -->
+  <section class="ref-section">
+    <div class="container">
+      <div class="ref-header">
+        <h2>Sits in Detail</h2>
+        <p>Each sit, with animal profiles, care notes, and any challenges we navigated.</p>
+      </div>
+
+      {% for sit in site.data.sits.sits %}
+      <div class="sit-entry{% if sit.current %} is-current{% endif %}" id="{{ sit.id }}">
+        <div class="sit-header">
+          <div class="sit-title-group">
+            <h3>{{ sit.flag }} {{ sit.location }}, {{ sit.country }}</h3>
+            <div class="sit-meta">{{ sit.dates }}{% if sit.owners %} · Owners: {{ sit.owners }}{% endif %}</div>
+          </div>
+          {% if sit.current %}<span class="sit-badge">✦ Current Sit</span>{% endif %}
+        </div>
+
+        <!-- Slideshow -->
+        {% if sit.photos.slideshow.size > 0 or sit.photos.album_url != "" %}
+        <div>
+          {% if sit.photos.slideshow.size > 0 %}
+          <div class="slideshow" id="ss-{{ sit.id }}">
+            <div class="slideshow-track">
+              {% for img in sit.photos.slideshow %}
+              <div class="slide">
+                <img src="{{ '/assets/images/sits/' | append: img | relative_url }}" alt="Photo from {{ sit.location }}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'slide-placeholder\'><span>📷</span>{{ img }}</div>'" />
+              </div>
+              {% endfor %}
+            </div>
+            {% if sit.photos.slideshow.size > 1 %}
+            <button class="slideshow-btn prev" onclick="slidePrev('{{ sit.id }}')" aria-label="Previous">‹</button>
+            <button class="slideshow-btn next" onclick="slideNext('{{ sit.id }}')" aria-label="Next">›</button>
+            {% endif %}
+          </div>
+          {% if sit.photos.slideshow.size > 1 %}
+          <div class="slideshow-dots" id="dots-{{ sit.id }}">
+            {% for img in sit.photos.slideshow %}
+            <span class="dot{% if forloop.first %} active{% endif %}" onclick="slideTo('{{ sit.id }}', {{ forloop.index0 }})"></span>
+            {% endfor %}
+          </div>
+          {% endif %}
+          {% else %}
+          <div class="slideshow">
+            <div class="slide-placeholder"><span>📷</span><span>Photos coming soon</span></div>
+          </div>
+          {% endif %}
+          {% if sit.photos.album_url != "" %}
+          <a href="{{ sit.photos.album_url }}" class="album-link" target="_blank" rel="noopener">📂 {{ sit.photos.album_label }}</a>
+          {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- Inline testimonial -->
+        {% if sit.testimonial.quote != "" %}
+        <div class="sit-testimonial">
+          <blockquote>"{{ sit.testimonial.quote }}"</blockquote>
+          <cite>— {{ sit.testimonial.name }}</cite>
+        </div>
+        {% endif %}
+
+        <!-- Animal profiles -->
+        {% if sit.animals.size > 0 %}
+        <div class="animals-heading">Animals in Our Care</div>
+        <div class="animals-grid">
+          {% for animal in sit.animals %}
+          <div class="animal-card">
+            {% if animal.photo != "" %}
+            <img class="animal-photo"
+                 src="{{ '/assets/images/sits/' | append: animal.photo | relative_url }}"
+                 alt="{{ animal.name }}"
+                 loading="lazy"
+                 onerror="this.outerHTML='<div class=\'animal-photo-placeholder\'>{% if animal.species == \'Dog\' %}🐕{% elsif animal.species == \'Cat\' %}🐈{% else %}🐾{% endif %}</div>'" />
+            {% else %}
+            <div class="animal-photo-placeholder">{% if animal.species == "Dog" %}🐕{% elsif animal.species == "Cat" %}🐈{% else %}🐾{% endif %}</div>
+            {% endif %}
+            <div class="animal-body">
+              <div class="animal-name">{{ animal.name }}</div>
+              <div class="animal-breed">{{ animal.species }}{% if animal.breed %} · {{ animal.breed }}{% endif %}{% if animal.age %} · {{ animal.age }}{% endif %}</div>
+              {% if animal.personality != "" %}
+              <div class="animal-section">
+                <h6>Personality</h6>
+                <p>{{ animal.personality }}</p>
+              </div>
+              {% endif %}
+              {% if animal.care_notes != "" %}
+              <div class="animal-section">
+                <h6>Care Notes</h6>
+                <p>{{ animal.care_notes }}</p>
+              </div>
+              {% endif %}
+              {% if animal.challenges != "" %}
+              <div class="animal-section">
+                <span class="challenge-badge">Challenge navigated</span>
+                <p>{{ animal.challenges }}</p>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+      </div><!-- /.sit-entry -->
+      {% endfor %}
+
+    </div>
+  </section>
+
+</div><!-- /#ref-content -->
+
+<!-- ── Access controls panel (bottom-right) ──────────────── -->
+<div class="access-panel" id="access-panel" style="display:none">
+  <button class="access-toggle-btn" id="access-toggle-btn" title="Access settings">🔐</button>
+  <div class="access-drawer" id="access-drawer">
+    <h4>Access Controls</h4>
+    <div class="access-row">
+      <label for="toggle-slug">Require secret URL</label>
+      <label class="toggle-switch">
+        <input type="checkbox" id="toggle-slug" {% if cfg.require_slug %}checked{% endif %} />
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+    <div class="access-row">
+      <label for="toggle-pw">Require password</label>
+      <label class="toggle-switch">
+        <input type="checkbox" id="toggle-pw" {% if cfg.require_password %}checked{% endif %} />
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+    <p class="access-note">Changes update <code>_data/sits.yml</code> on next build. These toggles reflect the current config.</p>
+  </div>
+</div>
+
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+
+<script>
+// ── Config (injected from _data/sits.yml) ──────────────────
+const ACCESS = {
+  requireSlug: {{ cfg.require_slug | default: true }},
+  requirePassword: {{ cfg.require_password | default: true }},
+  password: {{ cfg.password | jsonify }}
+};
+
+// ── Gate logic ─────────────────────────────────────────────
+const STORAGE_KEY = 'flomads_ref_unlocked';
+const gate = document.getElementById('gate');
+const content = document.getElementById('ref-content');
+const panel = document.getElementById('access-panel');
+
+function unlock() {
+  gate.classList.add('unlocked');
+  content.style.display = 'block';
+  panel.style.display = 'block';
+  sessionStorage.setItem(STORAGE_KEY, '1');
+  setTimeout(() => gate.style.display = 'none', 420);
+  initMap();
+}
+
+function checkAccess() {
+  // If neither gate is required, just show content
+  if (!ACCESS.requireSlug && !ACCESS.requirePassword) { unlock(); return; }
+  // If already unlocked this session, skip password prompt
+  if (sessionStorage.getItem(STORAGE_KEY) === '1') { unlock(); return; }
+  // Show appropriate gate
+  if (ACCESS.requirePassword) {
+    gate.style.display = 'flex';
+  } else {
+    unlock(); // slug alone — already on the page if they got here
+  }
+}
+
+document.getElementById('gate-submit').addEventListener('click', () => {
+  const val = document.getElementById('gate-pw').value;
+  if (val === ACCESS.password) {
+    unlock();
+  } else {
+    document.getElementById('gate-error').classList.add('show');
+    document.getElementById('gate-pw').value = '';
+    document.getElementById('gate-pw').focus();
+  }
+});
+document.getElementById('gate-pw').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('gate-submit').click();
+});
+
+checkAccess();
+
+// ── Access drawer toggle ───────────────────────────────────
+document.getElementById('access-toggle-btn').addEventListener('click', () => {
+  document.getElementById('access-drawer').classList.toggle('open');
+});
+
+// ── Slideshow ──────────────────────────────────────────────
+const ssState = {};
+
+function initSlideshow(id, total) {
+  ssState[id] = { current: 0, total };
+}
+
+function slideTo(id, idx) {
+  const ss = ssState[id];
+  if (!ss) return;
+  ss.current = (idx + ss.total) % ss.total;
+  document.querySelector(`#ss-${id} .slideshow-track`).style.transform = `translateX(-${ss.current * 100}%)`;
+  document.querySelectorAll(`#dots-${id} .dot`).forEach((d, i) => d.classList.toggle('active', i === ss.current));
+}
+function slidePrev(id) { slideTo(id, ssState[id].current - 1); }
+function slideNext(id) { slideTo(id, ssState[id].current + 1); }
+
+// Init all slideshows
+{% for sit in site.data.sits.sits %}
+{% if sit.photos.slideshow.size > 1 %}
+initSlideshow('{{ sit.id }}', {{ sit.photos.slideshow.size }});
+{% endif %}
+{% endfor %}
+
+// Auto-advance every 5s
+setInterval(() => {
+  Object.keys(ssState).forEach(id => slideNext(id));
+}, 5000);
+
+// ── Map ────────────────────────────────────────────────────
+function initMap() {
+  const map = L.map('sit-map', { zoomControl: true, scrollWheelZoom: false });
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© OpenStreetMap contributors © CARTO',
+    subdomains: 'abcd', maxZoom: 19
+  }).addTo(map);
+
+  const sits = [
+    {% for sit in site.data.sits.sits %}
+    {
+      id: '{{ sit.id }}',
+      lat: {{ sit.lat }},
+      lng: {{ sit.lng }},
+      label: '{{ sit.location }}, {{ sit.country }}',
+      dates: '{{ sit.dates }}',
+      current: {{ sit.current | default: false }}
+    },
+    {% endfor %}
+  ];
+
+  const goldIcon = L.divIcon({
+    className: '',
+    html: '<div style="width:14px;height:14px;border-radius:50%;background:#c9922a;border:3px solid #e8b84b;box-shadow:0 0 12px rgba(201,146,42,0.7)"></div>',
+    iconSize: [14, 14], iconAnchor: [7, 7]
+  });
+  const dimIcon = L.divIcon({
+    className: '',
+    html: '<div style="width:10px;height:10px;border-radius:50%;background:#1e3f63;border:2px solid #c9922a;opacity:0.85"></div>',
+    iconSize: [10, 10], iconAnchor: [5, 5]
+  });
+
+  const bounds = [];
+  sits.forEach(s => {
+    const icon = s.current ? goldIcon : dimIcon;
+    const marker = L.marker([s.lat, s.lng], { icon }).addTo(map);
+    marker.bindPopup(`<strong style="color:#c9922a">${s.label}</strong><br><span style="color:#888;font-size:0.85em">${s.dates}</span>${s.current ? '<br><span style="color:#e8b84b;font-size:0.8em">✦ Current</span>' : ''}`);
+    bounds.push([s.lat, s.lng]);
+  });
+
+  if (bounds.length) map.fitBounds(bounds, { padding: [40, 40] });
+}
+</script>

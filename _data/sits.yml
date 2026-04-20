@@ -1,0 +1,261 @@
+# ============================================================
+# FLOMADS — Sitter Reference Data
+# ============================================================
+# This file drives the hidden references page.
+# Add new sits to the `sits` list (most recent first).
+# Add standalone testimonials to `testimonials`.
+# Add contact methods to `contact`.
+# ============================================================
+
+# ── Page access controls ─────────────────────────────────────
+access:
+  require_slug: true          # false = secret URL alone is enough
+  require_password: true      # false = no password prompt
+  password: "flomads2024"     # change this!
+
+# ── Contact methods ──────────────────────────────────────────
+# type options: email | phone | facebook | twitter | instagram
+#               trustedhousesitters | website | whatsapp | other
+# label: display text
+# value: the address/handle/url
+# primary: true = shown prominently at top, false = listed below
+contact:
+  - type: trustedhousesitters
+    label: "TrustedHouseSitters Profile"
+    value: "https://www.trustedhousesitters.com/house-and-pet-sitters/united-states-of-america/colorado-springs/"
+    primary: true
+  - type: email
+    label: "jordan@flomads.com"
+    value: "jordan@flomads.com"
+    primary: true
+  # - type: phone
+  #   label: "+1 (555) 000-0000"
+  #   value: "+15550000000"
+  #   primary: false
+  # - type: facebook
+  #   label: "The Flomads on Facebook"
+  #   value: "https://facebook.com/theflomads"
+  #   primary: false
+
+# ── Sits ─────────────────────────────────────────────────────
+# Fields:
+#   id:           unique slug (used for anchor links)
+#   location:     city/region
+#   country:      country name
+#   flag:         emoji flag
+#   dates:        human-readable date range
+#   lat/lng:      for the map pin
+#   current:      true = highlighted as current sit
+#   owners:       first names of the homeowners
+#   testimonial:
+#     quote:      their words (no surrounding quotes needed)
+#     name:       how they want to be credited
+#   photos:
+#     slideshow:  list of local image paths (relative to /assets/images/sits/)
+#     album_url:  link to a Google Photos / Flickr / etc. album
+#     album_label: button label for the album link
+#   animals:      list of animal profiles (see schema below)
+#
+# Animal fields:
+#   name, species, breed, age, photo (path under /assets/images/sits/)
+#   personality, care_notes, challenges
+
+sits:
+
+  - id: albrighton-2026
+    location: "Albrighton, Shropshire"
+    country: "England, UK"
+    flag: "🇬🇧"
+    dates: "February – June 2026"
+    lat: 52.632
+    lng: -2.248
+    current: true
+    owners: "Sarah & Mark"
+    testimonial:
+      quote: "Jordan and The Admiral were absolute stars. The house was spotless, the dogs were clearly doted on, and they even left a little carved figure in the garden. We came home to happy dogs and a home that felt cared for. Cannot recommend them highly enough."
+      name: "Sarah & Mark, Albrighton"
+    photos:
+      slideshow:
+        - "albrighton/trixie-garden.jpg"
+        - "albrighton/buddy-walk.jpg"
+        - "albrighton/village.jpg"
+      album_url: ""
+      album_label: "View Full Album"
+    animals:
+      - name: "Trixie"
+        species: "Dog"
+        breed: "Boxer Mix"
+        age: "4 years"
+        photo: "albrighton/trixie.jpg"
+        personality: "Opinionated, vocal, and absolutely convinced she should be on the furniture. Loves fetch and will carry her favourite ball everywhere as a greeting gift."
+        care_notes: "Fed twice daily (7am / 5pm). Wears a harness for walks — pulls enthusiastically. Needs a good 45-min walk each morning."
+        challenges: ""
+      - name: "Buddy"
+        species: "Dog"
+        breed: "Golden Lab Mix"
+        age: "6 years"
+        photo: "albrighton/buddy.jpg"
+        personality: "Gentle, calm, and a masterclass in mournful eyes at mealtimes. Best friends with Trixie despite pretending otherwise."
+        care_notes: "Fed twice daily with Trixie. Easy on-leash. Enjoys a long sniff-walk more than a fast one."
+        challenges: ""
+
+  - id: melbourne-fl-2025
+    location: "Melbourne, FL"
+    country: "United States"
+    flag: "🇺🇸"
+    dates: "2025 (two stays)"
+    lat: 28.083
+    lng: -80.608
+    current: false
+    owners: "The Hendersons"
+    testimonial:
+      quote: "They took incredible care of Galadriel and all the farm animals — no small task. We came back to a thriving homestead and one very content Great Dane. The carved gnome they left on the porch is still there."
+      name: "The Hendersons, Melbourne FL"
+    photos:
+      slideshow: []
+      album_url: ""
+      album_label: "View Photos"
+    animals:
+      - name: "Galadriel"
+        species: "Dog"
+        breed: "Great Dane"
+        age: "3 years"
+        photo: ""
+        personality: "Majestic, affectionate, and completely unaware of her own size. Prefers to drape herself across humans rather than sit beside them."
+        care_notes: "Large-breed kibble twice daily. Slow feeder bowl required — bloat risk. Needs companionship and doesn't do well alone for long stretches."
+        challenges: "Arrived to a significant flea infestation. We handled a full treatment protocol — Galadriel, all bedding, and the house — coordinating with the vet and resolving it completely before the owners returned."
+
+  - id: todos-santos-2022
+    location: "Todos Santos, Baja California Sur"
+    country: "Mexico"
+    flag: "🇲🇽"
+    dates: "Early 2022 (3 months)"
+    lat: 23.446
+    lng: -110.225
+    current: false
+    owners: "Patricia"
+    testimonial:
+      quote: "Duncan and Ruby adored them. My Gordon Setters can be a handful with strangers but they were completely at ease. The house was in perfect order and I came back to two very happy, well-exercised dogs."
+      name: "Patricia, Todos Santos"
+    photos:
+      slideshow: []
+      album_url: ""
+      album_label: "View Photos"
+    animals:
+      - name: "Duncan"
+        species: "Dog"
+        breed: "Gordon Setter"
+        age: "5 years (at time of sit)"
+        photo: ""
+        personality: "Bold, energetic, and deeply suspicious of strangers — until he isn't. Once he trusts you, he's all in."
+        care_notes: "High-energy breed. Needs significant daily exercise. Free-fed in this household."
+        challenges: ""
+      - name: "Ruby"
+        species: "Dog"
+        breed: "Gordon Setter"
+        age: "3 years (at time of sit)"
+        photo: ""
+        personality: "More biddable than Duncan but matches his energy completely. Loves to run."
+        care_notes: "Same routine as Duncan."
+        challenges: ""
+
+  - id: dorset-vt-2022
+    location: "Dorset, VT"
+    country: "United States"
+    flag: "🇺🇸"
+    dates: "2022 (3 months)"
+    lat: 43.256
+    lng: -73.073
+    current: false
+    owners: "The Caldwells"
+    testimonial:
+      quote: "June and Mr. Stone were in the best of hands. We loved coming home to a cared-for house and animals who were clearly content. Would have them back without a second thought."
+      name: "The Caldwells, Dorset VT"
+    photos:
+      slideshow: []
+      album_url: ""
+      album_label: "View Photos"
+    animals:
+      - name: "June"
+        species: "Dog"
+        breed: "Chihuahua Mix"
+        age: "7 years (at time of sit)"
+        photo: ""
+        personality: "Small dog, enormous personality. Cuddly once she accepts you, which takes exactly 24 hours."
+        care_notes: "Small portions twice daily. Hates the cold — coats required for winter walks."
+        challenges: ""
+      - name: "Mr. Stone"
+        species: "Cat"
+        breed: "Barn Cat (Domestic Shorthair)"
+        age: "Unknown (at time of sit)"
+        photo: ""
+        personality: "Entirely self-sufficient and faintly contemptuous of humans. Will accept chin scritches on his schedule only."
+        care_notes: "Dry food always available, fresh water daily. Indoor/outdoor — has a cat door. Does not want your attention. Will return for food."
+        challenges: ""
+
+  - id: santa-maria-dota-2021
+    location: "Santa Maria de Dota"
+    country: "Costa Rica"
+    flag: "🇨🇷"
+    dates: "2021 (3 months)"
+    lat: 9.735
+    lng: -83.99
+    current: false
+    owners: "Local family"
+    testimonial:
+      quote: ""
+      name: ""
+    photos:
+      slideshow: []
+      album_url: ""
+      album_label: "View Photos"
+    animals:
+      - name: "Wolfe"
+        species: "Dog"
+        breed: "Mixed Breed"
+        age: "Unknown"
+        photo: ""
+        personality: "Loyal and protective of the property. Warmed up quickly."
+        care_notes: "Fed daily, outdoor dog with covered shelter."
+        challenges: ""
+      - name: "Puppy"
+        species: "Dog"
+        breed: "Mixed Breed"
+        age: "Puppy"
+        photo: ""
+        personality: "All energy, no brakes."
+        care_notes: "Puppy-appropriate portions."
+        challenges: ""
+      - name: "Mora"
+        species: "Cat"
+        breed: "Domestic"
+        age: "Adult"
+        photo: ""
+        personality: "Indoor/outdoor, independent, friendly on her terms."
+        care_notes: "Daily feeding, fresh water."
+        challenges: ""
+
+# ── Standalone testimonials ──────────────────────────────────
+# These appear in the dedicated testimonials section.
+# Can duplicate a per-sit quote here or add extras
+# (e.g. from TrustedHouseSitters reviews).
+testimonials:
+  - quote: "Jordan and The Admiral were absolute stars. The house was spotless, the dogs were clearly doted on, and they even left a little carved figure in the garden. We came home to happy dogs and a home that felt cared for."
+    name: "Sarah & Mark"
+    location: "Albrighton, Shropshire"
+    platform: "TrustedHouseSitters"
+
+  - quote: "Duncan and Ruby adored them. My Gordon Setters can be a handful with strangers but they were completely at ease. The house was in perfect order."
+    name: "Patricia"
+    location: "Todos Santos, Mexico"
+    platform: "TrustedHouseSitters"
+
+  - quote: "They took incredible care of Galadriel and all the farm animals — no small task. We came back to a thriving homestead and one very content Great Dane."
+    name: "The Hendersons"
+    location: "Melbourne, FL"
+    platform: "TrustedHouseSitters"
+
+  - quote: "June and Mr. Stone were in the best of hands. We loved coming home to a cared-for house and animals who were clearly content. Would have them back without a second thought."
+    name: "The Caldwells"
+    location: "Dorset, VT"
+    platform: "TrustedHouseSitters"

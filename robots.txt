@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /sit-with-us/
+
+Sitemap: {{ site.url }}/sitemap.xml
