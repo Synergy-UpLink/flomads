@@ -1,0 +1,24 @@
+{
+  "name": "Flomads - VSCode Jekyll Container",
+  "build": {
+    "dockerfile": "../Dockerfile"
+  },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/site,type=bind,consistency=cached",
+  "workspaceFolder": "/site",
+  "forwardPorts": [4000, 35729],
+  "portsAttributes": {
+    "4000": { "label": "Jekyll Site" },
+    "35729": { "label": "LiveReload" }
+  },
+  "postStartCommand": "bundle install && bundle exec jekyll serve --host 0.0.0.0 --livereload --force_polling",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "sissel.shopify-liquid",
+        "yzhang.markdown-all-in-one",
+        "davidanson.vscode-markdownlint",
+        "redhat.vscode-yaml"
+      ]
+    }
+  }
+}
