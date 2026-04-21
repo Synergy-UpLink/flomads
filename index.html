@@ -4,7 +4,6 @@ title: false
 description: "Two humans, one pirate hedgehog, and the open road — living full-time across the globe one petsit at a time."
 ---
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg">
     <div class="wave wave1"></div>
@@ -13,16 +12,16 @@ description: "Two humans, one pirate hedgehog, and the open road — living full
     <div class="stars"></div>
   </div>
   <div class="hero-content">
-    <p class="hero-eyebrow">⚓ est. 2020</p>
+    <p class="hero-eyebrow">{% t home.eyebrow %}</p>
     <h1 class="hero-headline">
-      <span class="line1">no<em>MADS</em></span>
-      <span class="line2">going with</span>
-      <span class="line3">the <em>FLO</em></span>
+      <span class="line1">{% t home.headline_line1 %}</span>
+      <span class="line2">{% t home.headline_line2 %}</span>
+      <span class="line3">{% t home.headline_line3 %}</span>
     </h1>
-    <p class="hero-sub">Two humans, one pirate hedgehog, and the open road — living full-time across the globe one petsit at a time.</p>
+    <p class="hero-sub">{% t home.sub %}</p>
     <div class="hero-cta">
-      <a href="{{ '/about/' | relative_url }}" class="btn btn-primary">Meet the Crew</a>
-      <a href="{{ '/now/' | relative_url }}" class="btn btn-ghost">Where Are We Now?</a>
+      <a href="{% if site.active_lang == site.default_lang %}{{ '/about/' | relative_url }}{% else %}{{ '/about/' | prepend: site.active_lang | prepend: '/' | relative_url }}{% endif %}" class="btn btn-primary">{% t ui.meet_crew %}</a>
+      <a href="{% if site.active_lang == site.default_lang %}{{ '/now/' | relative_url }}{% else %}{{ '/now/' | prepend: site.active_lang | prepend: '/' | relative_url }}{% endif %}" class="btn btn-ghost">{% t ui.where_now %}</a>
     </div>
   </div>
   <div class="hero-henry">
@@ -31,145 +30,68 @@ description: "Two humans, one pirate hedgehog, and the open road — living full
   </div>
 </section>
 
-<!-- INTRO STRIP -->
 <section class="intro-strip">
   <div class="strip-inner">
-    <span>🌍 Full-Time Travelers</span>
-    <span class="divider">✦</span>
-    <span>⛵ Former Liveaboards</span>
-    <span class="divider">✦</span>
-    <span>🐾 TrustedHouseSitters</span>
-    <span class="divider">✦</span>
-    <span>🌿 Future Finca Farmers</span>
-    <span class="divider">✦</span>
-    <span>🌍 Full-Time Travelers</span>
-    <span class="divider">✦</span>
-    <span>⛵ Former Liveaboards</span>
-    <span class="divider">✦</span>
-    <span>🐾 TrustedHouseSitters</span>
-    <span class="divider">✦</span>
-    <span>🌿 Future Finca Farmers</span>
-    <span class="divider">✦</span>
+    <span>{% t home.strip_travelers %}</span><span class="divider">✦</span>
+    <span>{% t home.strip_liveaboards %}</span><span class="divider">✦</span>
+    <span>{% t home.strip_petsitters %}</span><span class="divider">✦</span>
+    <span>{% t home.strip_finca %}</span><span class="divider">✦</span>
+    <span>{% t home.strip_travelers %}</span><span class="divider">✦</span>
+    <span>{% t home.strip_liveaboards %}</span><span class="divider">✦</span>
+    <span>{% t home.strip_petsitters %}</span><span class="divider">✦</span>
+    <span>{% t home.strip_finca %}</span><span class="divider">✦</span>
   </div>
 </section>
 
-<!-- WHAT IS A FLOMAD -->
 <section class="section what-section">
   <div class="container">
     <div class="what-grid">
       <div class="what-text">
-        <h2>What's a Flomad?</h2>
-        <p>We used to call ourselves FLOating noMADS — two people who sold the house, shed the stuff, and moved aboard a sailboat. These days the boat's ashore, but the spirit lives on: noMADS going with the FLO.</p>
-        <p>Since 2020 we've been threading our way across the planet — petsitting in exchange for a home, renting long enough to really <em>live</em> somewhere, and slowly building toward a permanent base on a finca in Ecuador where we can grow food, make things with our hands, and host the kind of community we've always wanted.</p>
-        <p>Along the way: birds, boats, wood carving, harmonica noodling, rooftop drinks, and a hedgehog named Henry.</p>
+        <h2>{% t home.what_title %}</h2>
+        <p>{% t home.what_p1 %}</p>
+        <p>{% t home.what_p2 %}</p>
+        <p>{% t home.what_p3 %}</p>
       </div>
       <div class="what-cards">
-        <div class="stat-card">
-          <span class="stat-num">4+</span>
-          <span class="stat-label">Years on the Road</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-num">10+</span>
-          <span class="stat-label">Countries &amp; Destinations</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-num">1</span>
-          <span class="stat-label">Pirate Hedgehog</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-num">∞</span>
-          <span class="stat-label">Gnomes Left Behind</span>
-        </div>
+        <div class="stat-card"><span class="stat-num">4+</span><span class="stat-label">{% t home.stat_years %}</span></div>
+        <div class="stat-card"><span class="stat-num">10+</span><span class="stat-label">{% t home.stat_destinations %}</span></div>
+        <div class="stat-card"><span class="stat-num">1</span><span class="stat-label">{% t home.stat_hedgehog %}</span></div>
+        <div class="stat-card"><span class="stat-num">∞</span><span class="stat-label">{% t home.stat_gnomes %}</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HOW WE TRAVEL -->
 <section class="section travel-section">
   <div class="container">
-    <h2 class="section-title center">How We Do It</h2>
+    <h2 class="section-title center">{% t home.how_title %}</h2>
     <div class="travel-grid">
-      <div class="travel-card">
-        <div class="travel-icon">🐾</div>
-        <h3>Petsitting</h3>
-        <p>We trade care for accommodation through TrustedHouseSitters. Dogs, cats, chickens — we've loved them all. Currently bunking with a pair of scruffy, lovable mutts in the English countryside.</p>
-      </div>
-      <div class="travel-card">
-        <div class="travel-icon">🏡</div>
-        <h3>Long-Term Rentals</h3>
-        <p>We prefer to stay put long enough to find the good coffee shop, learn the neighborhood rhythms, and feel like locals. Two months is a minimum; longer is better.</p>
-      </div>
-      <div class="travel-card">
-        <div class="travel-icon">⛵</div>
-        <h3>By Sea (Formerly)</h3>
-        <p>We spent years living aboard a Pearson 365 ketch, sailing the Florida coast and spending all of 2024 in the Bahamas. The boat chapter is closing — but the salt's still in us.</p>
-      </div>
-      <div class="travel-card">
-        <div class="travel-icon">💻</div>
-        <h3>Working Remotely</h3>
-        <p>Tech consulting, software engineering, and whatever the internet makes possible keeps us funded and mobile. Wi-fi is a prerequisite; dress codes are not.</p>
-      </div>
+      <div class="travel-card"><div class="travel-icon">🐾</div><h3>{% t home.how_petsit_title %}</h3><p>{% t home.how_petsit_body %}</p></div>
+      <div class="travel-card"><div class="travel-icon">🏡</div><h3>{% t home.how_rental_title %}</h3><p>{% t home.how_rental_body %}</p></div>
+      <div class="travel-card"><div class="travel-icon">⛵</div><h3>{% t home.how_sea_title %}</h3><p>{% t home.how_sea_body %}</p></div>
+      <div class="travel-card"><div class="travel-icon">💻</div><h3>{% t home.how_remote_title %}</h3><p>{% t home.how_remote_body %}</p></div>
     </div>
   </div>
 </section>
 
-<!-- PASSIONS -->
 <section class="section passion-section">
   <div class="container">
-    <h2 class="section-title center">Things We Love</h2>
+    <h2 class="section-title center">{% t home.love_title %}</h2>
     <div class="passion-list">
-      <div class="passion-item">
-        <span class="passion-icon">🦜</span>
-        <div>
-          <h4>Birding</h4>
-          <p>From Bahamian shorebirds to English robins perched on fence posts — birds are everywhere if you slow down enough to look.</p>
-        </div>
-      </div>
-      <div class="passion-item">
-        <span class="passion-icon">🪵</span>
-        <div>
-          <h4>Wood &amp; Stone Carving</h4>
-          <p>One of us carves gnomes, animals, and figures from wood and stone. They get left behind at every sit — little gifts for the next person who opens the garden shed.</p>
-        </div>
-      </div>
-      <div class="passion-item">
-        <span class="passion-icon">🎵</span>
-        <div>
-          <h4>Harmonica</h4>
-          <p>The other one is learning. Slowly. Inconsistently. But with great enthusiasm.</p>
-        </div>
-      </div>
-      <div class="passion-item">
-        <span class="passion-icon">🌱</span>
-        <div>
-          <h4>Growing Things</h4>
-          <p>The long game is a finca — land, soil, seeds, and the kind of self-sufficiency that feels less like prepping and more like common sense.</p>
-        </div>
-      </div>
-      <div class="passion-item">
-        <span class="passion-icon">🍹</span>
-        <div>
-          <h4>Rooftop Hours</h4>
-          <p>Drinks on a terrace, a park grill at golden hour, a table outside a mercado — this is how we like to socialize. Al fresco, always.</p>
-        </div>
-      </div>
-      <div class="passion-item">
-        <span class="passion-icon">🗺️</span>
-        <div>
-          <h4>Slow Travel</h4>
-          <p>We're not collecting passport stamps. We're learning where the sun goes in the afternoon and which bakery opens first.</p>
-        </div>
-      </div>
+      <div class="passion-item"><span class="passion-icon">🦜</span><div><h4>{% t home.love_birding_title %}</h4><p>{% t home.love_birding_body %}</p></div></div>
+      <div class="passion-item"><span class="passion-icon">🪵</span><div><h4>{% t home.love_carving_title %}</h4><p>{% t home.love_carving_body %}</p></div></div>
+      <div class="passion-item"><span class="passion-icon">🎵</span><div><h4>{% t home.love_harmonica_title %}</h4><p>{% t home.love_harmonica_body %}</p></div></div>
+      <div class="passion-item"><span class="passion-icon">🌱</span><div><h4>{% t home.love_growing_title %}</h4><p>{% t home.love_growing_body %}</p></div></div>
+      <div class="passion-item"><span class="passion-icon">🍹</span><div><h4>{% t home.love_rooftop_title %}</h4><p>{% t home.love_rooftop_body %}</p></div></div>
+      <div class="passion-item"><span class="passion-icon">🗺️</span><div><h4>{% t home.love_slowtravel_title %}</h4><p>{% t home.love_slowtravel_body %}</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- CTA BANNER -->
 <section class="cta-banner">
   <div class="container center">
-    <h2>Come along for the ride.</h2>
-    <p>We don't have a newsletter (yet). But you can find out where we are right now, and what we're up to.</p>
-    <a href="{{ '/now/' | relative_url }}" class="btn btn-primary">See Our Now Page →</a>
+    <h2>{% t home.cta_heading %}</h2>
+    <p>{% t home.cta_body %}</p>
+    <a href="{% if site.active_lang == site.default_lang %}{{ '/now/' | relative_url }}{% else %}{{ '/now/' | prepend: site.active_lang | prepend: '/' | relative_url }}{% endif %}" class="btn btn-primary">{% t ui.see_now %}</a>
   </div>
 </section>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ site.active_lang | default: 'en' }}">
 <head>
   {% include head.html %}
 </head>
@@ -12,5 +12,70 @@
   {% include footer.html %}
 
   <script src="{{ '/assets/js/nav.js' | relative_url }}"></script>
+  <script>
+  // ── Language autodetect (runs once, stores preference) ────────
+  (function() {
+    var PREF_KEY = 'flomads_lang';
+    var SUPPORTED = ['en', 'es', 'de', 'fr', 'pt'];
+    var currentLang = '{{ site.active_lang | default: "en" }}';
+
+    // Map prefix codes → our supported langs
+    function mapLang(code) {
+      code = (code || '').toLowerCase().split('-')[0];
+      if (SUPPORTED.indexOf(code) > -1) return code;
+      return null;
+    }
+
+    // Only redirect if no stored preference and not already on right lang
+    if (!localStorage.getItem(PREF_KEY)) {
+      var navLangs = (navigator.languages || [navigator.language || navigator.userLanguage || 'en']);
+      for (var i = 0; i < navLangs.length; i++) {
+        var detected = mapLang(navLangs[i]);
+        if (detected && detected !== currentLang) {
+          localStorage.setItem(PREF_KEY, detected);
+          var path = window.location.pathname;
+          // Strip existing lang prefix
+          SUPPORTED.forEach(function(l) { path = path.replace(new RegExp('^/' + l + '(/|$)'), '/'); });
+          var newPath = detected === 'en' ? path : '/' + detected + path;
+          window.location.replace(newPath);
+          break;
+        } else if (detected) {
+          localStorage.setItem(PREF_KEY, detected);
+          break;
+        }
+      }
+    }
+
+    // ── Flag map for the current button ─────────────────────
+    var FLAGS = { en: '🇬🇧', es: '🇪🇸', de: '🇩🇪', fr: '🇫🇷', pt: '🇧🇷' };
+    var flagEl = document.getElementById('current-flag');
+    var codeEl = document.getElementById('current-code');
+    if (flagEl) flagEl.textContent = FLAGS[currentLang] || '🌐';
+    if (codeEl) codeEl.textContent = currentLang.toUpperCase();
+
+    // ── Store lang preference on manual click ─────────────
+    document.querySelectorAll('.lang-option').forEach(function(a) {
+      a.addEventListener('click', function() {
+        var lang = this.getAttribute('data-lang');
+        if (lang) localStorage.setItem(PREF_KEY, lang);
+      });
+    });
+
+    // ── Dropdown toggle ───────────────────────────────────
+    var btn = document.getElementById('lang-btn');
+    var dropdown = document.getElementById('lang-dropdown');
+    if (btn && dropdown) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var open = dropdown.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open);
+      });
+      document.addEventListener('click', function() {
+        dropdown.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    }
+  })();
+  </script>
 </body>
 </html>

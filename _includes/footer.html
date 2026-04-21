@@ -4,14 +4,14 @@
       <img src="{{ '/assets/images/henry.png' | relative_url }}" alt="Henry" class="footer-henry" />
       <div>
         <p class="footer-title">The Flomads</p>
-        <p class="footer-sub">noMADS going with the FLO</p>
+        <p class="footer-sub">{% t footer.tagline %}</p>
       </div>
     </div>
     <nav class="footer-nav">
-      <a href="{{ '/' | relative_url }}">Home</a>
-      <a href="{{ '/about/' | relative_url }}">About</a>
-      <a href="{{ '/now/' | relative_url }}">Now</a>
+      <a href="{% if site.active_lang == site.default_lang %}{{ '/' | relative_url }}{% else %}{{ '/' | prepend: site.active_lang | prepend: '/' | relative_url }}{% endif %}">{% t nav.home %}</a>
+      <a href="{% if site.active_lang == site.default_lang %}{{ '/about/' | relative_url }}{% else %}{{ '/about/' | prepend: site.active_lang | prepend: '/' | relative_url }}{% endif %}">{% t nav.about %}</a>
+      <a href="{% if site.active_lang == site.default_lang %}{{ '/now/' | relative_url }}{% else %}{{ '/now/' | prepend: site.active_lang | prepend: '/' | relative_url }}{% endif %}">{% t nav.now %}</a>
     </nav>
-    <p class="footer-copy">Made with ☕ &amp; 🗺️ somewhere in the world · flomads.com</p>
+    <p class="footer-copy">{% t footer.made_with %}</p>
   </div>
 </footer>

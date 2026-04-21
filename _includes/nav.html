@@ -5,10 +5,27 @@
       <span class="nav-title">FLOMADS</span>
     </a>
     <ul class="nav-links">
-      <li><a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="active"{% endif %}>Home</a></li>
-      <li><a href="{{ '/about/' | relative_url }}"{% if page.url contains '/about' %} class="active"{% endif %}>About</a></li>
-      <li><a href="{{ '/now/' | relative_url }}"{% if page.url contains '/now' %} class="active"{% endif %}>Now</a></li>
+      <li><a href="{% if site.active_lang == site.default_lang %}{{ '/' | relative_url }}{% else %}{{ '/' | prepend: site.active_lang | prepend: '/' | relative_url }}{% endif %}"{% if page.url == '/' or page.url contains '/index' %} class="active"{% endif %}>{% t nav.home %}</a></li>
+      <li><a href="{% if site.active_lang == site.default_lang %}{{ '/about/' | relative_url }}{% else %}{{ '/about/' | prepend: site.active_lang | prepend: '/' | relative_url }}{% endif %}"{% if page.url contains '/about' %} class="active"{% endif %}>{% t nav.about %}</a></li>
+      <li><a href="{% if site.active_lang == site.default_lang %}{{ '/now/' | relative_url }}{% else %}{{ '/now/' | prepend: site.active_lang | prepend: '/' | relative_url }}{% endif %}"{% if page.url contains '/now' %} class="active"{% endif %}>{% t nav.now %}</a></li>
     </ul>
+
+    <!-- Language switcher -->
+    <div class="lang-switcher" id="lang-switcher">
+      <button class="lang-current" id="lang-btn" aria-label="Language" aria-expanded="false">
+        <span class="lang-flag" id="current-flag">🌐</span>
+        <span class="lang-code" id="current-code">{{ site.active_lang | default: 'en' | upcase }}</span>
+        <span class="lang-caret">▾</span>
+      </button>
+      <ul class="lang-dropdown" id="lang-dropdown" role="menu">
+        <li role="menuitem"><a href="{{ '/' | relative_url }}" class="lang-option{% if site.active_lang == 'en' or site.active_lang == nil %} lang-active{% endif %}" hreflang="en" data-lang="en"><span>🇬🇧</span> English</a></li>
+        <li role="menuitem"><a href="{{ '/es/' | relative_url }}" class="lang-option{% if site.active_lang == 'es' %} lang-active{% endif %}" hreflang="es" data-lang="es"><span>🇪🇸</span> Español</a></li>
+        <li role="menuitem"><a href="{{ '/de/' | relative_url }}" class="lang-option{% if site.active_lang == 'de' %} lang-active{% endif %}" hreflang="de" data-lang="de"><span>🇩🇪</span> Deutsch</a></li>
+        <li role="menuitem"><a href="{{ '/fr/' | relative_url }}" class="lang-option{% if site.active_lang == 'fr' %} lang-active{% endif %}" hreflang="fr" data-lang="fr"><span>🇫🇷</span> Français</a></li>
+        <li role="menuitem"><a href="{{ '/pt/' | relative_url }}" class="lang-option{% if site.active_lang == 'pt' %} lang-active{% endif %}" hreflang="pt" data-lang="pt"><span>🇧🇷</span> Português</a></li>
+      </ul>
+    </div>
+
     <button class="nav-toggle" aria-label="Toggle menu">☰</button>
   </div>
 </nav>

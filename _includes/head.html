@@ -1,7 +1,16 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }} — {{ site.tagline }}{% endif %}</title>
+<title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }} — {% t footer.tagline %}{% endif %}</title>
 <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}" />
+<meta name="robots" content="{% if page.robots %}{{ page.robots }}{% else %}index, follow{% endif %}" />
+
+<!-- hreflang alternates for i18n -->
+<link rel="alternate" hreflang="en" href="{{ site.url }}{{ page.url | remove: '/es' | remove: '/de' | remove: '/fr' | remove: '/pt' }}" />
+<link rel="alternate" hreflang="es" href="{{ site.url }}/es{{ page.url | remove: '/es' | remove: '/de' | remove: '/fr' | remove: '/pt' }}" />
+<link rel="alternate" hreflang="de" href="{{ site.url }}/de{{ page.url | remove: '/es' | remove: '/de' | remove: '/fr' | remove: '/pt' }}" />
+<link rel="alternate" hreflang="fr" href="{{ site.url }}/fr{{ page.url | remove: '/es' | remove: '/de' | remove: '/fr' | remove: '/pt' }}" />
+<link rel="alternate" hreflang="pt" href="{{ site.url }}/pt{{ page.url | remove: '/es' | remove: '/de' | remove: '/fr' | remove: '/pt' }}" />
+<link rel="alternate" hreflang="x-default" href="{{ site.url }}{{ page.url | remove: '/es' | remove: '/de' | remove: '/fr' | remove: '/pt' }}" />
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />

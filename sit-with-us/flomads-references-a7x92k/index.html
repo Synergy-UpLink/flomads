@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Flomads — Sitter References"
+title_key: "refs.title"
 description: "Private reference page for prospective homeowners."
 sitemap: false
 robots: noindex
@@ -227,11 +227,11 @@ robots: noindex
 <div id="gate">
   <div class="gate-box">
     <img src="{{ '/assets/images/henry.png' | relative_url }}" alt="Henry" />
-    <h2>Flomads References</h2>
-    <p>This page is private. Please enter the password to continue.</p>
+    <h2>{% t refs.gate_title %}</h2>
+    <p>{% t refs.gate_sub %}</p>
     <p class="gate-error" id="gate-error">That's not right — try again.</p>
-    <input type="password" id="gate-pw" class="gate-input" placeholder="Password" autocomplete="current-password" />
-    <button class="btn btn-primary" id="gate-submit" style="width:100%">Enter →</button>
+    <input type="password" id="gate-pw" class="gate-input" placeholder="{% t ui.password_placeholder %}" autocomplete="current-password" />
+    <button class="btn btn-primary" id="gate-submit" style="width:100%">{% t ui.enter_btn %}</button>
   </div>
 </div>
 
@@ -241,16 +241,16 @@ robots: noindex
   <!-- Hero -->
   <div class="ref-hero">
     <img src="{{ '/assets/images/henry.png' | relative_url }}" alt="Henry S. Pricklesworth III" />
-    <h1>The Flomads — Sitter References</h1>
-    <p>Full-time house and pet sitters. Below you'll find testimonials from previous homeowners, profiles of animals in our care, and how to reach us.</p>
+    <h1>{% t refs.title %}</h1>
+    <p>{% t refs.hero_sub %}</p>
   </div>
 
   <!-- Contact -->
   <section class="ref-section" style="background: var(--navy-mid);">
     <div class="container">
       <div class="ref-header">
-        <h2>Get In Touch</h2>
-        <p>We'd love to hear about your sit. Reach out through any of the channels below.</p>
+        <h2>{% t ui.get_in_touch %}</h2>
+        <p>{% t ui.contact_intro %}</p>
       </div>
       <div class="contact-grid">
         {% for c in site.data.sits.contact %}{% if c.primary %}
@@ -286,8 +286,8 @@ robots: noindex
   <section class="ref-section">
     <div class="container">
       <div class="ref-header">
-        <h2>Where We've Sat</h2>
-        <p>Every location we've called home for a sit. Gold pin = current.</p>
+        <h2>{% t ui.map_heading %}</h2>
+        <p>{% t ui.map_sub %}</p>
       </div>
       <div id="sit-map"></div>
     </div>
@@ -297,7 +297,7 @@ robots: noindex
   <section class="ref-section" style="background: var(--navy-mid);">
     <div class="container">
       <div class="ref-header">
-        <h2>What Homeowners Say</h2>
+        <h2>{% t ui.testimonials_heading %}</h2>
       </div>
       <div class="testimonials-grid">
         {% for t in site.data.sits.testimonials %}{% if t.quote != "" %}
@@ -318,8 +318,8 @@ robots: noindex
   <section class="ref-section">
     <div class="container">
       <div class="ref-header">
-        <h2>Sits in Detail</h2>
-        <p>Each sit, with animal profiles, care notes, and any challenges we navigated.</p>
+        <h2>{% t ui.sits_detail %}</h2>
+        <p>{% t ui.sits_detail_sub %}</p>
       </div>
 
       {% for sit in site.data.sits.sits %}
@@ -377,7 +377,7 @@ robots: noindex
 
         <!-- Animal profiles -->
         {% if sit.animals.size > 0 %}
-        <div class="animals-heading">Animals in Our Care</div>
+        <div class="animals-heading">{% t ui.animals_in_care %}</div>
         <div class="animals-grid">
           {% for animal in sit.animals %}
           <div class="animal-card">
@@ -395,19 +395,19 @@ robots: noindex
               <div class="animal-breed">{{ animal.species }}{% if animal.breed %} · {{ animal.breed }}{% endif %}{% if animal.age %} · {{ animal.age }}{% endif %}</div>
               {% if animal.personality != "" %}
               <div class="animal-section">
-                <h6>Personality</h6>
+                <h6>{% t ui.personality %}</h6>
                 <p>{{ animal.personality }}</p>
               </div>
               {% endif %}
               {% if animal.care_notes != "" %}
               <div class="animal-section">
-                <h6>Care Notes</h6>
+                <h6>{% t ui.care_notes %}</h6>
                 <p>{{ animal.care_notes }}</p>
               </div>
               {% endif %}
               {% if animal.challenges != "" %}
               <div class="animal-section">
-                <span class="challenge-badge">Challenge navigated</span>
+                <span class="challenge-badge">{% t ui.challenge_label %}</span>
                 <p>{{ animal.challenges }}</p>
               </div>
               {% endif %}
@@ -429,22 +429,22 @@ robots: noindex
 <div class="access-panel" id="access-panel" style="display:none">
   <button class="access-toggle-btn" id="access-toggle-btn" title="Access settings">🔐</button>
   <div class="access-drawer" id="access-drawer">
-    <h4>Access Controls</h4>
+    <h4>{% t ui.access_controls %}</h4>
     <div class="access-row">
-      <label for="toggle-slug">Require secret URL</label>
+      <label for="toggle-slug">{% t ui.require_slug %}</label>
       <label class="toggle-switch">
         <input type="checkbox" id="toggle-slug" {% if cfg.require_slug %}checked{% endif %} />
         <span class="toggle-track"></span>
       </label>
     </div>
     <div class="access-row">
-      <label for="toggle-pw">Require password</label>
+      <label for="toggle-pw">{% t ui.require_password %}</label>
       <label class="toggle-switch">
         <input type="checkbox" id="toggle-pw" {% if cfg.require_password %}checked{% endif %} />
         <span class="toggle-track"></span>
       </label>
     </div>
-    <p class="access-note">Changes update <code>_data/sits.yml</code> on next build. These toggles reflect the current config.</p>
+    <p class="access-note">{% t ui.access_note %}</p>
   </div>
 </div>
 

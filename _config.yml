@@ -7,12 +7,27 @@ baseurl: ""
 author:
   name: "The Flomads"
 
-# Build settings
+# ── i18n ──────────────────────────────────────────────────────
+languages: ["en", "es", "de", "fr", "pt"]
+default_lang: "en"
+exclude_from_localizations:
+  - assets
+  - _data
+  - robots.txt
+  - site.webmanifest
+  - favicon.ico
+  - favicon.svg
+  - favicon-96x96.png
+  - apple-touch-icon.png
+  - web-app-manifest-192x192.png
+  - web-app-manifest-512x512.png
+
+# ── Build settings ─────────────────────────────────────────────
 markdown: kramdown
 highlighter: rouge
 permalink: pretty
 
-# Exclude from build
+# ── Exclude from build ─────────────────────────────────────────
 exclude:
   - Gemfile
   - Gemfile.lock
@@ -20,18 +35,13 @@ exclude:
   - .gitignore
   - node_modules/
 
-# Plugins (safe for GitHub Pages)
+# ── Plugins ────────────────────────────────────────────────────
 plugins:
+  - jekyll-multiple-languages-plugin
   - jekyll-seo-tag
   - jekyll-sitemap
 
-# Collections (for future use, e.g. posts/journal)
-# collections:
-#   journal:
-#     output: true
-#     permalink: /journal/:slug/
-
-# Defaults
+# ── Page defaults ──────────────────────────────────────────────
 defaults:
   - scope:
       path: ""
@@ -42,7 +52,3 @@ defaults:
     values:
       sitemap: false
       robots: "noindex, nofollow"
-
-# Exclude hidden reference page from sitemap
-defaults_sitemap_exclude:
-  - sit-with-us
