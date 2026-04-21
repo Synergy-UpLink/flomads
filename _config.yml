@@ -7,6 +7,7 @@ baseurl: ""
 author:
   name: "The Flomads"
 
+
 # Build settings
 markdown: kramdown
 highlighter: rouge
@@ -25,11 +26,16 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
 
-# Collections (for future use, e.g. posts/journal)
-# collections:
-#   journal:
-#     output: true
-#     permalink: /journal/:slug/
+# Collections
+collections:
+  blog:
+    output: true
+    permalink: /blog/:slug/
+    sort_by: date
+  articles:
+    output: true
+    permalink: /articles/:slug/
+    sort_by: date
 
 # Defaults
 defaults:
@@ -42,6 +48,20 @@ defaults:
     values:
       sitemap: false
       robots: "noindex, nofollow"
+  - scope:
+      path: ""
+      type: "blog"
+    values:
+      layout: "post"
+      collection_label: "Blog"
+      collection_path: "/blog/"
+  - scope:
+      path: ""
+      type: "articles"
+    values:
+      layout: "post"
+      collection_label: "Articles"
+      collection_path: "/articles/"
 
 # Exclude hidden reference page from sitemap
 defaults_sitemap_exclude:
