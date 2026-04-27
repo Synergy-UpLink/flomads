@@ -598,7 +598,7 @@ em { font-style: italic; color: var(--gold-light); }
   position: relative;
 }
 .featured-card::before {
-  content: '⭐ Chief Navigator';
+  content: '⭐ The Admiral ⭐';
   position: absolute;
   top: -12px;
   left: 50%;
