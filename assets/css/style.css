@@ -289,26 +289,60 @@ em { font-style: italic; color: var(--gold-light); }
    INTRO STRIP
 ══════════════════════════════════════════ */
 .intro-strip {
-  background: var(--gold);
-  padding: 1rem 0;
+  padding: 0;
   overflow: hidden;
+  position: relative;
+  background: linear-gradient(270deg, #0d2a3f, #1a3d52, #1b3a2e, #2a1f0d, #152d4a);
+  background-size: 400% 400%;
+  animation: stripGradient 14s ease infinite;
+  border-top: 1px solid rgba(201,146,42,0.2);
+  border-bottom: 1px solid rgba(201,146,42,0.2);
 }
+
+@keyframes stripGradient {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 .strip-inner {
   display: flex;
-  gap: 2rem;
+  gap: 0;
   align-items: center;
   white-space: nowrap;
-  animation: stripScroll 30s linear infinite;
+  animation: stripScroll 40s linear infinite;
   width: max-content;
+  padding: 0.9rem 0;
 }
-.strip-inner span {
-  font-size: 0.85rem;
+
+.strip-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0 2.5rem;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-style: italic;
   font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--navy);
+  letter-spacing: 0.02em;
+  color: var(--cream-dim);
 }
-.strip-inner .divider { color: var(--navy-mid); opacity: 0.5; }
+
+.strip-svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--gold);
+  opacity: 0.85;
+}
+
+.strip-divider {
+  color: var(--gold);
+  opacity: 0.35;
+  font-size: 0.7rem;
+  padding: 0 0.5rem;
+}
+
 @keyframes stripScroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
