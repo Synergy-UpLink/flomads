@@ -4,6 +4,144 @@ title: false
 description: "Two humans, one pirate hedgehog (beanie baby), and the open road — living full-time across the globe one
 petsit at a time."
 ---
+<style>
+.page-separator {
+  position: relative;
+  padding: 6rem 1.5rem;
+  background: var(--navy);
+  overflow: hidden;
+}
+
+.separator-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.wave-animation {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  z-index: 1;
+}
+
+.wave {
+  animation: wave 8s ease-in-out infinite;
+}
+
+.wave-1 {
+  animation-delay: 0s;
+}
+
+.wave-2 {
+  animation-delay: -2s;
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(50px);
+  }
+}
+
+.separator-content {
+  position: relative;
+  z-index: 2;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.separator-title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  color: var(--cream);
+  margin-bottom: 3rem;
+  letter-spacing: 2px;
+}
+
+.separator-icons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icon-svg {
+  width: 100px;
+  height: 100px;
+  filter: drop-shadow(0 4px 15px rgba(201, 146, 42, 0.2));
+  transition: transform var(--transition);
+  animation: float 3s ease-in-out infinite;
+}
+
+.icon-item:nth-child(1) .icon-svg {
+  animation-delay: 0s;
+}
+
+.icon-item:nth-child(2) .icon-svg {
+  animation-delay: 0.3s;
+}
+
+.icon-item:nth-child(3) .icon-svg {
+  animation-delay: 0.6s;
+}
+
+.icon-item:nth-child(4) .icon-svg {
+  animation-delay: 0.9s;
+}
+
+.icon-item:hover .icon-svg {
+  transform: scale(1.1);
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.icon-item p {
+  font-family: var(--font-body);
+  color: var(--cream-dim);
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .separator-title {
+    font-size: 1.75rem;
+  }
+
+  .separator-icons {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .icon-svg {
+    width: 80px;
+    height: 80px;
+  }
+}
+</style>
 
 <!-- HERO -->
 <section class="hero">
@@ -33,27 +171,106 @@ petsit at a time."
 </section>
 
 <!-- INTRO STRIP -->
-<section class="intro-strip">
-  <div class="strip-inner">
-    <span>🌍 Full-Time Travelers</span>
-    <span class="divider">✦</span>
-    <span>⛵ Former Liveaboards</span>
-    <span class="divider">✦</span>
-    <span>🐾 TrustedHouseSitters</span>
-    <span class="divider">✦</span>
-    <span>🌿 Future Finca Farmers</span>
-    <span class="divider">✦</span>
-    <span>🌍 Full-Time Travelers</span>
-    <span class="divider">✦</span>
-    <span>⛵ Former Liveaboards</span>
-    <span class="divider">✦</span>
-    <span>🐾 TrustedHouseSitters</span>
-    <span class="divider">✦</span>
-    <span>🌿 Future Finca Farmers</span>
-    <span class="divider">✦</span>
+<section class="page-separator">
+  <div class="separator-background">
+    <svg class="wave-animation" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:var(--gold);stop-opacity:0.3" />
+          <stop offset="50%" style="stop-color:var(--red);stop-opacity:0.2" />
+          <stop offset="100%" style="stop-color:var(--gold-light);stop-opacity:0.3" />
+        </linearGradient>
+      </defs>
+      <path d="M0,60 Q300,20 600,60 T1200,60 L1200,120 L0,120 Z" fill="url(#waveGradient)" class="wave wave-1"></path>
+      <path d="M0,70 Q300,30 600,70 T1200,70 L1200,120 L0,120 Z" fill="var(--gold)" opacity="0.15" class="wave wave-2">
+      </path>
+    </svg>
+  </div>
+
+  <div class="separator-content">
+    <h2 class="separator-title">Explore Our Journey</h2>
+
+    <div class="separator-icons">
+      <div class="icon-item">
+        <svg class="icon-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sailGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:var(--gold-light)" />
+              <stop offset="100%" style="stop-color:var(--gold)" />
+            </linearGradient>
+          </defs>
+          <!-- Sailboat -->
+          <circle cx="50" cy="50" r="45" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.3" />
+          <path d="M50 15 L50 70" stroke="var(--gold)" stroke-width="3" stroke-linecap="round" />
+          <path d="M50 25 L75 65 L50 60 Z" fill="url(#sailGradient)" opacity="0.9" />
+          <path d="M50 40 L65 70 L50 68 Z" fill="var(--red-bright)" opacity="0.7" />
+          <ellipse cx="50" cy="72" rx="12" ry="5" fill="var(--cream)" opacity="0.4" />
+        </svg>
+        <p>By Sea</p>
+      </div>
+
+      <div class="icon-item">
+        <svg class="icon-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="mountainGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:var(--red-bright)" />
+              <stop offset="100%" style="stop-color:var(--gold-light)" />
+            </linearGradient>
+          </defs>
+          <!-- Mountains & Path -->
+          <circle cx="50" cy="50" r="45" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.3" />
+          <path d="M20 70 L40 35 L55 50 L75 25 L85 70" fill="none" stroke="url(#mountainGradient)" stroke-width="4"
+            stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M20 70 L85 70" stroke="var(--cream-dim)" stroke-width="3" opacity="0.6" />
+          <circle cx="35" cy="45" r="3" fill="var(--gold-light)" />
+          <circle cx="68" cy="35" r="3" fill="var(--gold-light)" />
+        </svg>
+        <p>By Land</p>
+      </div>
+
+      <div class="icon-item">
+        <svg class="icon-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="planeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:var(--gold-light)" />
+              <stop offset="100%" style="stop-color:var(--red-bright)" />
+            </linearGradient>
+          </defs>
+          <!-- Airplane -->
+          <circle cx="50" cy="50" r="45" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.3" />
+          <path d="M25 55 L75 55" stroke="var(--cream-dim)" stroke-width="2" opacity="0.4" stroke-dasharray="4,4" />
+          <g class="plane-body">
+            <ellipse cx="50" cy="50" rx="18" ry="8" fill="url(#planeGradient)" />
+            <path d="M35 50 L20 45 L20 55 Z" fill="var(--gold)" />
+            <path d="M65 50 L80 48 L80 52 Z" fill="var(--gold)" />
+            <circle cx="50" cy="50" r="3" fill="var(--navy-light)" />
+          </g>
+        </svg>
+        <p>By Air</p>
+      </div>
+
+      <div class="icon-item">
+        <svg class="icon-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="birdGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:var(--red-bright)" />
+              <stop offset="100%" style="stop-color:var(--gold-light)" />
+            </linearGradient>
+          </defs>
+          <!-- Bird -->
+          <circle cx="50" cy="50" r="45" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.3" />
+          <ellipse cx="50" cy="50" rx="12" ry="14" fill="url(#birdGradient)" />
+          <circle cx="58" cy="45" r="7" fill="url(#birdGradient)" />
+          <circle cx="60" cy="44" r="2.5" fill="var(--navy-light)" />
+          <path d="M45 48 L25 40 M45 48 L25 55" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" />
+          <path d="M55 48 L75 42 M55 48 L75 56" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"
+            class="wing-right" />
+        </svg>
+        <p>By Passion</p>
+      </div>
+    </div>
   </div>
 </section>
-
 
 <!-- WHAT IS A FLOMAD -->
 <section class="section what-section">
