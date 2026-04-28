@@ -8,9 +8,10 @@ now_updated: "April 2026"
 <section class="page-hero">
   <div class="page-hero-bg"></div>
   <div class="container">
-    <p class="page-eyebrow">📍 Updated {{ page.now_updated }}</p>
+    <p class="page-eyebrow">📍 Last Updated {{ page.now_updated }}</p>
     <h1 class="page-title">Now</h1>
-    <p class="page-subtitle">A snapshot of what we're doing, where we are, and what's on our minds. <a href="https://nownownow.com/about" target="_blank" rel="noopener">What's a now page?</a></p>
+    <p class="page-subtitle">Where we are, what we're working on, and what's occupying our thoughts right now. <a
+        href="https://nownownow.com/about" target="_blank" rel="noopener">What's a now page?</a></p>
   </div>
 </section>
 
@@ -23,10 +24,12 @@ now_updated: "April 2026"
       <div class="now-block-body">
         <h2>Where We Are</h2>
         <p class="now-highlight">Albrighton, Shropshire, England</p>
-        <p>We're tucked into a village in the English countryside for a petsit running through early June 2026. Our charges: Trixie, a boxer mix with an opinion about everything, and Buddy, a golden-lab-ish mutt who has perfected the art of looking pitiful at mealtimes. We arrived in early February and have fully settled into the rhythms of the village — the pub, the post office, the particular quality of afternoon light through hedgerows.</p>
-        <p>England in winter-into-spring is greener than you'd expect and grey in ways that are actually beautiful. The birds have been excellent.</p>
+        <p>We're settled in a quiet English village through early June 2026, caring for Trixie (a boxer mix with strong opinions) and Buddy (a golden lab who's mastered the art of looking desperately hungry). Since arriving in February, we've fallen into the village rhythm — regular pub trips, the post office runs, long walks through hedgerows in that particular grey-green English light.</p>
+        <p>The birds here have been a pleasant surprise, and the countryside is far greener than expected.</p>
       </div>
     </div>
+
+    {% include map.html %} <!-- This includes the map centered on current location -->
 
     <!-- WHAT WE'RE DOING -->
     <div class="now-block">
@@ -35,16 +38,16 @@ now_updated: "April 2026"
         <h2>What We're Working On</h2>
         <div class="now-sub-items">
           <div class="now-sub">
-            <h4>Tech Consulting</h4>
-            <p>One of us keeps the lights on with software engineering and technology consulting work. Remote-first, async-friendly, occasionally loud about it.</p>
+            <h4>Remote Work</h4>
+            <p>Software engineering and technology consulting — the work that funds the travel. Mostly async, always remote, occasionally takes over the kitchen table.</p>
           </div>
           <div class="now-sub">
-            <h4>Carving</h4>
-            <p>The Admiral is working in wood — figures and creatures taking shape slowly on the workbench. At least one will be left behind here when we go.</p>
+            <h4>Wood Carving</h4>
+            <p>The Admiral is carving at the workbench — animals slowly taking shape, one of which will stay behind here as a small gift to the village when we leave.</p>
           </div>
           <div class="now-sub">
-            <h4>Planning the Next Chapter</h4>
-            <p>We're researching what comes after England. The finca dream is always in the background; the next sit or rental is the foreground. Both require spreadsheets.</p>
+            <h4>Planning Ahead</h4>
+            <p>Researching the next chapter: whether it's another petsit, a longer rental, or something unexpected. The finca is always in the background; logistics are in the foreground.</p>
           </div>
         </div>
       </div>
@@ -57,32 +60,17 @@ now_updated: "April 2026"
         <h2>What We're Into</h2>
         <div class="now-trio">
           <div class="trio-item">
-            <h5>🎵 Learning</h5>
-            <p>The harmonica. Progress is… nonlinear. The dogs have opinions. We play anyway.</p>
+            <h5>🎵 Playing</h5>
+            <p>The harmonica — slowly, inconsistently, and to the mild bewilderment of Trixie and Buddy.</p>
           </div>
           <div class="trio-item">
-            <h5>🦜 Watching</h5>
-            <p>Birds, mostly. England has robins that are disturbingly friendly and jackdaws that are disturbingly smart.</p>
+            <h5>🦜 Observing</h5>
+            <p>Local birds: robins that are inappropriately bold and jackdaws that are unsettlingly intelligent.</p>
           </div>
           <div class="trio-item">
-            <h5>🌱 Dreaming</h5>
-            <p>Finca design — what grows well in Ecuador, what self-sufficiency actually looks like at small scale, what kind of community we want to build.</p>
+            <h5>🌱 Planning</h5>
+            <p>The finca — what grows in Ecuador's climate, what self-sufficiency looks like on a small scale, what kind of home and community we're actually building toward.</p>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- HENRY -->
-    <div class="now-block henry-now-block">
-      <div class="now-block-icon">🦔</div>
-      <div class="now-block-body henry-now-body">
-        <div class="henry-now-text">
-          <h2>Henry's Status</h2>
-          <p class="now-highlight">Currently: Holding Court in Shropshire</p>
-          <p>Henry S. Pricklesworth III continues to project authority and maintain excellent posture. He has made peace with the English climate. He has strong feelings about the dogs, which he keeps private. His eyepatch remains perfectly positioned. All is well.</p>
-        </div>
-        <div class="henry-now-img">
-          <img src="{{ '/assets/images/henry.png' | relative_url }}" alt="Henry S. Pricklesworth III" />
         </div>
       </div>
     </div>
@@ -92,10 +80,11 @@ now_updated: "April 2026"
       <div class="now-block-icon">🧭</div>
       <div class="now-block-body">
         <h2>What's Next</h2>
-        <p>We depart Albrighton in early June 2026. After that: open. We're weighing options — another petsit, a longer rental somewhere warmer, or something we haven't thought of yet. The beauty and terror of this life is that "next" is rarely locked in until it is.</p>
-        <p>Ecuador is always on the horizon. Always getting closer.</p>
+        <p>We leave Albrighton in early June. After that, it's genuinely open — another petsit somewhere, a rental to decompress, or something we haven't thought of yet. That's the thing about this life: the next chapter rarely gets locked in until it does.</p>
+        <p>Ecuador stays on the horizon, getting closer.</p>
         <div class="now-update-note">
-          <span>🕐</span> This page was last updated in {{ page.now_updated }}. <a href="https://nownownow.com" target="_blank" rel="noopener">Learn about now pages →</a>
+          <span>🕐</span> Last updated {{ page.now_updated }}. <a href="https://nownownow.com"
+            target="_blank" rel="noopener">What's a now page? →</a>
         </div>
       </div>
     </div>

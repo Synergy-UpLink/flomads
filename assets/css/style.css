@@ -710,6 +710,7 @@ em { font-style: italic; color: var(--gold-light); }
 /* ══════════════════════════════════════════
    NOW PAGE
 ══════════════════════════════════════════ */
+
 .now-section { background: var(--navy); }
 .now-container {
   max-width: 800px;
@@ -812,3 +813,5 @@ em { font-style: italic; color: var(--gold-light); }
   .henry-now-img { margin: 0 auto; }
   .passion-list { grid-template-columns: 1fr; }
 }
+
+
