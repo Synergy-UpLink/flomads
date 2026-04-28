@@ -10,73 +10,32 @@ now_updated: "April 2026"
   <div class="container">
     <p class="page-eyebrow">📍 Updated {{ page.now_updated }}</p>
     <h1 class="page-title">Now</h1>
-    <p class="page-subtitle">A snapshot of what we're doing, where we are, and what's on our minds. <a href="https://nownownow.com/about" target="_blank" rel="noopener">What's a now page?</a></p>
+    <p class="page-subtitle">A snapshot of what we're doing, where we are, and what's on our minds. <a
+        href="https://nownownow.com/about" target="_blank" rel="noopener">What's a now page?</a></p>
   </div>
 </section>
 
 <section class="section now-section">
   <div class="container now-container">
 
-    
+
     <!-- WHERE -->
     <div class="now-block location-block">
       <div class="now-block-icon">📍</div>
       <div class="now-block-body">
         <h2>Where We Are</h2>
         <p class="now-highlight">Albrighton, Shropshire, England</p>
-        <p>We're tucked into a village in the English countryside for a petsit running through early June 2026. Our charges: Trixie, a boxer mix with an opinion about everything, and Buddy, a golden-lab-ish mutt who has perfected the art of looking pitiful at mealtimes. We arrived in early February and have fully settled into the rhythms of the village — the pub, the post office, the particular quality of afternoon light through hedgerows.</p>
-        <p>England in winter-into-spring is greener than you'd expect and grey in ways that are actually beautiful. The birds have been excellent.</p>
+        <p>We're tucked into a village in the English countryside for a petsit running through early June 2026. Our
+          charges: Trixie, a boxer mix with an opinion about everything, and Buddy, a golden-lab-ish mutt who has
+          perfected the art of looking pitiful at mealtimes. We arrived in early February and have fully settled into
+          the rhythms of the village — the pub, the post office, the particular quality of afternoon light through
+          hedgerows.</p>
+        <p>England in winter-into-spring is greener than you'd expect and grey in ways that are actually beautiful. The
+          birds have been excellent.</p>
       </div>
     </div>
 
-
-
-
-<div id="now-map" style="height: 400px; border-radius: 8px; margin: 1.5rem 0; border: 1px solid rgba(201,146,42,0.25);"></div>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-
-<script>
-  // Initialize map centered on Albrighton, Shropshire
-  const map = L.map('now-map').setView([52.5519, -2.2394], 12);
-
-  // Use a darker tile set that works with your navy palette
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '© OpenStreetMap contributors © CARTO',
-    maxZoom: 19,
-    className: 'now-map-tiles'
-  }).addTo(map);
-
-  // SVG pin icon in your gold accent color
-  const svgPin = `
-    <svg width="40" height="50" viewBox="0 0 40 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Pin shape -->
-      <path d="M20 0C10.06 0 2 8.06 2 18c0 12 18 32 18 32s18-20 18-32c0-9.94-8.06-18-18-18z" fill="#e8b84b" stroke="#c9922a" stroke-width="1.5"/>
-      <!-- Inner highlight -->
-      <circle cx="20" cy="17" r="6" fill="#c0392b" opacity="0.8"/>
-    </svg>
-  `;
-
-  const customIcon = L.divIcon({
-    html: svgPin,
-    iconSize: [40, 50],
-    iconAnchor: [20, 50],
-    popupAnchor: [0, -50],
-    className: 'now-custom-marker'
-  });
-
-  L.marker([52.5519, -2.2394], { icon: customIcon })
-    .bindPopup('<div class="now-map-popup"><strong>Albrighton, Shropshire</strong><p>Winter-into-spring 2026</p></div>')
-    .addTo(map);
-</script>
-
-
-
-
-
-
-
+      {% include map.html %} <!-- This includes the map centered on current location -->
 
     <!-- WHAT WE'RE DOING -->
     <div class="now-block">
@@ -86,15 +45,18 @@ now_updated: "April 2026"
         <div class="now-sub-items">
           <div class="now-sub">
             <h4>Tech Consulting</h4>
-            <p>One of us keeps the lights on with software engineering and technology consulting work. Remote-first, async-friendly, occasionally loud about it.</p>
+            <p>One of us keeps the lights on with software engineering and technology consulting work. Remote-first,
+              async-friendly, occasionally loud about it.</p>
           </div>
           <div class="now-sub">
             <h4>Carving</h4>
-            <p>The Admiral is working in wood — figures and creatures taking shape slowly on the workbench. At least one will be left behind here when we go.</p>
+            <p>The Admiral is working in wood — figures and creatures taking shape slowly on the workbench. At least one
+              will be left behind here when we go.</p>
           </div>
           <div class="now-sub">
             <h4>Planning the Next Chapter</h4>
-            <p>We're researching what comes after England. The finca dream is always in the background; the next sit or rental is the foreground. Both require spreadsheets.</p>
+            <p>We're researching what comes after England. The finca dream is always in the background; the next sit or
+              rental is the foreground. Both require spreadsheets.</p>
           </div>
         </div>
       </div>
@@ -112,11 +74,13 @@ now_updated: "April 2026"
           </div>
           <div class="trio-item">
             <h5>🦜 Watching</h5>
-            <p>Birds, mostly. England has robins that are disturbingly friendly and jackdaws that are disturbingly smart.</p>
+            <p>Birds, mostly. England has robins that are disturbingly friendly and jackdaws that are disturbingly
+              smart.</p>
           </div>
           <div class="trio-item">
             <h5>🌱 Dreaming</h5>
-            <p>Finca design — what grows well in Ecuador, what self-sufficiency actually looks like at small scale, what kind of community we want to build.</p>
+            <p>Finca design — what grows well in Ecuador, what self-sufficiency actually looks like at small scale, what
+              kind of community we want to build.</p>
           </div>
         </div>
       </div>
@@ -127,10 +91,13 @@ now_updated: "April 2026"
       <div class="now-block-icon">🧭</div>
       <div class="now-block-body">
         <h2>What's Next</h2>
-        <p>We depart Albrighton in early June 2026. After that: open. We're weighing options — another petsit, a longer rental somewhere warmer, or something we haven't thought of yet. The beauty and terror of this life is that "next" is rarely locked in until it is.</p>
+        <p>We depart Albrighton in early June 2026. After that: open. We're weighing options — another petsit, a longer
+          rental somewhere warmer, or something we haven't thought of yet. The beauty and terror of this life is that
+          "next" is rarely locked in until it is.</p>
         <p>Ecuador is always on the horizon. Always getting closer.</p>
         <div class="now-update-note">
-          <span>🕐</span> This page was last updated in {{ page.now_updated }}. <a href="https://nownownow.com" target="_blank" rel="noopener">Learn about now pages →</a>
+          <span>🕐</span> This page was last updated in {{ page.now_updated }}. <a href="https://nownownow.com"
+            target="_blank" rel="noopener">Learn about now pages →</a>
         </div>
       </div>
     </div>
