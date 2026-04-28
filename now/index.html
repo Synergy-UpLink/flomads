@@ -32,8 +32,6 @@ now_updated: "April 2026"
 
 
 
-
-
 <div id="now-map" style="height: 400px; border-radius: 8px; margin: 1.5rem 0; border: 1px solid rgba(201,146,42,0.25);"></div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -50,10 +48,21 @@ now_updated: "April 2026"
     className: 'now-map-tiles'
   }).addTo(map);
 
-  // Custom marker icon in your gold accent color
+  // SVG pin icon in your gold accent color
+  const svgPin = `
+    <svg width="40" height="50" viewBox="0 0 40 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Pin shape -->
+      <path d="M20 0C10.06 0 2 8.06 2 18c0 12 18 32 18 32s18-20 18-32c0-9.94-8.06-18-18-18z" fill="#e8b84b" stroke="#c9922a" stroke-width="1.5"/>
+      <!-- Inner highlight -->
+      <circle cx="20" cy="17" r="6" fill="#c0392b" opacity="0.8"/>
+    </svg>
+  `;
+
   const customIcon = L.divIcon({
-    html: `<div class="now-map-pin">📍</div>`,
-    iconSize: [40, 40],
+    html: svgPin,
+    iconSize: [40, 50],
+    iconAnchor: [20, 50],
+    popupAnchor: [0, -50],
     className: 'now-custom-marker'
   });
 
@@ -61,7 +70,6 @@ now_updated: "April 2026"
     .bindPopup('<div class="now-map-popup"><strong>Albrighton, Shropshire</strong><p>Winter-into-spring 2026</p></div>')
     .addTo(map);
 </script>
-
 
 
 
