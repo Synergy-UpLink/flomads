@@ -4,9 +4,10 @@ description: "Two humans, one pirate hedgehog, and the open road — living full
 url: "https://flomads.com"
 baseurl: ""
 
-author:
+author: Jordan
   name: "The Flomads"
 
+<loc>http://0.0.0.0:4000/articles/</loc>
 # Collections
 collections:
   blog:
