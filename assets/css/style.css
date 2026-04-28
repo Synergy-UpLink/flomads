@@ -710,6 +710,7 @@ em { font-style: italic; color: var(--gold-light); }
 /* ══════════════════════════════════════════
    NOW PAGE
 ══════════════════════════════════════════ */
+
 .now-section { background: var(--navy); }
 .now-container {
   max-width: 800px;
