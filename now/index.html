@@ -29,6 +29,47 @@ now_updated: "April 2026"
       </div>
     </div>
 
+
+
+
+
+
+<div id="now-map" style="height: 400px; border-radius: 8px; margin: 1.5rem 0; border: 1px solid rgba(201,146,42,0.25);"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<script>
+  // Initialize map centered on Albrighton, Shropshire
+  const map = L.map('now-map').setView([52.5519, -2.2394], 12);
+
+  // Use a darker tile set that works with your navy palette
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© OpenStreetMap contributors © CARTO',
+    maxZoom: 19,
+    className: 'now-map-tiles'
+  }).addTo(map);
+
+  // Custom marker icon in your gold accent color
+  const customIcon = L.divIcon({
+    html: `<div class="now-map-pin">📍</div>`,
+    iconSize: [40, 40],
+    className: 'now-custom-marker'
+  });
+
+  L.marker([52.5519, -2.2394], { icon: customIcon })
+    .bindPopup('<div class="now-map-popup"><strong>Albrighton, Shropshire</strong><p>Winter-into-spring 2026</p></div>')
+    .addTo(map);
+</script>
+
+
+
+
+
+
+
+
+
     <!-- WHAT WE'RE DOING -->
     <div class="now-block">
       <div class="now-block-icon">⚙️</div>
