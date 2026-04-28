@@ -8,11 +8,11 @@
     // Initialize map centered on Albrighton, Shropshire
     const map = L.map('now-map').setView([52.6353685, -2.2781400], 12);
 
-    // OPTION 3: Stamen Terrain (warmer, more character)
-    L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}.png', {
-        attribution: '© Stamen Design © OpenStreetMap contributors',
-        maxZoom: 18
-    }).addTo(map);
+	// OPTION 2: OpenStreetMap Standard (clean, neutral)
+	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	  attribution: '© OpenStreetMap contributors',
+	  maxZoom: 19
+	}).addTo(map);
 
     const svgPin = `
   <svg width="44" height="50" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
