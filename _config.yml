@@ -4,8 +4,50 @@ description: "Two humans, one pirate hedgehog, and the open road — living full
 url: "https://flomads.com"
 baseurl: ""
 
-author:
+author: Jordan
   name: "The Flomads"
+
+<loc>http://0.0.0.0:4000/articles/</loc>
+# Collections
+collections:
+  blog:
+    output: true
+    permalink: /blog/:slug/
+    sort_by: date
+  articles:
+    output: true
+    permalink: /articles/:slug/
+    sort_by: date
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+  - scope:
+      path: "sit-with-us"
+    values:
+      sitemap: false
+      robots: "noindex, nofollow"
+  - scope:
+      path: ""
+      type: "blog"
+    values:
+      layout: "post"
+      collection_label: "Blog"
+      collection_path: "/blog/"
+  - scope:
+      path: ""
+      type: "articles"
+    values:
+      layout: "post"
+      collection_label: "Articles"
+      collection_path: "/articles/"
+
+# Exclude hidden reference page from sitemap
+defaults_sitemap_exclude:
+  - sit-with-us
 
 # Build settings
 markdown: kramdown
@@ -25,24 +67,3 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
 
-# Collections (for future use, e.g. posts/journal)
-# collections:
-#   journal:
-#     output: true
-#     permalink: /journal/:slug/
-
-# Defaults
-defaults:
-  - scope:
-      path: ""
-    values:
-      layout: "default"
-  - scope:
-      path: "sit-with-us"
-    values:
-      sitemap: false
-      robots: "noindex, nofollow"
-
-# Exclude hidden reference page from sitemap
-defaults_sitemap_exclude:
-  - sit-with-us

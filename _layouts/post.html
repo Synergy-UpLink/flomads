@@ -1,0 +1,87 @@
+---
+layout: default
+---
+
+<article class="post-page">
+
+  <!-- Post hero -->
+  <header class="post-hero {% if page.cover_image %}post-hero--image{% endif %}">
+    {% if page.cover_image %}
+    <div class="post-hero-bg" style="background-image: url('{{ page.cover_image | relative_url }}')"></div>
+    <div class="post-hero-overlay"></div>
+    {% else %}
+    <div class="post-hero-bg post-hero-bg--plain"></div>
+    {% endif %}
+    <div class="container post-hero-content">
+      <div class="post-breadcrumb">
+        <a href="{{ page.collection_path | default: '/' | relative_url }}">{{ page.collection_label | default: 'Back' }}</a>
+        <span>›</span>
+        <span>{{ page.title }}</span>
+      </div>
+      <h1 class="post-title">{{ page.title }}</h1>
+      {% if page.excerpt_text %}
+      <p class="post-deck">{{ page.excerpt_text }}</p>
+      {% endif %}
+      <div class="post-meta">
+        {% if page.author %}<span class="post-author">{{ page.author }}</span>{% endif %}
+        {% if page.author and page.date %}<span class="post-meta-sep">·</span>{% endif %}
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+        {% if page.location %}
+        <span class="post-meta-sep">·</span>
+        <span class="post-location">📍 {{ page.location }}</span>
+        {% endif %}
+      </div>
+      {% if page.tags and page.tags.size > 0 %}
+      <div class="post-tags">
+        {% for tag in page.tags %}
+        <a href="{{ page.collection_path | default: '/blog/' | relative_url }}?tag={{ tag | slugify }}" class="tag">{{ tag }}</a>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </header>
+
+  <!-- Post body -->
+  <div class="container post-body-wrap">
+    <div class="post-body">
+      {{ content }}
+    </div>
+
+    <!-- Post footer nav -->
+    <nav class="post-nav">
+      {% assign collection_docs = site[page.collection] | sort: 'date' %}
+      {% assign current_index = nil %}
+      {% for doc in collection_docs %}
+        {% if doc.url == page.url %}
+          {% assign current_index = forloop.index0 %}
+        {% endif %}
+      {% endfor %}
+
+      {% if current_index and current_index > 0 %}
+        {% assign prev_post = collection_docs[current_index | minus: 1] %}
+        <a href="{{ prev_post.url | relative_url }}" class="post-nav-link post-nav-prev">
+          <span class="post-nav-label">← Older</span>
+          <span class="post-nav-title">{{ prev_post.title }}</span>
+        </a>
+      {% else %}
+        <span></span>
+      {% endif %}
+
+      {% assign next_index = current_index | plus: 1 %}
+      {% if next_index < collection_docs.size %}
+        {% assign next_post = collection_docs[next_index] %}
+        <a href="{{ next_post.url | relative_url }}" class="post-nav-link post-nav-next">
+          <span class="post-nav-label">Newer →</span>
+          <span class="post-nav-title">{{ next_post.title }}</span>
+        </a>
+      {% else %}
+        <span></span>
+      {% endif %}
+    </nav>
+
+    <div class="post-back-link">
+      <a href="{{ page.collection_path | default: '/' | relative_url }}">← Back to {{ page.collection_label | default: 'index' }}</a>
+    </div>
+  </div>
+
+</article>

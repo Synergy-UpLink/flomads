@@ -23,8 +23,8 @@ if (toggle && links) {
 }
 
 // Duplicate intro strip for seamless infinite scroll
-const strip = document.querySelector('.strip-inner');
-if (strip) {
-  const clone = strip.cloneNode(true);
-  strip.parentElement.appendChild(clone);
-}
+// const strip = document.querySelector('.strip-inner');
+// if (strip) {
+//   const clone = strip.cloneNode(true);
+//   strip.parentElement.appendChild(clone);
+// }
