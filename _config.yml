@@ -5,9 +5,8 @@ url: "https://flomads.com"
 baseurl: ""
 
 author: Jordan
-  name: "The Flomads"
+name: "The Flomads"
 
-<loc>http://0.0.0.0:4000/articles/</loc>
 # Collections
 collections:
   blog:
