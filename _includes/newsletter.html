@@ -1,7 +1,250 @@
 <section class="cta-banner">
   <div class="container center">
     <h2>Come along for the ride.</h2>
-    <p>We don't have a newsletter (yet). But you can find out where we are right now, and what we're up to.</p>
-    <a href="{{ '/now/' | relative_url }}" class="btn btn-primary">See Our Now Page →</a>
+    <p>No algorithms. No automation. Just us — when we're somewhere new, when we added something worth sharing, or when the now page changes enough to matter. Never more than once a month, and most likely less.</p>
+
+    <button class="btn btn-ghost cta-toggle" id="newsletter-toggle" aria-expanded="false" aria-controls="newsletter-form-wrap">
+      Get the occasional dispatch →
+    </button>
+
+    <div class="newsletter-wrap" id="newsletter-form-wrap" aria-hidden="true">
+      <div class="newsletter-inner">
+        <div class="newsletter-form-area" id="newsletter-form-area">
+          <p class="newsletter-note">Drop your email. We'll add you manually. That's the whole system.</p>
+          <div class="newsletter-fields">
+            <!-- Honeypot -->
+            <input
+              type="text"
+              name="company"
+              id="nl-company"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+              style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;"
+            >
+            <input
+              type="email"
+              id="nl-email"
+              name="email"
+              placeholder="your@email.com"
+              autocomplete="email"
+              required
+              class="newsletter-input"
+            >
+            <button class="btn btn-primary newsletter-submit" id="nl-submit">
+              Sign me up
+            </button>
+          </div>
+          <p class="newsletter-fine">No spam. No selling your info. Unsubscribe by just emailing us.</p>
+        </div>
+
+        <div class="newsletter-success" id="newsletter-success" aria-live="polite" hidden>
+          <span class="success-icon">⚓</span>
+          <p>You're on the manifest. We'll be in touch when there's something worth saying, and we remember to send the email.</p>
+        </div>
+
+        <div class="newsletter-error" id="newsletter-error" aria-live="assertive" hidden>
+          <p>Something went sideways. Try again, or just <a href="mailto:newsletter@flomads.com">email us directly</a>.</p>
+        </div>
+      </div>
+    </div>
+
+    <a href="{{ '/now/' | relative_url }}" class="btn btn-primary cta-now-link">See Our Now Page →</a>
   </div>
 </section>
+
+<style>
+/* ── CTA Banner ── */
+.cta-banner {
+  padding: var(--section-pad);
+  background: linear-gradient(135deg, var(--navy-mid) 0%, var(--navy) 100%);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.cta-toggle {
+  margin-top: 1.5rem;
+  display: inline-block;
+}
+.cta-toggle[aria-expanded="true"] {
+  color: var(--gold-light);
+  border-color: var(--gold);
+}
+
+/* ── Collapsible wrapper ── */
+.newsletter-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s ease;
+  overflow: hidden;
+  margin-top: 0;
+}
+.newsletter-wrap.open {
+  grid-template-rows: 1fr;
+  margin-top: 1.5rem;
+}
+.newsletter-inner {
+  min-height: 0; /* required for grid-template-rows trick */
+}
+
+/* ── Form area ── */
+.newsletter-form-area {
+  padding: 2rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  max-width: 520px;
+  margin: 0 auto;
+}
+.newsletter-note {
+  font-size: 0.95rem;
+  color: var(--cream-dim);
+  margin-bottom: 1.2rem;
+}
+.newsletter-fields {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.newsletter-input {
+  flex: 1 1 220px;
+  padding: 0.75rem 1rem;
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(201,146,42,0.3);
+  border-radius: var(--radius);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color var(--transition), background var(--transition);
+}
+.newsletter-input::placeholder { color: var(--text-muted); }
+.newsletter-input:focus {
+  border-color: var(--gold);
+  background: rgba(255,255,255,0.09);
+}
+.newsletter-fine {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.9rem;
+  margin-bottom: 0;
+}
+
+/* ── State messages ── */
+.newsletter-success,
+.newsletter-error {
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  max-width: 520px;
+  margin: 0 auto;
+}
+.newsletter-success {
+  background: rgba(201,146,42,0.1);
+  border: 1px solid var(--border);
+}
+.newsletter-error {
+  background: rgba(192,57,43,0.1);
+  border: 1px solid rgba(192,57,43,0.3);
+}
+.success-icon {
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.newsletter-success p,
+.newsletter-error p {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* ── Now page link (below form) ── */
+.cta-now-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+}
+
+/* ── Submit loading state ── */
+.newsletter-submit.loading {
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .newsletter-fields { flex-direction: column; }
+  .newsletter-input { flex: 1 1 auto; width: 100%; }
+  .newsletter-submit { width: 100%; }
+}
+</style>
+
+<script>
+(function () {
+  const toggle     = document.getElementById('newsletter-toggle');
+  const wrap       = document.getElementById('newsletter-form-wrap');
+  const emailInput = document.getElementById('nl-email');
+  const submitBtn  = document.getElementById('nl-submit');
+  const formArea   = document.getElementById('newsletter-form-area');
+  const success    = document.getElementById('newsletter-success');
+  const error      = document.getElementById('newsletter-error');
+
+  // Toggle collapse
+  toggle.addEventListener('click', function () {
+    const isOpen = wrap.classList.toggle('open');
+    this.setAttribute('aria-expanded', isOpen);
+    wrap.setAttribute('aria-hidden', !isOpen);
+    if (isOpen) {
+      // Small delay so the animation plays before focus lands
+      setTimeout(() => emailInput.focus(), 50);
+    }
+  });
+
+  // Submit
+  submitBtn.addEventListener('click', async function () {
+    const honeyEl = document.getElementById('nl-company');
+    const email   = emailInput.value.trim();
+
+    // Basic validation
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      emailInput.focus();
+      emailInput.style.borderColor = 'var(--red)';
+      setTimeout(() => emailInput.style.borderColor = '', 1500);
+      return;
+    }
+
+    submitBtn.classList.add('loading');
+    submitBtn.textContent = 'Sending…';
+    error.hidden = true;
+
+    try {
+      const res = await fetch('https://contact-worker.sul-admin.workers.dev/', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({
+          siteId:  'flomads-main',
+          email:   email,
+          subject: 'New newsletter subscription!',
+          text:    email,
+          company: honeyEl.value, // honeypot
+        }),
+      });
+
+      if (!res.ok) throw new Error('Non-2xx response');
+
+      formArea.hidden = true;
+      success.hidden  = false;
+      toggle.textContent = 'You\'re on the manifest ⚓';
+      toggle.disabled = true;
+
+    } catch (err) {
+      submitBtn.classList.remove('loading');
+      submitBtn.textContent = 'Sign me up';
+      error.hidden = false;
+    }
+  });
+
+  // Also allow Enter key in email field
+  emailInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') submitBtn.click();
+  });
+})();
+</script>
