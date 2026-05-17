@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pet Sit Climate Planner</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .row {
+            margin-bottom: 16px;
+        }
+
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        #results {
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+
+        .metric {
+            margin-bottom: 10px;
+        }
+
+        .loading {
+            opacity: 0.6;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Pet Sit Climate Planner</h1>
+
+    <div class="row">
+        <label>City</label>
+        <input id="cityInput" type="text" placeholder="Lisbon, Portugal" />
+    </div>
+
+    <div class="row">
+        <label>From Date</label>
+        <input id="fromDate" type="text" placeholder="2026-11-01" />
+    </div>
+
+    <div class="row">
+        <label>To Date</label>
+        <input id="toDate" type="text" placeholder="2026-11-30" />
+    </div>
+
+    <div class="row">
+        <button id="searchButton">Get Climate Info</button>
+    </div>
+
+    <div id="results"></div>
+
+    <script>
+        const searchButton = document.getElementById("searchButton");
+        const results = document.getElementById("results");
+
+        searchButton.addEventListener("click", async () => {
+
+            const city = document.getElementById("cityInput").value.trim();
+            const fromDate = document.getElementById("fromDate").value.trim();
+            const toDate = document.getElementById("toDate").value.trim();
+
+            if (!city || !fromDate || !toDate) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            results.innerHTML = "Loading...";
+            results.classList.add("loading");
+
+            try {
+
+                //
+                // 1. Geocode city
+                //
+                const geoUrl =
+                    `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=en&format=json`;
+
+                const geoResponse = await fetch(geoUrl);
+                const geoData = await geoResponse.json();
+
+                if (!geoData.results || geoData.results.length === 0) {
+                    throw new Error("Location not found.");
+                }
+
+                const location = geoData.results[0];
+
+                const latitude = location.latitude;
+                const longitude = location.longitude;
+                const locationName =
+                    `${location.name}, ${location.country}`;
+
+                //
+                // 2. Fetch historical climate data
+                //
+                const weatherUrl =
+                    `https://archive-api.open-meteo.com/v1/archive` +
+                    `?latitude=${latitude}` +
+                    `&longitude=${longitude}` +
+                    `&start_date=${fromDate}` +
+                    `&end_date=${toDate}` +
+                    `&daily=` +
+                    [
+                        "temperature_2m_max",
+                        "temperature_2m_min",
+                        "precipitation_sum",
+                        "wind_speed_10m_max",
+                        "relative_humidity_2m_mean"
+                    ].join(",") +
+                    `&timezone=auto`;
+
+                const weatherResponse = await fetch(weatherUrl);
+                const weatherData = await weatherResponse.json();
+
+                const daily = weatherData.daily;
+
+                //
+                // Helpers
+                //
+                const average = (arr) => {
+                    const valid = arr.filter(v => v !== null && v !== undefined);
+                    return valid.reduce((a, b) => a + b, 0) / valid.length;
+                };
+
+                const total = (arr) => {
+                    const valid = arr.filter(v => v !== null && v !== undefined);
+                    return valid.reduce((a, b) => a + b, 0);
+                };
+
+                //
+                // Calculations
+                //
+                const avgHigh = average(daily.temperature_2m_max).toFixed(1);
+                const avgLow = average(daily.temperature_2m_min).toFixed(1);
+
+                const totalRain =
+                    total(daily.precipitation_sum).toFixed(1);
+
+                const avgWind =
+                    average(daily.wind_speed_10m_max).toFixed(1);
+
+                const avgHumidity =
+                    average(daily.relative_humidity_2m_mean).toFixed(1);
+
+                //
+                // Display
+                //
+                results.innerHTML = `
+                    <h2>${locationName}</h2>
+
+                    <div class="metric">
+                        <strong>Date Range:</strong>
+                        ${fromDate} → ${toDate}
+                    </div>
+
+                    <div class="metric">
+                        <strong>Average High:</strong>
+                        ${avgHigh} °C
+                    </div>
+
+                    <div class="metric">
+                        <strong>Average Low:</strong>
+                        ${avgLow} °C
+                    </div>
+
+                    <div class="metric">
+                        <strong>Total Rainfall:</strong>
+                        ${totalRain} mm
+                    </div>
+
+                    <div class="metric">
+                        <strong>Average Wind Speed:</strong>
+                        ${avgWind} km/h
+                    </div>
+
+                    <div class="metric">
+                        <strong>Average Humidity:</strong>
+                        ${avgHumidity}%
+                    </div>
+
+                    <hr />
+
+                    <div>
+                        <small>
+                            Coordinates:
+                            ${latitude.toFixed(3)},
+                            ${longitude.toFixed(3)}
+                        </small>
+                    </div>
+                `;
+
+            }
+            catch (err) {
+
+                console.error(err);
+
+                results.innerHTML = `
+                    <div class="error">
+                        ${err.message}
+                    </div>
+                `;
+            }
+            finally {
+                results.classList.remove("loading");
+            }
+        });
+    </script>
+
+</body>
+</html>
