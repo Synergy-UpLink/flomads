@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,9 +16,11 @@
 
         .row {
             margin-bottom: 16px;
+            position: relative;
         }
 
-        input, button {
+        input,
+        button {
             padding: 10px;
             font-size: 16px;
             width: 100%;
@@ -45,25 +48,56 @@
         .error {
             color: red;
         }
+
+        .autocomplete-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #ccc;
+            border-top: none;
+            max-height: 250px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .autocomplete-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .autocomplete-item:hover {
+            background: #f0f0f0;
+        }
+
+        .small {
+            font-size: 0.85rem;
+            color: #666;
+        }
     </style>
 </head>
+
 <body>
 
     <h1>Pet Sit Climate Planner</h1>
 
     <div class="row">
         <label>City</label>
-        <input id="cityInput" type="text" placeholder="Lisbon, Portugal" />
+
+        <input id="cityInput" type="text" autocomplete="off" placeholder="Lisbon, Portugal" />
+
+        <div id="autocompleteList" class="autocomplete-list"></div>
     </div>
 
     <div class="row">
         <label>From Date</label>
-        <input id="fromDate" type="text" placeholder="2026-11-01" />
+        <input id="fromDate" type="date" />
     </div>
 
     <div class="row">
         <label>To Date</label>
-        <input id="toDate" type="text" placeholder="2026-11-30" />
+        <input id="toDate" type="date" />
     </div>
 
     <div class="row">
@@ -73,17 +107,163 @@
     <div id="results"></div>
 
     <script>
-        const searchButton = document.getElementById("searchButton");
-        const results = document.getElementById("results");
 
+        //
+        // DOM
+        //
+        const cityInput = document.getElementById("cityInput");
+        const autocompleteList =
+            document.getElementById("autocompleteList");
+
+        const searchButton =
+            document.getElementById("searchButton");
+
+        const results =
+            document.getElementById("results");
+
+        //
+        // Selected location storage
+        //
+        let selectedLocation = null;
+
+        //
+        // Debounce helper
+        //
+        function debounce(fn, delay = 300) {
+
+            let timeoutId;
+
+            return (...args) => {
+
+                clearTimeout(timeoutId);
+
+                timeoutId = setTimeout(() => {
+                    fn(...args);
+                }, delay);
+            };
+        }
+
+        //
+        // Autocomplete search
+        //
+        async function searchLocations(query) {
+
+            if (!query || query.length < 2) {
+                autocompleteList.innerHTML = "";
+                return;
+            }
+
+            try {
+
+                const url =
+                    `https://geocoding-api.open-meteo.com/v1/search` +
+                    `?name=${encodeURIComponent(query)}` +
+                    `&count=8` +
+                    `&language=en` +
+                    `&format=json`;
+
+                const response = await fetch(url);
+
+                const data = await response.json();
+
+                autocompleteList.innerHTML = "";
+
+                if (!data.results || data.results.length === 0) {
+                    return;
+                }
+
+                data.results.forEach(location => {
+
+                    const item =
+                        document.createElement("div");
+
+                    item.className = "autocomplete-item";
+
+                    const admin =
+                        location.admin1
+                            ? `${location.admin1}, `
+                            : "";
+
+                    item.innerHTML = `
+                        <div>
+                            <strong>
+                                ${location.name}
+                            </strong>
+                        </div>
+
+                        <div class="small">
+                            ${admin}${location.country}
+                        </div>
+                    `;
+
+                    item.addEventListener("click", () => {
+
+                        selectedLocation = {
+                            name: location.name,
+                            country: location.country,
+                            latitude: location.latitude,
+                            longitude: location.longitude,
+                            timezone: location.timezone
+                        };
+
+                        cityInput.value =
+                            `${location.name}, ${location.country}`;
+
+                        autocompleteList.innerHTML = "";
+                    });
+
+                    autocompleteList.appendChild(item);
+                });
+
+            }
+            catch (err) {
+                console.error(err);
+            }
+        }
+
+        //
+        // Debounced autocomplete
+        //
+        const debouncedSearch =
+            debounce(searchLocations, 350);
+
+        cityInput.addEventListener("input", (e) => {
+
+            selectedLocation = null;
+
+            debouncedSearch(e.target.value);
+        });
+
+        //
+        // Close dropdown when clicking outside
+        //
+        document.addEventListener("click", (e) => {
+
+            if (!autocompleteList.contains(e.target)
+                && e.target !== cityInput) {
+
+                autocompleteList.innerHTML = "";
+            }
+        });
+
+        //
+        // Main climate lookup
+        //
         searchButton.addEventListener("click", async () => {
 
-            const city = document.getElementById("cityInput").value.trim();
-            const fromDate = document.getElementById("fromDate").value.trim();
-            const toDate = document.getElementById("toDate").value.trim();
+            const fromDate =
+                document.getElementById("fromDate").value;
 
-            if (!city || !fromDate || !toDate) {
-                alert("Please fill in all fields.");
+            const toDate =
+                document.getElementById("toDate").value;
+
+            if (!selectedLocation) {
+                alert("Please select a city from the dropdown.");
+                return;
+            }
+
+            if (!fromDate || !toDate) {
+                alert("Please select both dates.");
                 return;
             }
 
@@ -92,83 +272,112 @@
 
             try {
 
-                //
-                // 1. Geocode city
-                //
-                const geoUrl =
-                    `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=en&format=json`;
-
-                const geoResponse = await fetch(geoUrl);
-                const geoData = await geoResponse.json();
-
-                if (!geoData.results || geoData.results.length === 0) {
-                    throw new Error("Location not found.");
-                }
-
-                const location = geoData.results[0];
-
-                const latitude = location.latitude;
-                const longitude = location.longitude;
-                const locationName =
-                    `${location.name}, ${location.country}`;
-
-                //
-                // 2. Fetch historical climate data
-                //
                 const weatherUrl =
-                    `https://archive-api.open-meteo.com/v1/archive` +
-                    `?latitude=${latitude}` +
-                    `&longitude=${longitude}` +
+                    `https://archive-api.open-meteo.com/v1/forecast` +
+                    `?latitude=${selectedLocation.latitude}` +
+                    `&longitude=${selectedLocation.longitude}` +
                     `&start_date=${fromDate}` +
                     `&end_date=${toDate}` +
                     `&daily=` +
                     [
+                        "weather_code",
                         "temperature_2m_max",
                         "temperature_2m_min",
+                        "apparent_temperature_max",
+                        "apparent_temperature_min",
+                        "sunrise",
+                        "sunset",
+                        "daylight_duration",
+                        "sunshine_duration",
+                        "uv_index_max",
+                        "rain_sum",
+                        "showers_sum",
+                        "snowfall_sum",
                         "precipitation_sum",
+                        "precipitation_probability_max",
                         "wind_speed_10m_max",
-                        "relative_humidity_2m_mean"
+                        "wind_gusts_10m_max",
+                        "shortwave_radiation_sum",
+                        "wind_direction_10m_dominant"
                     ].join(",") +
-                    `&timezone=auto`;
+                    `&timezone=auto` +
+                    `&wind_speed_unit=mph` +
+                    `&temperature_unit=fahrenheit` +
+                    `&precipitation_unit=inch` +
+                    `&format=json` +
+                    `&timeformat=unixtime`;
 
-                const weatherResponse = await fetch(weatherUrl);
-                const weatherData = await weatherResponse.json();
+                const response =
+                    await fetch(weatherUrl);
 
-                const daily = weatherData.daily;
+                const data =
+                    await response.json();
+
+                const daily =
+                    data.daily;
 
                 //
                 // Helpers
                 //
                 const average = (arr) => {
-                    const valid = arr.filter(v => v !== null && v !== undefined);
-                    return valid.reduce((a, b) => a + b, 0) / valid.length;
+
+                    const valid =
+                        arr.filter(v =>
+                            v !== null &&
+                            v !== undefined);
+
+                    return (
+                        valid.reduce((a, b) => a + b, 0)
+                        / valid.length
+                    );
                 };
 
                 const total = (arr) => {
-                    const valid = arr.filter(v => v !== null && v !== undefined);
+
+                    const valid =
+                        arr.filter(v =>
+                            v !== null &&
+                            v !== undefined);
+
                     return valid.reduce((a, b) => a + b, 0);
                 };
 
                 //
                 // Calculations
                 //
-                const avgHigh = average(daily.temperature_2m_max).toFixed(1);
-                const avgLow = average(daily.temperature_2m_min).toFixed(1);
+                const avgHigh =
+                    average(
+                        daily.temperature_2m_max
+                    ).toFixed(1);
 
-                const totalRain =
-                    total(daily.precipitation_sum).toFixed(1);
+                const avgLow =
+                    average(
+                        daily.temperature_2m_min
+                    ).toFixed(1);
+
+                const rainfall =
+                    total(
+                        daily.precipitation_sum
+                    ).toFixed(1);
 
                 const avgWind =
-                    average(daily.wind_speed_10m_max).toFixed(1);
+                    average(
+                        daily.wind_speed_10m_max
+                    ).toFixed(1);
 
-                const avgHumidity =
-                    average(daily.relative_humidity_2m_mean).toFixed(1);
+                const humidity =
+                    average(
+                        daily.relative_humidity_2m_mean
+                    ).toFixed(1);
 
                 //
-                // Display
+                // Render
                 //
                 results.innerHTML = `
-                    <h2>${locationName}</h2>
+                    <h2>
+                        ${selectedLocation.name},
+                        ${selectedLocation.country}
+                    </h2>
 
                     <div class="metric">
                         <strong>Date Range:</strong>
@@ -187,7 +396,7 @@
 
                     <div class="metric">
                         <strong>Total Rainfall:</strong>
-                        ${totalRain} mm
+                        ${rainfall} mm
                     </div>
 
                     <div class="metric">
@@ -197,17 +406,20 @@
 
                     <div class="metric">
                         <strong>Average Humidity:</strong>
-                        ${avgHumidity}%
+                        ${humidity}%
                     </div>
 
                     <hr />
 
-                    <div>
-                        <small>
-                            Coordinates:
-                            ${latitude.toFixed(3)},
-                            ${longitude.toFixed(3)}
-                        </small>
+                    <div class="small">
+                        Coordinates:
+                        ${selectedLocation.latitude.toFixed(3)},
+                        ${selectedLocation.longitude.toFixed(3)}
+                    </div>
+
+                    <div class="small">
+                        Timezone:
+                        ${selectedLocation.timezone}
                     </div>
                 `;
 
@@ -226,7 +438,9 @@
                 results.classList.remove("loading");
             }
         });
+
     </script>
 
 </body>
+
 </html>
