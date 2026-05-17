@@ -218,15 +218,14 @@ COUNTRIES = [
 ]
 
 # ---------------------------------------------------------------------------
-# Open-Meteo climate API — 1991-2020 ERA5 monthly normals
+# Open-Meteo archive API
 # ---------------------------------------------------------------------------
-BASE_URL = "https://climate-api.open-meteo.com/v1/climate"
+BASE_URL = "https://archive-api.open-meteo.com/v1/archive"
 
 PARAMS = {
     "start_date": "1991-01-01",
     "end_date": "2020-12-31",
-    "models": "ERA5",
-    "monthly": "temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum",
+    "daily": "temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum",
     "timezone": "UTC",
 }
 
@@ -238,14 +237,14 @@ def fetch_climate(iso, name, lat, lon):
     """Fetch 30-year monthly climate normals for one coordinate."""
     params = {**PARAMS, "latitude": lat, "longitude": lon}
     try:
-        r = requests.get(BASE_URL, params=params, timeout=30)
+        r = requests.get(BASE_URL, params=params, timeout=60)
         r.raise_for_status()
         data = r.json()
     except Exception as e:
         print(f"  ERROR fetching {iso} ({name}): {e}")
         return None
 
-    monthly = data.get("monthly", {})
+    monthly = data.get("daily", {})
     if not monthly or "time" not in monthly:
         print(f"  WARN: no monthly data for {iso}")
         return None
@@ -320,7 +319,7 @@ def main():
             print("✗ skipped")
 
         # Polite delay — Open-Meteo free tier, no key required but be nice
-        time.sleep(0.4)
+        time.sleep(40)
 
     out_path = "climate-grid.json"
     with open(out_path, "w", encoding="utf-8") as f:

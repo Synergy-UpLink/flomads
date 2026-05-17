@@ -60,6 +60,7 @@ exclude:
   - README.md
   - .gitignore
   - node_modules/
+  - planning/generate_climate_grid.py
 
 # Plugins (safe for GitHub Pages)
 plugins:
