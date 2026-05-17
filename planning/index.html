@@ -1,1438 +1,1430 @@
-<!DOCTYPE html>
-<html lang="en">
+---
+layout: default
+title: Sit Scout
+description: Planning page for specific sits
+---
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sit Scout — Climate Planner</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=DM+Sans:wght@400;500&family=Cinzel+Decorative:wght@700&display=swap"
-        rel="stylesheet" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
 
-    <style>
-        /* ── Inherit Flomads palette ── */
-        :root {
-            --navy: #0d1f35;
-            --navy-mid: #152d4a;
-            --navy-light: #1e3f63;
-            --cream: #f5ead8;
-            --cream-dim: #d4c4a8;
-            --gold: #c9922a;
-            --gold-light: #e8b84b;
-            --red: #c0392b;
-            --red-bright: #e74c3c;
-            --white: #ffffff;
-            --text-main: #f5ead8;
-            --text-muted: #a89b85;
-            --border: rgba(201, 146, 42, 0.25);
-            --font-display: 'Playfair Display', Georgia, serif;
-            --font-deco: 'Cinzel Decorative', serif;
-            --font-body: 'DM Sans', system-ui, sans-serif;
-            --radius: 6px;
-            --radius-lg: 14px;
-            --transition: 0.3s ease;
+<style>
+    /* ── Inherit Flomads palette ── */
+    :root {
+        --navy: #0d1f35;
+        --navy-mid: #152d4a;
+        --navy-light: #1e3f63;
+        --cream: #f5ead8;
+        --cream-dim: #d4c4a8;
+        --gold: #c9922a;
+        --gold-light: #e8b84b;
+        --red: #c0392b;
+        --red-bright: #e74c3c;
+        --white: #ffffff;
+        --text-main: #f5ead8;
+        --text-muted: #a89b85;
+        --border: rgba(201, 146, 42, 0.25);
+        --font-display: 'Playfair Display', Georgia, serif;
+        --font-deco: 'Cinzel Decorative', serif;
+        --font-body: 'DM Sans', system-ui, sans-serif;
+        --radius: 6px;
+        --radius-lg: 14px;
+        --transition: 0.3s ease;
+    }
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background: var(--navy);
+        color: var(--text-main);
+        font-family: var(--font-body);
+        font-size: 16px;
+        line-height: 1.7;
+        min-height: 100vh;
+    }
+
+    /* ── Page header ── */
+    .scout-header {
+        padding: 2.5rem 2rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+        background: linear-gradient(180deg, rgba(21, 45, 74, 0.9) 0%, transparent 100%);
+    }
+
+    .scout-header h1 {
+        font-family: var(--font-display);
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        color: var(--cream);
+        font-weight: 900;
+        letter-spacing: -0.01em;
+    }
+
+    .scout-header h1 span {
+        color: var(--gold-light);
+    }
+
+    .scout-header p {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        margin-top: 0.3rem;
+    }
+
+    /* ── Main layout ── */
+    .scout-layout {
+        display: grid;
+        grid-template-columns: 340px 1fr;
+        grid-template-rows: auto 1fr;
+        min-height: calc(100vh - 120px);
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+        grid-row: 1 / 3;
+        background: var(--navy-mid);
+        border-right: 1px solid var(--border);
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        overflow-y: auto;
+    }
+
+    .sidebar-section {
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 1.2rem;
+        background: rgba(13, 31, 53, 0.5);
+    }
+
+    .sidebar-section-title {
+        font-family: var(--font-display);
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .sidebar-section-title::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+    }
+
+    /* ── Date range ── */
+    .date-inputs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+    }
+
+    .field-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+
+    .field-group label {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+
+    .field-group input[type="date"] {
+        background: rgba(13, 31, 53, 0.8);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        color: var(--cream);
+        font-family: var(--font-body);
+        font-size: 0.9rem;
+        padding: 0.5rem 0.7rem;
+        width: 100%;
+        outline: none;
+        transition: border-color var(--transition);
+        color-scheme: dark;
+    }
+
+    .field-group input[type="date"]:focus {
+        border-color: var(--gold);
+    }
+
+    /* ── Location search ── */
+    .location-wrap {
+        position: relative;
+    }
+
+    .location-input {
+        width: 100%;
+        background: rgba(13, 31, 53, 0.8);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        color: var(--cream);
+        font-family: var(--font-body);
+        font-size: 0.9rem;
+        padding: 0.55rem 0.8rem 0.55rem 2.2rem;
+        outline: none;
+        transition: border-color var(--transition);
+    }
+
+    .location-input:focus {
+        border-color: var(--gold);
+    }
+
+    .location-input::placeholder {
+        color: var(--text-muted);
+    }
+
+    .search-icon {
+        position: absolute;
+        left: 0.65rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        pointer-events: none;
+    }
+
+    .autocomplete-list {
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 0;
+        right: 0;
+        background: var(--navy-mid);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 200;
+        display: none;
+    }
+
+    .autocomplete-list.open {
+        display: block;
+    }
+
+    .autocomplete-item {
+        padding: 0.6rem 0.8rem;
+        cursor: pointer;
+        font-size: 0.88rem;
+        color: var(--cream-dim);
+        border-bottom: 1px solid rgba(201, 146, 42, 0.1);
+        transition: background var(--transition);
+    }
+
+    .autocomplete-item:last-child {
+        border-bottom: none;
+    }
+
+    .autocomplete-item:hover {
+        background: rgba(201, 146, 42, 0.12);
+        color: var(--cream);
+    }
+
+    .autocomplete-item .ac-country {
+        color: var(--text-muted);
+        font-size: 0.78rem;
+    }
+
+    .btn-fetch {
+        width: 100%;
+        padding: 0.7rem;
+        background: var(--gold);
+        color: var(--navy);
+        border: none;
+        border-radius: var(--radius);
+        font-family: var(--font-body);
+        font-size: 0.88rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all var(--transition);
+        margin-top: 0.5rem;
+    }
+
+    .btn-fetch:hover {
+        background: var(--gold-light);
+        transform: translateY(-1px);
+    }
+
+    .btn-fetch:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    /* ── Selected location badge ── */
+    .selected-loc {
+        display: none;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0.7rem;
+        background: rgba(201, 146, 42, 0.1);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        font-size: 0.83rem;
+        color: var(--gold-light);
+    }
+
+    .selected-loc.visible {
+        display: flex;
+    }
+
+    .selected-loc button {
+        margin-left: auto;
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        font-size: 1rem;
+        line-height: 1;
+        padding: 0;
+    }
+
+    .selected-loc button:hover {
+        color: var(--red-bright);
+    }
+
+    /* ── Status / log ── */
+    .status-line {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        min-height: 1.2em;
+        font-style: italic;
+    }
+
+    .status-line.error {
+        color: var(--red-bright);
+    }
+
+    .status-line.ok {
+        color: #5cb85c;
+    }
+
+    /* ── Map area ── */
+    .map-panel {
+        position: relative;
+        background: var(--navy);
+    }
+
+    .map-controls {
+        position: absolute;
+        top: 0.8rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 50;
+        display: flex;
+        gap: 0.5rem;
+        background: rgba(13, 31, 53, 0.92);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 0.4rem 0.7rem;
+        align-items: center;
+    }
+
+    .map-controls label {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+
+    .week-slider {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 180px;
+        height: 4px;
+        background: var(--navy-light);
+        border-radius: 2px;
+        outline: none;
+    }
+
+    .week-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--gold);
+        cursor: pointer;
+    }
+
+    .week-label {
+        font-size: 0.8rem;
+        color: var(--gold-light);
+        min-width: 80px;
+        text-align: center;
+        font-family: var(--font-display);
+    }
+
+    .play-btn {
+        background: none;
+        border: none;
+        color: var(--gold);
+        font-size: 1rem;
+        cursor: pointer;
+        padding: 0 0.2rem;
+        line-height: 1;
+        transition: color var(--transition);
+    }
+
+    .play-btn:hover {
+        color: var(--gold-light);
+    }
+
+    #map {
+        width: 100%;
+        height: 100%;
+        min-height: 420px;
+    }
+
+    /* Override Leaflet tile brightness for dark theme */
+    .leaflet-tile {
+        filter: brightness(0.55) saturate(0.4);
+    }
+
+    .leaflet-container {
+        background: var(--navy);
+    }
+
+    /* ── Legend ── */
+    .map-legend {
+        position: absolute;
+        bottom: 1.2rem;
+        right: 1rem;
+        z-index: 50;
+        background: rgba(13, 31, 53, 0.92);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 0.7rem 1rem;
+        font-size: 0.75rem;
+    }
+
+    .legend-title {
+        color: var(--text-muted);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+        font-size: 0.7rem;
+    }
+
+    .legend-bar {
+        display: flex;
+        gap: 0;
+        height: 10px;
+        border-radius: 3px;
+        overflow: hidden;
+        width: 140px;
+        margin-bottom: 0.3rem;
+    }
+
+    .legend-labels {
+        display: flex;
+        justify-content: space-between;
+        color: var(--text-muted);
+        font-size: 0.68rem;
+    }
+
+    /* ── Detail panel ── */
+    .detail-panel {
+        grid-column: 2;
+        background: var(--navy-mid);
+        border-top: 1px solid var(--border);
+        padding: 1.5rem;
+        display: none;
+    }
+
+    .detail-panel.visible {
+        display: block;
+    }
+
+    .detail-header {
+        display: flex;
+        align-items: baseline;
+        gap: 1rem;
+        margin-bottom: 1.2rem;
+        flex-wrap: wrap;
+    }
+
+    .detail-header h2 {
+        font-family: var(--font-display);
+        font-size: 1.4rem;
+        color: var(--cream);
+        font-weight: 700;
+    }
+
+    .detail-header .date-range-badge {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        font-style: italic;
+    }
+
+    /* ── Metric cards ── */
+    .metric-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .metric-card {
+        background: rgba(13, 31, 53, 0.6);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 1rem;
+        text-align: center;
+        transition: all var(--transition);
+        cursor: pointer;
+        position: relative;
+    }
+
+    .metric-card.active {
+        border-color: var(--gold);
+        background: rgba(201, 146, 42, 0.1);
+    }
+
+    .metric-card:hover {
+        border-color: rgba(201, 146, 42, 0.5);
+    }
+
+    .metric-card .mc-label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-muted);
+        margin-bottom: 0.3rem;
+    }
+
+    .metric-card .mc-max {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--gold-light);
+        line-height: 1;
+    }
+
+    .metric-card .mc-min {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        margin-top: 0.1rem;
+    }
+
+    .metric-card .mc-unit {
+        font-size: 0.68rem;
+        color: var(--text-muted);
+        position: absolute;
+        top: 0.5rem;
+        right: 0.6rem;
+    }
+
+    /* ── Metric selector tabs ── */
+    .metric-tabs {
+        display: flex;
+        gap: 0.4rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .metric-tab {
+        padding: 0.35rem 0.8rem;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        font-weight: 500;
+        cursor: pointer;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--text-muted);
+        transition: all var(--transition);
+        letter-spacing: 0.03em;
+    }
+
+    .metric-tab.active {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: var(--navy);
+    }
+
+    .metric-tab:hover:not(.active) {
+        border-color: var(--gold);
+        color: var(--gold-light);
+    }
+
+    /* ── Chart ── */
+    .chart-wrap {
+        background: rgba(13, 31, 53, 0.5);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 1rem 1.2rem;
+        position: relative;
+        height: 220px;
+    }
+
+    .chart-wrap canvas {
+        max-height: 200px;
+    }
+
+    /* ── Weekly table ── */
+    .weekly-table-wrap {
+        margin-top: 1rem;
+        overflow-x: auto;
+    }
+
+    .weekly-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.82rem;
+    }
+
+    .weekly-table th {
+        text-align: left;
+        color: var(--text-muted);
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.4rem 0.8rem;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .weekly-table td {
+        padding: 0.5rem 0.8rem;
+        border-bottom: 1px solid rgba(201, 146, 42, 0.07);
+        color: var(--cream-dim);
+    }
+
+    .weekly-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .weekly-table tr:hover td {
+        background: rgba(201, 146, 42, 0.05);
+    }
+
+    .weekly-table .temp-hi {
+        color: var(--gold-light);
+        font-weight: 600;
+    }
+
+    .weekly-table .temp-lo {
+        color: #6baed6;
+    }
+
+    .weekly-table .condition-emoji {
+        font-size: 1rem;
+    }
+
+    /* ── Empty / loading states ── */
+    .empty-detail {
+        padding: 2rem;
+        text-align: center;
+        color: var(--text-muted);
+        font-style: italic;
+        font-size: 0.9rem;
+    }
+
+    .spinner {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        border: 2px solid var(--border);
+        border-top-color: var(--gold);
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+        vertical-align: middle;
+        margin-right: 0.4rem;
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
         }
+    }
 
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    /* ── Leaflet custom popup ── */
+    .leaflet-popup-content-wrapper {
+        background: var(--navy-mid) !important;
+        color: var(--cream) !important;
+        border: 1px solid var(--border) !important;
+        border-radius: var(--radius) !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    .leaflet-popup-tip {
+        background: var(--navy-mid) !important;
+    }
 
-        body {
-            background: var(--navy);
-            color: var(--text-main);
-            font-family: var(--font-body);
-            font-size: 16px;
-            line-height: 1.7;
-            min-height: 100vh;
-        }
+    .leaflet-popup-content {
+        font-family: var(--font-body);
+        font-size: 0.88rem;
+        margin: 0.6rem 0.8rem;
+    }
 
-        /* ── Page header ── */
-        .scout-header {
-            padding: 2.5rem 2rem 1.5rem;
-            border-bottom: 1px solid var(--border);
-            background: linear-gradient(180deg, rgba(21, 45, 74, 0.9) 0%, transparent 100%);
-        }
-
-        .scout-header h1 {
-            font-family: var(--font-display);
-            font-size: clamp(1.8rem, 4vw, 2.8rem);
-            color: var(--cream);
-            font-weight: 900;
-            letter-spacing: -0.01em;
-        }
-
-        .scout-header h1 span {
-            color: var(--gold-light);
-        }
-
-        .scout-header p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 0.3rem;
-        }
-
-        /* ── Main layout ── */
+    @media (max-width: 900px) {
         .scout-layout {
-            display: grid;
-            grid-template-columns: 340px 1fr;
-            grid-template-rows: auto 1fr;
-            min-height: calc(100vh - 120px);
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto 1fr;
         }
 
-        /* ── Sidebar ── */
         .sidebar {
-            grid-row: 1 / 3;
-            background: var(--navy-mid);
-            border-right: 1px solid var(--border);
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            overflow-y: auto;
+            grid-row: auto;
+            border-right: none;
+            border-bottom: 1px solid var(--border);
         }
 
-        .sidebar-section {
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 1.2rem;
-            background: rgba(13, 31, 53, 0.5);
-        }
-
-        .sidebar-section-title {
-            font-family: var(--font-display);
-            font-size: 0.75rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .sidebar-section-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
-
-        /* ── Date range ── */
-        .date-inputs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.75rem;
-        }
-
-        .field-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-        }
-
-        .field-group label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        .field-group input[type="date"] {
-            background: rgba(13, 31, 53, 0.8);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            color: var(--cream);
-            font-family: var(--font-body);
-            font-size: 0.9rem;
-            padding: 0.5rem 0.7rem;
-            width: 100%;
-            outline: none;
-            transition: border-color var(--transition);
-            color-scheme: dark;
-        }
-
-        .field-group input[type="date"]:focus {
-            border-color: var(--gold);
-        }
-
-        /* ── Location search ── */
-        .location-wrap {
-            position: relative;
-        }
-
-        .location-input {
-            width: 100%;
-            background: rgba(13, 31, 53, 0.8);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            color: var(--cream);
-            font-family: var(--font-body);
-            font-size: 0.9rem;
-            padding: 0.55rem 0.8rem 0.55rem 2.2rem;
-            outline: none;
-            transition: border-color var(--transition);
-        }
-
-        .location-input:focus {
-            border-color: var(--gold);
-        }
-
-        .location-input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 0.65rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            pointer-events: none;
-        }
-
-        .autocomplete-list {
-            position: absolute;
-            top: calc(100% + 4px);
-            left: 0;
-            right: 0;
-            background: var(--navy-mid);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            max-height: 200px;
-            overflow-y: auto;
-            z-index: 200;
-            display: none;
-        }
-
-        .autocomplete-list.open {
-            display: block;
-        }
-
-        .autocomplete-item {
-            padding: 0.6rem 0.8rem;
-            cursor: pointer;
-            font-size: 0.88rem;
-            color: var(--cream-dim);
-            border-bottom: 1px solid rgba(201, 146, 42, 0.1);
-            transition: background var(--transition);
-        }
-
-        .autocomplete-item:last-child {
-            border-bottom: none;
-        }
-
-        .autocomplete-item:hover {
-            background: rgba(201, 146, 42, 0.12);
-            color: var(--cream);
-        }
-
-        .autocomplete-item .ac-country {
-            color: var(--text-muted);
-            font-size: 0.78rem;
-        }
-
-        .btn-fetch {
-            width: 100%;
-            padding: 0.7rem;
-            background: var(--gold);
-            color: var(--navy);
-            border: none;
-            border-radius: var(--radius);
-            font-family: var(--font-body);
-            font-size: 0.88rem;
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all var(--transition);
-            margin-top: 0.5rem;
-        }
-
-        .btn-fetch:hover {
-            background: var(--gold-light);
-            transform: translateY(-1px);
-        }
-
-        .btn-fetch:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* ── Selected location badge ── */
-        .selected-loc {
-            display: none;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 0.7rem;
-            background: rgba(201, 146, 42, 0.1);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            font-size: 0.83rem;
-            color: var(--gold-light);
-        }
-
-        .selected-loc.visible {
-            display: flex;
-        }
-
-        .selected-loc button {
-            margin-left: auto;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 1rem;
-            line-height: 1;
-            padding: 0;
-        }
-
-        .selected-loc button:hover {
-            color: var(--red-bright);
-        }
-
-        /* ── Status / log ── */
-        .status-line {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            min-height: 1.2em;
-            font-style: italic;
-        }
-
-        .status-line.error {
-            color: var(--red-bright);
-        }
-
-        .status-line.ok {
-            color: #5cb85c;
-        }
-
-        /* ── Map area ── */
-        .map-panel {
-            position: relative;
-            background: var(--navy);
-        }
-
-        .map-controls {
-            position: absolute;
-            top: 0.8rem;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 50;
-            display: flex;
-            gap: 0.5rem;
-            background: rgba(13, 31, 53, 0.92);
-            border: 1px solid var(--border);
-            border-radius: 999px;
-            padding: 0.4rem 0.7rem;
-            align-items: center;
-        }
-
-        .map-controls label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        .week-slider {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 180px;
-            height: 4px;
-            background: var(--navy-light);
-            border-radius: 2px;
-            outline: none;
-        }
-
-        .week-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: var(--gold);
-            cursor: pointer;
-        }
-
-        .week-label {
-            font-size: 0.8rem;
-            color: var(--gold-light);
-            min-width: 80px;
-            text-align: center;
-            font-family: var(--font-display);
-        }
-
-        .play-btn {
-            background: none;
-            border: none;
-            color: var(--gold);
-            font-size: 1rem;
-            cursor: pointer;
-            padding: 0 0.2rem;
-            line-height: 1;
-            transition: color var(--transition);
-        }
-
-        .play-btn:hover {
-            color: var(--gold-light);
+        .detail-panel {
+            grid-column: 1;
         }
 
         #map {
-            width: 100%;
-            height: 100%;
-            min-height: 420px;
+            min-height: 300px;
         }
+    }
+</style>
+<div class="scout-header">
+    <h1>Sit <span>Scout</span></h1>
+    <p>Select a date range to preview global climate, then enter a specific sit location for a full weekly
+        breakdown.</p>
+</div>
+<div class="date-range-slider-wrap">
+    <span id="range-slider-start-label"></span>
+    <div id="range-slider"></div>
+    <span id="range-slider-end-label"></span>
+</div>
+<div class="scout-layout">
 
-        /* Override Leaflet tile brightness for dark theme */
-        .leaflet-tile {
-            filter: brightness(0.55) saturate(0.4);
-        }
+    <!-- ══ SIDEBAR ══ -->
+    <aside class="sidebar">
 
-        .leaflet-container {
-            background: var(--navy);
-        }
-
-        /* ── Legend ── */
-        .map-legend {
-            position: absolute;
-            bottom: 1.2rem;
-            right: 1rem;
-            z-index: 50;
-            background: rgba(13, 31, 53, 0.92);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 0.7rem 1rem;
-            font-size: 0.75rem;
-        }
-
-        .legend-title {
-            color: var(--text-muted);
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            margin-bottom: 0.4rem;
-            font-size: 0.7rem;
-        }
-
-        .legend-bar {
-            display: flex;
-            gap: 0;
-            height: 10px;
-            border-radius: 3px;
-            overflow: hidden;
-            width: 140px;
-            margin-bottom: 0.3rem;
-        }
-
-        .legend-labels {
-            display: flex;
-            justify-content: space-between;
-            color: var(--text-muted);
-            font-size: 0.68rem;
-        }
-
-        /* ── Detail panel ── */
-        .detail-panel {
-            grid-column: 2;
-            background: var(--navy-mid);
-            border-top: 1px solid var(--border);
-            padding: 1.5rem;
-            display: none;
-        }
-
-        .detail-panel.visible {
-            display: block;
-        }
-
-        .detail-header {
-            display: flex;
-            align-items: baseline;
-            gap: 1rem;
-            margin-bottom: 1.2rem;
-            flex-wrap: wrap;
-        }
-
-        .detail-header h2 {
-            font-family: var(--font-display);
-            font-size: 1.4rem;
-            color: var(--cream);
-            font-weight: 700;
-        }
-
-        .detail-header .date-range-badge {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-style: italic;
-        }
-
-        /* ── Metric cards ── */
-        .metric-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .metric-card {
-            background: rgba(13, 31, 53, 0.6);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 1rem;
-            text-align: center;
-            transition: all var(--transition);
-            cursor: pointer;
-            position: relative;
-        }
-
-        .metric-card.active {
-            border-color: var(--gold);
-            background: rgba(201, 146, 42, 0.1);
-        }
-
-        .metric-card:hover {
-            border-color: rgba(201, 146, 42, 0.5);
-        }
-
-        .metric-card .mc-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-muted);
-            margin-bottom: 0.3rem;
-        }
-
-        .metric-card .mc-max {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--gold-light);
-            line-height: 1;
-        }
-
-        .metric-card .mc-min {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            margin-top: 0.1rem;
-        }
-
-        .metric-card .mc-unit {
-            font-size: 0.68rem;
-            color: var(--text-muted);
-            position: absolute;
-            top: 0.5rem;
-            right: 0.6rem;
-        }
-
-        /* ── Metric selector tabs ── */
-        .metric-tabs {
-            display: flex;
-            gap: 0.4rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .metric-tab {
-            padding: 0.35rem 0.8rem;
-            border-radius: 999px;
-            font-size: 0.78rem;
-            font-weight: 500;
-            cursor: pointer;
-            border: 1px solid var(--border);
-            background: transparent;
-            color: var(--text-muted);
-            transition: all var(--transition);
-            letter-spacing: 0.03em;
-        }
-
-        .metric-tab.active {
-            background: var(--gold);
-            border-color: var(--gold);
-            color: var(--navy);
-        }
-
-        .metric-tab:hover:not(.active) {
-            border-color: var(--gold);
-            color: var(--gold-light);
-        }
-
-        /* ── Chart ── */
-        .chart-wrap {
-            background: rgba(13, 31, 53, 0.5);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 1rem 1.2rem;
-            position: relative;
-            height: 220px;
-        }
-
-        .chart-wrap canvas {
-            max-height: 200px;
-        }
-
-        /* ── Weekly table ── */
-        .weekly-table-wrap {
-            margin-top: 1rem;
-            overflow-x: auto;
-        }
-
-        .weekly-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.82rem;
-        }
-
-        .weekly-table th {
-            text-align: left;
-            color: var(--text-muted);
-            font-size: 0.7rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            padding: 0.4rem 0.8rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .weekly-table td {
-            padding: 0.5rem 0.8rem;
-            border-bottom: 1px solid rgba(201, 146, 42, 0.07);
-            color: var(--cream-dim);
-        }
-
-        .weekly-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .weekly-table tr:hover td {
-            background: rgba(201, 146, 42, 0.05);
-        }
-
-        .weekly-table .temp-hi {
-            color: var(--gold-light);
-            font-weight: 600;
-        }
-
-        .weekly-table .temp-lo {
-            color: #6baed6;
-        }
-
-        .weekly-table .condition-emoji {
-            font-size: 1rem;
-        }
-
-        /* ── Empty / loading states ── */
-        .empty-detail {
-            padding: 2rem;
-            text-align: center;
-            color: var(--text-muted);
-            font-style: italic;
-            font-size: 0.9rem;
-        }
-
-        .spinner {
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            border: 2px solid var(--border);
-            border-top-color: var(--gold);
-            border-radius: 50%;
-            animation: spin 0.7s linear infinite;
-            vertical-align: middle;
-            margin-right: 0.4rem;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* ── Leaflet custom popup ── */
-        .leaflet-popup-content-wrapper {
-            background: var(--navy-mid) !important;
-            color: var(--cream) !important;
-            border: 1px solid var(--border) !important;
-            border-radius: var(--radius) !important;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
-        }
-
-        .leaflet-popup-tip {
-            background: var(--navy-mid) !important;
-        }
-
-        .leaflet-popup-content {
-            font-family: var(--font-body);
-            font-size: 0.88rem;
-            margin: 0.6rem 0.8rem;
-        }
-
-        @media (max-width: 900px) {
-            .scout-layout {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto auto 1fr;
-            }
-
-            .sidebar {
-                grid-row: auto;
-                border-right: none;
-                border-bottom: 1px solid var(--border);
-            }
-
-            .detail-panel {
-                grid-column: 1;
-            }
-
-            #map {
-                min-height: 300px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="scout-header">
-        <h1>⚓ Sit <span>Scout</span></h1>
-        <p>Select a date range to preview global climate, then enter a specific sit location for a full weekly
-            breakdown.</p>
-    </div>
-    <div class="date-range-slider-wrap">
-        <span id="range-slider-start-label"></span>
-        <div id="range-slider"></div>
-        <span id="range-slider-end-label"></span>
-    </div>
-    <div class="scout-layout">
-
-        <!-- ══ SIDEBAR ══ -->
-        <aside class="sidebar">
-
-            <div class="sidebar-section">
-                <div class="sidebar-section-title">📅 Sit Dates</div>
-                <div class="date-inputs">
-                    <div class="field-group">
-                        <label>Start</label>
-                        <input type="date" id="date-start" />
-                    </div>
-                    <div class="field-group">
-                        <label>End</label>
-                        <input type="date" id="date-end" />
-                    </div>
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">📅 Sit Dates</div>
+            <div class="date-inputs">
+                <div class="field-group">
+                    <label>Start</label>
+                    <input type="date" id="date-start" />
                 </div>
-                <div class="status-line" id="date-status" style="margin-top:0.6rem;"></div>
-            </div>
-
-            <div class="sidebar-section">
-                <div class="sidebar-section-title">📍 Specific Location</div>
-                <div class="location-wrap">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" class="location-input" id="location-input" placeholder="City, country…"
-                        autocomplete="off" />
-                    <div class="autocomplete-list" id="ac-list"></div>
-                </div>
-                <div class="selected-loc" id="selected-loc">
-                    <span id="selected-loc-name"></span>
-                    <button id="clear-loc" title="Clear">✕</button>
-                </div>
-                <button class="btn-fetch" id="btn-fetch" disabled>Fetch Climate Data</button>
-                <div class="status-line" id="fetch-status" style="margin-top:0.5rem;"></div>
-            </div>
-
-            <!-- Saved sits placeholder -->
-            <div class="sidebar-section" id="saved-sits-section" style="display:none;">
-                <div class="sidebar-section-title">🗂 Recent Lookups</div>
-                <div id="saved-sits-list"></div>
-            </div>
-
-        </aside>
-
-        <!-- ══ MAP ══ -->
-        <div class="map-panel" id="map-panel">
-            <div class="map-controls" id="map-controls" style="display:none;">
-                <label>Week</label>
-                <button class="play-btn" id="play-btn" title="Animate">▶</button>
-                <input type="range" class="week-slider" id="week-slider" min="0" value="0" />
-                <span class="week-label" id="week-label">—</span>
-            </div>
-            <div id="map"></div>
-            <div class="map-legend" id="map-legend" style="display:none;">
-                <div class="legend-title">Avg Temp (°C)</div>
-                <div class="legend-bar" id="legend-bar"></div>
-                <div class="legend-labels">
-                    <span id="legend-min"></span>
-                    <span id="legend-mid"></span>
-                    <span id="legend-max"></span>
+                <div class="field-group">
+                    <label>End</label>
+                    <input type="date" id="date-end" />
                 </div>
             </div>
+            <div class="status-line" id="date-status" style="margin-top:0.6rem;"></div>
         </div>
 
-        <!-- ══ DETAIL PANEL ══ -->
-        <div class="detail-panel" id="detail-panel">
-            <div class="empty-detail" id="detail-empty">
-                Enter a location above and click <strong>Fetch Climate Data</strong> to see the weekly breakdown.
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">📍 Specific Location</div>
+            <div class="location-wrap">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="location-input" id="location-input" placeholder="City, country…"
+                    autocomplete="off" />
+                <div class="autocomplete-list" id="ac-list"></div>
             </div>
-            <div id="detail-content" style="display:none;">
-                <div class="detail-header">
-                    <h2 id="detail-location-name"></h2>
-                    <span class="date-range-badge" id="detail-date-badge"></span>
-                </div>
-                <div class="metric-cards" id="metric-cards"></div>
-                <div class="metric-tabs" id="metric-tabs"></div>
-                <div class="chart-wrap">
-                    <canvas id="detail-chart"></canvas>
-                </div>
-                <div class="weekly-table-wrap">
-                    <table class="weekly-table" id="weekly-table">
-                        <thead>
-                            <tr>
-                                <th>Week</th>
-                                <th>Dates</th>
-                                <th>Hi °C</th>
-                                <th>Lo °C</th>
-                                <th>Precip mm</th>
-                                <th>Humidity %</th>
-                                <th>UV</th>
-                                <th>Conditions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="weekly-tbody"></tbody>
-                    </table>
-                </div>
+            <div class="selected-loc" id="selected-loc">
+                <span id="selected-loc-name"></span>
+                <button id="clear-loc" title="Clear">✕</button>
             </div>
+            <button class="btn-fetch" id="btn-fetch" disabled>Fetch Climate Data</button>
+            <div class="status-line" id="fetch-status" style="margin-top:0.5rem;"></div>
         </div>
 
-    </div><!-- /scout-layout -->
+        <!-- Saved sits placeholder -->
+        <div class="sidebar-section" id="saved-sits-section" style="display:none;">
+            <div class="sidebar-section-title">🗂 Recent Lookups</div>
+            <div id="saved-sits-list"></div>
+        </div>
 
-    <script>
-        /* ═══════════════════════════════════════════════════
-           CONFIG
-        ═══════════════════════════════════════════════════ */
-        const CLIMATE_DATA_URL = '/assets/data/climate-grid.json';
-        const WEATHERLENS_KEY = ''; // <-- paste your WeatherLens key here
-        const WEATHERLENS_BASE = 'https://weatherlens.dev/api/v1';
-        const GEO_API = 'https://geocoding-api.open-meteo.com/v1/search';
+    </aside>
 
-        /* ═══════════════════════════════════════════════════
-           STATE
-        ═══════════════════════════════════════════════════ */
-        let climateGrid = null;       // loaded from JSON
-        let selectedLoc = null;       // { name, lat, lon, country }
-        let fetchedWeeks = [];        // array of weekly objects from WeatherLens
-        let activeMetric = 'temp';
-        let detailChart = null;
-        let mapWeeks = [];            // [{label, startDate, endDate}] derived from date range
-        let currentWeekIdx = 0;
-        let playInterval = null;
-        let choroplethLayers = {};    // iso → Leaflet circle layer
+    <!-- ══ MAP ══ -->
+    <div class="map-panel" id="map-panel">
+        <div class="map-controls" id="map-controls" style="display:none;">
+            <label>Week</label>
+            <button class="play-btn" id="play-btn" title="Animate">▶</button>
+            <input type="range" class="week-slider" id="week-slider" min="0" value="0" />
+            <span class="week-label" id="week-label">—</span>
+        </div>
+        <div id="map"></div>
+        <div class="map-legend" id="map-legend" style="display:none;">
+            <div class="legend-title">Avg Temp (°C)</div>
+            <div class="legend-bar" id="legend-bar"></div>
+            <div class="legend-labels">
+                <span id="legend-min"></span>
+                <span id="legend-mid"></span>
+                <span id="legend-max"></span>
+            </div>
+        </div>
+    </div>
 
-        /* ═══════════════════════════════════════════════════
-           INIT MAP
-        ═══════════════════════════════════════════════════ */
-        const map = L.map('map', {
-            center: [20, 10],
-            zoom: 2,
-            minZoom: 2,
-            maxZoom: 10,
-            zoomControl: true,
-            attributionControl: false,
-        });
+    <!-- ══ DETAIL PANEL ══ -->
+    <div class="detail-panel" id="detail-panel">
+        <div class="empty-detail" id="detail-empty">
+            Enter a location above and click <strong>Fetch Climate Data</strong> to see the weekly breakdown.
+        </div>
+        <div id="detail-content" style="display:none;">
+            <div class="detail-header">
+                <h2 id="detail-location-name"></h2>
+                <span class="date-range-badge" id="detail-date-badge"></span>
+            </div>
+            <div class="metric-cards" id="metric-cards"></div>
+            <div class="metric-tabs" id="metric-tabs"></div>
+            <div class="chart-wrap">
+                <canvas id="detail-chart"></canvas>
+            </div>
+            <div class="weekly-table-wrap">
+                <table class="weekly-table" id="weekly-table">
+                    <thead>
+                        <tr>
+                            <th>Week</th>
+                            <th>Dates</th>
+                            <th>Hi °C</th>
+                            <th>Lo °C</th>
+                            <th>Precip mm</th>
+                            <th>Humidity %</th>
+                            <th>UV</th>
+                            <th>Conditions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="weekly-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
+</div><!-- /scout-layout -->
 
-        L.control.attribution({ position: 'bottomleft', prefix: false })
-            .addAttribution('Map © <a href="https://openstreetmap.org">OSM</a>')
-            .addTo(map);
+<script>
+    /* ═══════════════════════════════════════════════════
+       CONFIG
+    ═══════════════════════════════════════════════════ */
+    const CLIMATE_DATA_URL = '/assets/data/climate-grid.json';
+    const WEATHERLENS_KEY = ''; // <-- paste your WeatherLens key here
+    const WEATHERLENS_BASE = 'https://weatherlens.dev/api/v1';
+    const GEO_API = 'https://geocoding-api.open-meteo.com/v1/search';
+
+    /* ═══════════════════════════════════════════════════
+       STATE
+    ═══════════════════════════════════════════════════ */
+    let climateGrid = null;       // loaded from JSON
+    let selectedLoc = null;       // { name, lat, lon, country }
+    let fetchedWeeks = [];        // array of weekly objects from WeatherLens
+    let activeMetric = 'temp';
+    let detailChart = null;
+    let mapWeeks = [];            // [{label, startDate, endDate}] derived from date range
+    let currentWeekIdx = 0;
+    let playInterval = null;
+    let choroplethLayers = {};    // iso → Leaflet circle layer
+
+    /* ═══════════════════════════════════════════════════
+       INIT MAP
+    ═══════════════════════════════════════════════════ */
+    const map = L.map('map', {
+        center: [20, 10],
+        zoom: 2,
+        minZoom: 2,
+        maxZoom: 10,
+        zoomControl: true,
+        attributionControl: false,
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    L.control.attribution({ position: 'bottomleft', prefix: false })
+        .addAttribution('Map © <a href="https://openstreetmap.org">OSM</a>')
+        .addTo(map);
 
 
-        /* ── Dual-handle date range slider ── */
-        (function () {
-            const WINDOW_DAYS = 9 * 30;  // ~9 months, right edge
-            const DEFAULT_START = 14;      // today + 2 weeks
-            const DEFAULT_END = 60;      // today + 2 months
+    /* ── Dual-handle date range slider ── */
+    (function () {
+        const WINDOW_DAYS = 9 * 30;  // ~9 months, right edge
+        const DEFAULT_START = 14;      // today + 2 weeks
+        const DEFAULT_END = 60;      // today + 2 months
 
-            const startInput = document.getElementById('date-start');
-            const endInput = document.getElementById('date-end');
-            const startLabel = document.getElementById('range-slider-start-label');
-            const endLabel = document.getElementById('range-slider-end-label');
+        const startInput = document.getElementById('date-start');
+        const endInput = document.getElementById('date-end');
+        const startLabel = document.getElementById('range-slider-start-label');
+        const endLabel = document.getElementById('range-slider-end-label');
 
-            const today = new Date();
-            today.setUTCHours(0, 0, 0, 0);
-            const origin = today.getTime();
+        const today = new Date();
+        today.setUTCHours(0, 0, 0, 0);
+        const origin = today.getTime();
 
-            function toISO(offsetDays) {
-                return new Date(origin + offsetDays * 86400000).toISOString().slice(0, 10);
-            }
-            function fmt(offsetDays) {
-                return new Date(origin + offsetDays * 86400000).toLocaleDateString('en-GB', {
-                    day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC'
-                });
-            }
-
-            const slider = document.getElementById('range-slider');
-            noUiSlider.create(slider, {
-                start: [DEFAULT_START, DEFAULT_END],
-                connect: true,
-                step: 1,
-                range: { min: 0, max: WINDOW_DAYS },
-                tooltips: [
-                    { to: v => fmt(Math.round(v)) },
-                    { to: v => fmt(Math.round(v)) },
-                ],
-            });
-
-            slider.noUiSlider.on('update', (values) => {
-                const s = Math.round(values[0]);
-                const e = Math.round(values[1]);
-
-                startInput.value = toISO(s);
-                endInput.value = toISO(e);
-                startLabel.textContent = fmt(s);
-                endLabel.textContent = fmt(e);
-
-                onDatesChange();
-            });
-        })();
-        /* ═══════════════════════════════════════════════════
-           LOAD CLIMATE GRID
-        ═══════════════════════════════════════════════════ */
-        async function loadClimateGrid() {
-            try {
-                // Try real URL first, fall back to test data embedded below
-                let data;
-                try {
-                    const r = await fetch(CLIMATE_DATA_URL);
-                    if (!r.ok) throw new Error();
-                    data = await r.json();
-                } catch {
-                    data = FALLBACK_CLIMATE_DATA;
-                }
-                climateGrid = data;
-            } catch (e) {
-                console.warn('Climate grid load failed', e);
-            }
+        function toISO(offsetDays) {
+            return new Date(origin + offsetDays * 86400000).toISOString().slice(0, 10);
         }
-
-        /* ═══════════════════════════════════════════════════
-           DATE RANGE → WEEK LIST
-        ═══════════════════════════════════════════════════ */
-        function buildWeekList(startStr, endStr) {
-            const weeks = [];
-            let cur = new Date(startStr + 'T00:00:00Z');
-            const end = new Date(endStr + 'T00:00:00Z');
-            let idx = 1;
-            while (cur <= end) {
-                const weekEnd = new Date(Math.min(cur.getTime() + 6 * 86400000, end.getTime()));
-                weeks.push({
-                    label: `Wk ${idx}`,
-                    startDate: cur.toISOString().slice(0, 10),
-                    endDate: weekEnd.toISOString().slice(0, 10),
-                    startMs: cur.getTime(),
-                });
-                cur = new Date(cur.getTime() + 7 * 86400000);
-                idx++;
-            }
-            return weeks;
-        }
-
-        function weekMidMonthIdx(week) {
-            // Return 0-based month index of the midpoint of the week
-            const mid = new Date((new Date(week.startDate).getTime() + new Date(week.endDate).getTime()) / 2);
-            return mid.getUTCMonth();
-        }
-
-        /* ═══════════════════════════════════════════════════
-           CHOROPLETH
-        ═══════════════════════════════════════════════════ */
-        const TEMP_STOPS = [
-            { v: -20, h: 210 }, // deep blue
-            { v: 0, h: 200 },
-            { v: 10, h: 170 },
-            { v: 20, h: 60 }, // yellow-green
-            { v: 30, h: 30 }, // orange
-            { v: 40, h: 0 }, // red
-        ];
-
-        function tempToHue(t) {
-            for (let i = 1; i < TEMP_STOPS.length; i++) {
-                const a = TEMP_STOPS[i - 1], b = TEMP_STOPS[i];
-                if (t <= b.v) {
-                    const frac = (t - a.v) / (b.v - a.v);
-                    return a.h + frac * (b.h - a.h);
-                }
-            }
-            return TEMP_STOPS[TEMP_STOPS.length - 1].h;
-        }
-
-        function tempToColor(t, alpha = 0.7) {
-            if (t === null || t === undefined) return `rgba(100,100,100,${alpha})`;
-            const h = tempToHue(t);
-            const s = 75, l = 48;
-            return `hsla(${h.toFixed(0)},${s}%,${l}%,${alpha})`;
-        }
-
-        function renderChoropleth(weekIdx) {
-            if (!climateGrid) return;
-            const week = mapWeeks[weekIdx];
-            if (!week) return;
-            const monthIdx = weekMidMonthIdx(week);
-
-            // Clear old layers
-            Object.values(choroplethLayers).forEach(l => map.removeLayer(l));
-            choroplethLayers = {};
-
-            let temps = [];
-            Object.entries(climateGrid.countries).forEach(([iso, country]) => {
-                const t = country.monthly?.temp_mean?.[monthIdx];
-                if (t !== null && t !== undefined) temps.push(t);
-            });
-            const tMin = Math.min(...temps), tMax = Math.max(...temps);
-
-            Object.entries(climateGrid.countries).forEach(([iso, country]) => {
-                const t = country.monthly?.temp_mean?.[monthIdx];
-                const precip = country.monthly?.precip?.[monthIdx];
-                const color = tempToColor(t);
-
-                const circle = L.circleMarker([country.lat, country.lon], {
-                    radius: 9,
-                    fillColor: color,
-                    fillOpacity: 0.82,
-                    color: 'rgba(0,0,0,0.3)',
-                    weight: 1,
-                });
-
-                const monthName = climateGrid.meta.months[monthIdx];
-                circle.bindTooltip(
-                    `<strong>${country.name}</strong><br>` +
-                    `${monthName} avg: <strong>${t !== null ? t.toFixed(1) + '°C' : '—'}</strong><br>` +
-                    `Precip: ${precip !== null ? precip.toFixed(0) + ' mm' : '—'}`,
-                    { sticky: true, className: '' }
-                );
-
-                circle.addTo(map);
-                choroplethLayers[iso] = circle;
-            });
-
-            // Update legend
-            updateLegend(tMin, tMax);
-            updateWeekLabel(week);
-        }
-
-        function updateLegend(tMin, tMax) {
-            const bar = document.getElementById('legend-bar');
-            const steps = 20;
-            bar.innerHTML = '';
-            for (let i = 0; i < steps; i++) {
-                const t = tMin + (tMax - tMin) * (i / (steps - 1));
-                const seg = document.createElement('div');
-                seg.style.cssText = `flex:1; background:${tempToColor(t, 1)};`;
-                bar.appendChild(seg);
-            }
-            document.getElementById('legend-min').textContent = tMin.toFixed(0) + '°';
-            document.getElementById('legend-mid').textContent = ((tMin + tMax) / 2).toFixed(0) + '°';
-            document.getElementById('legend-max').textContent = tMax.toFixed(0) + '°';
-            document.getElementById('map-legend').style.display = 'block';
-        }
-
-        function updateWeekLabel(week) {
-            const fmt = d => {
-                const dt = new Date(d + 'T00:00:00Z');
-                return dt.toLocaleDateString('en-GB', { month: 'short', day: 'numeric', timeZone: 'UTC' });
-            };
-            document.getElementById('week-label').textContent =
-                `${fmt(week.startDate)} – ${fmt(week.endDate)}`;
-        }
-
-        /* ═══════════════════════════════════════════════════
-           DATE CHANGE HANDLER
-        ═══════════════════════════════════════════════════ */
-        function onDatesChange() {
-            const s = document.getElementById('date-start').value;
-            const e = document.getElementById('date-end').value;
-            const status = document.getElementById('date-status');
-
-            if (!s || !e) { status.textContent = ''; return; }
-            if (new Date(e) <= new Date(s)) {
-                status.className = 'status-line error';
-                status.textContent = 'End date must be after start date.';
-                return;
-            }
-
-            mapWeeks = buildWeekList(s, e);
-            const numWeeks = mapWeeks.length;
-            status.className = 'status-line ok';
-            status.textContent = `${numWeeks} week${numWeeks !== 1 ? 's' : ''} · ${s} → ${e}`;
-
-            // Show map controls
-            const slider = document.getElementById('week-slider');
-            slider.max = numWeeks - 1;
-            slider.value = 0;
-            currentWeekIdx = 0;
-            document.getElementById('map-controls').style.display = 'flex';
-
-            renderChoropleth(0);
-            updateFetchBtn();
-        }
-
-        /* ═══════════════════════════════════════════════════
-           ANIMATION
-        ═══════════════════════════════════════════════════ */
-        document.getElementById('play-btn').addEventListener('click', () => {
-            if (playInterval) {
-                clearInterval(playInterval);
-                playInterval = null;
-                document.getElementById('play-btn').textContent = '▶';
-            } else {
-                document.getElementById('play-btn').textContent = '⏸';
-                playInterval = setInterval(() => {
-                    currentWeekIdx = (currentWeekIdx + 1) % mapWeeks.length;
-                    document.getElementById('week-slider').value = currentWeekIdx;
-                    renderChoropleth(currentWeekIdx);
-                }, 900);
-            }
-        });
-
-        document.getElementById('week-slider').addEventListener('input', e => {
-            currentWeekIdx = parseInt(e.target.value);
-            renderChoropleth(currentWeekIdx);
-        });
-
-        /* ═══════════════════════════════════════════════════
-           GEOCODING AUTOCOMPLETE
-        ═══════════════════════════════════════════════════ */
-        let acTimer = null;
-        const locInput = document.getElementById('location-input');
-        const acList = document.getElementById('ac-list');
-
-        locInput.addEventListener('input', () => {
-            clearTimeout(acTimer);
-            const q = locInput.value.trim();
-            if (q.length < 2) { acList.classList.remove('open'); return; }
-            acTimer = setTimeout(() => fetchAutocomplete(q), 350);
-        });
-
-        async function fetchAutocomplete(query) {
-            try {
-                const url = `${GEO_API}?name=${encodeURIComponent(query)}&count=8&language=en&format=json`;
-                const r = await fetch(url);
-                const data = await r.json();
-                renderAC(data.results || []);
-            } catch { acList.classList.remove('open'); }
-        }
-
-        function renderAC(results) {
-            acList.innerHTML = '';
-            if (!results.length) { acList.classList.remove('open'); return; }
-            results.forEach(res => {
-                const parts = [res.admin1, res.country].filter(Boolean).join(', ');
-                const div = document.createElement('div');
-                div.className = 'autocomplete-item';
-                div.innerHTML = `<strong>${res.name}</strong> <span class="ac-country">${parts}</span>`;
-                div.addEventListener('click', () => {
-                    selectedLoc = { name: res.name, country: res.country || '', lat: res.latitude, lon: res.longitude };
-                    locInput.value = `${res.name}${res.country ? ', ' + res.country : ''}`;
-                    acList.classList.remove('open');
-                    showSelectedBadge();
-                    updateFetchBtn();
-                });
-                acList.appendChild(div);
-            });
-            acList.classList.add('open');
-        }
-
-        document.addEventListener('click', e => {
-            if (!e.target.closest('.location-wrap')) acList.classList.remove('open');
-        });
-
-        function showSelectedBadge() {
-            const badge = document.getElementById('selected-loc');
-            document.getElementById('selected-loc-name').textContent =
-                `📍 ${selectedLoc.name}${selectedLoc.country ? ', ' + selectedLoc.country : ''}`;
-            badge.classList.add('visible');
-        }
-
-        document.getElementById('clear-loc').addEventListener('click', () => {
-            selectedLoc = null;
-            locInput.value = '';
-            document.getElementById('selected-loc').classList.remove('visible');
-            updateFetchBtn();
-        });
-
-        function updateFetchBtn() {
-            const s = document.getElementById('date-start').value;
-            const e = document.getElementById('date-end').value;
-            document.getElementById('btn-fetch').disabled = !(selectedLoc && s && e);
-        }
-
-        /* ═══════════════════════════════════════════════════
-           WEATHERLENS FETCH + WEEKLY AGGREGATION
-        ═══════════════════════════════════════════════════ */
-        document.getElementById('btn-fetch').addEventListener('click', fetchClimateData);
-
-        async function fetchClimateData() {
-            if (!selectedLoc) return;
-            const s = document.getElementById('date-start').value;
-            const e = document.getElementById('date-end').value;
-            const statusEl = document.getElementById('fetch-status');
-            const btn = document.getElementById('btn-fetch');
-
-            statusEl.className = 'status-line';
-            statusEl.innerHTML = '<span class="spinner"></span> Fetching climate data…';
-            btn.disabled = true;
-
-            try {
-                // Build list of unique months needed
-                const weeks = buildWeekList(s, e);
-                const uniqueDates = getUniqueDatesForRange(s, e);
-
-                // Call WeatherLens /climate for the full range (comma-separated dates)
-                // WeatherLens accepts YYYY-MM-DD, single or comma-separated
-                const climateUrl = `${WEATHERLENS_BASE}/climate` +
-                    `?lat=${selectedLoc.lat}&lon=${selectedLoc.lon}` +
-                    `&date=${s},${e}`;
-
-                let climateResp;
-                if (WEATHERLENS_KEY) {
-                    const r = await fetch(climateUrl, { headers: { 'X-API-Key': WEATHERLENS_KEY } });
-                    if (!r.ok) throw new Error(`WeatherLens ${r.status}: ${r.statusText}`);
-                    climateResp = await r.json();
-                } else {
-                    // No key — use demo/mock data for development
-                    climateResp = buildMockClimateResp(selectedLoc, s, e);
-                }
-
-                fetchedWeeks = aggregateIntoWeeks(climateResp.climate || [], weeks);
-                renderDetailPanel(selectedLoc, s, e, fetchedWeeks);
-
-                statusEl.className = 'status-line ok';
-                statusEl.textContent = `✓ ${fetchedWeeks.length} weeks loaded.`;
-
-                // Save to recent
-                saveRecent(selectedLoc, s, e);
-
-            } catch (err) {
-                statusEl.className = 'status-line error';
-                statusEl.textContent = `Error: ${err.message}`;
-                console.error(err);
-            } finally {
-                btn.disabled = false;
-            }
-        }
-
-        function getUniqueDatesForRange(s, e) {
-            const dates = [];
-            let cur = new Date(s + 'T00:00:00Z');
-            const end = new Date(e + 'T00:00:00Z');
-            while (cur <= end) {
-                dates.push(cur.toISOString().slice(0, 10));
-                cur = new Date(cur.getTime() + 86400000);
-            }
-            return dates;
-        }
-
-        function aggregateIntoWeeks(dailyClimate, weeks) {
-            // dailyClimate: array of WeatherLens climate objects keyed by date "MM-DD"
-            // Build a map by "MM-DD" for O(1) lookup
-            const byDate = {};
-            dailyClimate.forEach(d => { byDate[d.date] = d; });
-
-            return weeks.map(week => {
-                const days = [];
-                let cur = new Date(week.startDate + 'T00:00:00Z');
-                const end = new Date(week.endDate + 'T00:00:00Z');
-                while (cur <= end) {
-                    const mmdd = cur.toISOString().slice(5, 10); // "MM-DD"
-                    if (byDate[mmdd]) days.push(byDate[mmdd]);
-                    cur = new Date(cur.getTime() + 86400000);
-                }
-                if (!days.length) return { ...week, noData: true };
-
-                const avg = key => {
-                    const vals = days.map(d => {
-                        // Navigate nested structure: temperature.highF / lowF, precipitation, etc.
-                        const parts = key.split('.');
-                        let v = d;
-                        for (const p of parts) v = v?.[p];
-                        return typeof v === 'number' ? v : null;
-                    }).filter(v => v !== null);
-                    return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
-                };
-
-                const sum = key => {
-                    const vals = days.map(d => {
-                        const parts = key.split('.');
-                        let v = d;
-                        for (const p of parts) v = v?.[p];
-                        return typeof v === 'number' ? v : null;
-                    }).filter(v => v !== null);
-                    return vals.length ? vals.reduce((a, b) => a + b, 0) : null;
-                };
-
-                return {
-                    ...week,
-                    tempHiC: fToC(avg('temperature.highF')),
-                    tempLoC: fToC(avg('temperature.lowF')),
-                    precipMm: inToMm(sum('precipitation.avgInchesPerDay')),
-                    humidityPct: avg('humidityPct'),
-                    uvIndex: avg('uvIndex'),
-                    conditions: days[Math.floor(days.length / 2)]?.conditions?.description || '—',
-                    conditionsEmoji: days[Math.floor(days.length / 2)]?.conditions?.emoji || '',
-                };
-            });
-        }
-
-        function fToC(f) { return f !== null && f !== undefined ? Math.round((f - 32) * 5 / 9 * 10) / 10 : null; }
-        function inToMm(i) { return i !== null && i !== undefined ? Math.round(i * 25.4 * 10) / 10 : null; }
-
-        /* ═══════════════════════════════════════════════════
-           DETAIL PANEL RENDER
-        ═══════════════════════════════════════════════════ */
-        function renderDetailPanel(loc, s, e, weeks) {
-            document.getElementById('detail-panel').classList.add('visible');
-            document.getElementById('detail-empty').style.display = 'none';
-            document.getElementById('detail-content').style.display = 'block';
-
-            document.getElementById('detail-location-name').textContent =
-                `${loc.name}${loc.country ? ', ' + loc.country : ''}`;
-            document.getElementById('detail-date-badge').textContent =
-                `${formatDate(s)} → ${formatDate(e)} · ${weeks.length} weeks`;
-
-            renderMetricCards(weeks);
-            renderMetricTabs();
-            renderChart(weeks, activeMetric);
-            renderTable(weeks);
-        }
-
-        function formatDate(d) {
-            return new Date(d + 'T00:00:00Z').toLocaleDateString('en-GB', {
+        function fmt(offsetDays) {
+            return new Date(origin + offsetDays * 86400000).toLocaleDateString('en-GB', {
                 day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC'
             });
         }
 
-        const METRICS = [
-            { key: 'tempHiC', label: 'High Temp', unit: '°C', color: '#e8b84b' },
-            { key: 'tempLoC', label: 'Low Temp', unit: '°C', color: '#6baed6' },
-            { key: 'precipMm', label: 'Precip', unit: 'mm', color: '#74c476' },
-            { key: 'humidityPct', label: 'Humidity', unit: '%', color: '#9ecae1' },
-            { key: 'uvIndex', label: 'UV Index', unit: '', color: '#fd8d3c' },
-        ];
+        const slider = document.getElementById('range-slider');
+        noUiSlider.create(slider, {
+            start: [DEFAULT_START, DEFAULT_END],
+            connect: true,
+            step: 1,
+            range: { min: 0, max: WINDOW_DAYS },
+            tooltips: [
+                { to: v => fmt(Math.round(v)) },
+                { to: v => fmt(Math.round(v)) },
+            ],
+        });
 
-        function renderMetricCards(weeks) {
-            const cards = document.getElementById('metric-cards');
-            cards.innerHTML = '';
-            METRICS.forEach(m => {
-                const vals = weeks.map(w => w[m.key]).filter(v => v !== null && v !== undefined);
-                const mx = vals.length ? Math.max(...vals) : null;
-                const mn = vals.length ? Math.min(...vals) : null;
-                const card = document.createElement('div');
-                card.className = 'metric-card' + (m.key === activeMetric ? ' active' : '');
-                card.innerHTML = `
+        slider.noUiSlider.on('update', (values) => {
+            const s = Math.round(values[0]);
+            const e = Math.round(values[1]);
+
+            startInput.value = toISO(s);
+            endInput.value = toISO(e);
+            startLabel.textContent = fmt(s);
+            endLabel.textContent = fmt(e);
+
+            onDatesChange();
+        });
+    })();
+    /* ═══════════════════════════════════════════════════
+       LOAD CLIMATE GRID
+    ═══════════════════════════════════════════════════ */
+    async function loadClimateGrid() {
+        try {
+            // Try real URL first, fall back to test data embedded below
+            let data;
+            try {
+                const r = await fetch(CLIMATE_DATA_URL);
+                if (!r.ok) throw new Error();
+                data = await r.json();
+            } catch {
+                data = FALLBACK_CLIMATE_DATA;
+            }
+            climateGrid = data;
+        } catch (e) {
+            console.warn('Climate grid load failed', e);
+        }
+    }
+
+    /* ═══════════════════════════════════════════════════
+       DATE RANGE → WEEK LIST
+    ═══════════════════════════════════════════════════ */
+    function buildWeekList(startStr, endStr) {
+        const weeks = [];
+        let cur = new Date(startStr + 'T00:00:00Z');
+        const end = new Date(endStr + 'T00:00:00Z');
+        let idx = 1;
+        while (cur <= end) {
+            const weekEnd = new Date(Math.min(cur.getTime() + 6 * 86400000, end.getTime()));
+            weeks.push({
+                label: `Wk ${idx}`,
+                startDate: cur.toISOString().slice(0, 10),
+                endDate: weekEnd.toISOString().slice(0, 10),
+                startMs: cur.getTime(),
+            });
+            cur = new Date(cur.getTime() + 7 * 86400000);
+            idx++;
+        }
+        return weeks;
+    }
+
+    function weekMidMonthIdx(week) {
+        // Return 0-based month index of the midpoint of the week
+        const mid = new Date((new Date(week.startDate).getTime() + new Date(week.endDate).getTime()) / 2);
+        return mid.getUTCMonth();
+    }
+
+    /* ═══════════════════════════════════════════════════
+       CHOROPLETH
+    ═══════════════════════════════════════════════════ */
+    const TEMP_STOPS = [
+        { v: -20, h: 210 }, // deep blue
+        { v: 0, h: 200 },
+        { v: 10, h: 170 },
+        { v: 20, h: 60 }, // yellow-green
+        { v: 30, h: 30 }, // orange
+        { v: 40, h: 0 }, // red
+    ];
+
+    function tempToHue(t) {
+        for (let i = 1; i < TEMP_STOPS.length; i++) {
+            const a = TEMP_STOPS[i - 1], b = TEMP_STOPS[i];
+            if (t <= b.v) {
+                const frac = (t - a.v) / (b.v - a.v);
+                return a.h + frac * (b.h - a.h);
+            }
+        }
+        return TEMP_STOPS[TEMP_STOPS.length - 1].h;
+    }
+
+    function tempToColor(t, alpha = 0.7) {
+        if (t === null || t === undefined) return `rgba(100,100,100,${alpha})`;
+        const h = tempToHue(t);
+        const s = 75, l = 48;
+        return `hsla(${h.toFixed(0)},${s}%,${l}%,${alpha})`;
+    }
+
+    function renderChoropleth(weekIdx) {
+        if (!climateGrid) return;
+        const week = mapWeeks[weekIdx];
+        if (!week) return;
+        const monthIdx = weekMidMonthIdx(week);
+
+        // Clear old layers
+        Object.values(choroplethLayers).forEach(l => map.removeLayer(l));
+        choroplethLayers = {};
+
+        let temps = [];
+        Object.entries(climateGrid.countries).forEach(([iso, country]) => {
+            const t = country.monthly?.temp_mean?.[monthIdx];
+            if (t !== null && t !== undefined) temps.push(t);
+        });
+        const tMin = Math.min(...temps), tMax = Math.max(...temps);
+
+        Object.entries(climateGrid.countries).forEach(([iso, country]) => {
+            const t = country.monthly?.temp_mean?.[monthIdx];
+            const precip = country.monthly?.precip?.[monthIdx];
+            const color = tempToColor(t);
+
+            const circle = L.circleMarker([country.lat, country.lon], {
+                radius: 9,
+                fillColor: color,
+                fillOpacity: 0.82,
+                color: 'rgba(0,0,0,0.3)',
+                weight: 1,
+            });
+
+            const monthName = climateGrid.meta.months[monthIdx];
+            circle.bindTooltip(
+                `<strong>${country.name}</strong><br>` +
+                `${monthName} avg: <strong>${t !== null ? t.toFixed(1) + '°C' : '—'}</strong><br>` +
+                `Precip: ${precip !== null ? precip.toFixed(0) + ' mm' : '—'}`,
+                { sticky: true, className: '' }
+            );
+
+            circle.addTo(map);
+            choroplethLayers[iso] = circle;
+        });
+
+        // Update legend
+        updateLegend(tMin, tMax);
+        updateWeekLabel(week);
+    }
+
+    function updateLegend(tMin, tMax) {
+        const bar = document.getElementById('legend-bar');
+        const steps = 20;
+        bar.innerHTML = '';
+        for (let i = 0; i < steps; i++) {
+            const t = tMin + (tMax - tMin) * (i / (steps - 1));
+            const seg = document.createElement('div');
+            seg.style.cssText = `flex:1; background:${tempToColor(t, 1)};`;
+            bar.appendChild(seg);
+        }
+        document.getElementById('legend-min').textContent = tMin.toFixed(0) + '°';
+        document.getElementById('legend-mid').textContent = ((tMin + tMax) / 2).toFixed(0) + '°';
+        document.getElementById('legend-max').textContent = tMax.toFixed(0) + '°';
+        document.getElementById('map-legend').style.display = 'block';
+    }
+
+    function updateWeekLabel(week) {
+        const fmt = d => {
+            const dt = new Date(d + 'T00:00:00Z');
+            return dt.toLocaleDateString('en-GB', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+        };
+        document.getElementById('week-label').textContent =
+            `${fmt(week.startDate)} – ${fmt(week.endDate)}`;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       DATE CHANGE HANDLER
+    ═══════════════════════════════════════════════════ */
+    function onDatesChange() {
+        const s = document.getElementById('date-start').value;
+        const e = document.getElementById('date-end').value;
+        const status = document.getElementById('date-status');
+
+        if (!s || !e) { status.textContent = ''; return; }
+        if (new Date(e) <= new Date(s)) {
+            status.className = 'status-line error';
+            status.textContent = 'End date must be after start date.';
+            return;
+        }
+
+        mapWeeks = buildWeekList(s, e);
+        const numWeeks = mapWeeks.length;
+        status.className = 'status-line ok';
+        status.textContent = `${numWeeks} week${numWeeks !== 1 ? 's' : ''} · ${s} → ${e}`;
+
+        // Show map controls
+        const slider = document.getElementById('week-slider');
+        slider.max = numWeeks - 1;
+        slider.value = 0;
+        currentWeekIdx = 0;
+        document.getElementById('map-controls').style.display = 'flex';
+
+        renderChoropleth(0);
+        updateFetchBtn();
+    }
+
+    /* ═══════════════════════════════════════════════════
+       ANIMATION
+    ═══════════════════════════════════════════════════ */
+    document.getElementById('play-btn').addEventListener('click', () => {
+        if (playInterval) {
+            clearInterval(playInterval);
+            playInterval = null;
+            document.getElementById('play-btn').textContent = '▶';
+        } else {
+            document.getElementById('play-btn').textContent = '⏸';
+            playInterval = setInterval(() => {
+                currentWeekIdx = (currentWeekIdx + 1) % mapWeeks.length;
+                document.getElementById('week-slider').value = currentWeekIdx;
+                renderChoropleth(currentWeekIdx);
+            }, 900);
+        }
+    });
+
+    document.getElementById('week-slider').addEventListener('input', e => {
+        currentWeekIdx = parseInt(e.target.value);
+        renderChoropleth(currentWeekIdx);
+    });
+
+    /* ═══════════════════════════════════════════════════
+       GEOCODING AUTOCOMPLETE
+    ═══════════════════════════════════════════════════ */
+    let acTimer = null;
+    const locInput = document.getElementById('location-input');
+    const acList = document.getElementById('ac-list');
+
+    locInput.addEventListener('input', () => {
+        clearTimeout(acTimer);
+        const q = locInput.value.trim();
+        if (q.length < 2) { acList.classList.remove('open'); return; }
+        acTimer = setTimeout(() => fetchAutocomplete(q), 350);
+    });
+
+    async function fetchAutocomplete(query) {
+        try {
+            const url = `${GEO_API}?name=${encodeURIComponent(query)}&count=8&language=en&format=json`;
+            const r = await fetch(url);
+            const data = await r.json();
+            renderAC(data.results || []);
+        } catch { acList.classList.remove('open'); }
+    }
+
+    function renderAC(results) {
+        acList.innerHTML = '';
+        if (!results.length) { acList.classList.remove('open'); return; }
+        results.forEach(res => {
+            const parts = [res.admin1, res.country].filter(Boolean).join(', ');
+            const div = document.createElement('div');
+            div.className = 'autocomplete-item';
+            div.innerHTML = `<strong>${res.name}</strong> <span class="ac-country">${parts}</span>`;
+            div.addEventListener('click', () => {
+                selectedLoc = { name: res.name, country: res.country || '', lat: res.latitude, lon: res.longitude };
+                locInput.value = `${res.name}${res.country ? ', ' + res.country : ''}`;
+                acList.classList.remove('open');
+                showSelectedBadge();
+                updateFetchBtn();
+            });
+            acList.appendChild(div);
+        });
+        acList.classList.add('open');
+    }
+
+    document.addEventListener('click', e => {
+        if (!e.target.closest('.location-wrap') && !e.target.closest('#selected-loc')) {
+            acList.classList.remove('open');
+        }
+    });
+
+    function showSelectedBadge() {
+        const badge = document.getElementById('selected-loc');
+        document.getElementById('selected-loc-name').textContent =
+            `📍 ${selectedLoc.name}${selectedLoc.country ? ', ' + selectedLoc.country : ''}`;
+        badge.classList.add('visible');
+    }
+
+    document.getElementById('clear-loc').addEventListener('click', () => {
+        selectedLoc = null;
+        locInput.value = '';
+        document.getElementById('selected-loc').classList.remove('visible');
+        updateFetchBtn();
+    });
+
+    function updateFetchBtn() {
+        const s = document.getElementById('date-start').value;
+        const e = document.getElementById('date-end').value;
+        document.getElementById('btn-fetch').disabled = !(selectedLoc && s && e);
+    }
+
+    /* ═══════════════════════════════════════════════════
+       WEATHERLENS FETCH + WEEKLY AGGREGATION
+    ═══════════════════════════════════════════════════ */
+    document.getElementById('btn-fetch').addEventListener('click', fetchClimateData);
+
+    async function fetchClimateData() {
+        if (!selectedLoc) return;
+        const s = document.getElementById('date-start').value;
+        const e = document.getElementById('date-end').value;
+        const statusEl = document.getElementById('fetch-status');
+        const btn = document.getElementById('btn-fetch');
+
+        statusEl.className = 'status-line';
+        statusEl.innerHTML = '<span class="spinner"></span> Fetching climate data…';
+        btn.disabled = true;
+
+        try {
+            // Build list of unique months needed
+            const weeks = buildWeekList(s, e);
+            const uniqueDates = getUniqueDatesForRange(s, e);
+
+            // Call WeatherLens /climate for the full range (comma-separated dates)
+            // WeatherLens accepts YYYY-MM-DD, single or comma-separated
+            const climateUrl = `${WEATHERLENS_BASE}/climate` +
+                `?lat=${selectedLoc.lat}&lon=${selectedLoc.lon}` +
+                `&date=${s},${e}`;
+
+            let climateResp;
+            if (WEATHERLENS_KEY) {
+                const r = await fetch(climateUrl, { headers: { 'X-API-Key': WEATHERLENS_KEY } });
+                if (!r.ok) throw new Error(`WeatherLens ${r.status}: ${r.statusText}`);
+                climateResp = await r.json();
+            } else {
+                // No key — use demo/mock data for development
+                climateResp = buildMockClimateResp(selectedLoc, s, e);
+            }
+
+            fetchedWeeks = aggregateIntoWeeks(climateResp.climate || [], weeks);
+            renderDetailPanel(selectedLoc, s, e, fetchedWeeks);
+
+            statusEl.className = 'status-line ok';
+            statusEl.textContent = `✓ ${fetchedWeeks.length} weeks loaded.`;
+
+            // Save to recent
+            saveRecent(selectedLoc, s, e);
+
+        } catch (err) {
+            statusEl.className = 'status-line error';
+            statusEl.textContent = `Error: ${err.message}`;
+            console.error(err);
+        } finally {
+            btn.disabled = false;
+        }
+    }
+
+    function getUniqueDatesForRange(s, e) {
+        const dates = [];
+        let cur = new Date(s + 'T00:00:00Z');
+        const end = new Date(e + 'T00:00:00Z');
+        while (cur <= end) {
+            dates.push(cur.toISOString().slice(0, 10));
+            cur = new Date(cur.getTime() + 86400000);
+        }
+        return dates;
+    }
+
+    function aggregateIntoWeeks(dailyClimate, weeks) {
+        // dailyClimate: array of WeatherLens climate objects keyed by date "MM-DD"
+        // Build a map by "MM-DD" for O(1) lookup
+        const byDate = {};
+        dailyClimate.forEach(d => { byDate[d.date] = d; });
+
+        return weeks.map(week => {
+            const days = [];
+            let cur = new Date(week.startDate + 'T00:00:00Z');
+            const end = new Date(week.endDate + 'T00:00:00Z');
+            while (cur <= end) {
+                const mmdd = cur.toISOString().slice(5, 10); // "MM-DD"
+                if (byDate[mmdd]) days.push(byDate[mmdd]);
+                cur = new Date(cur.getTime() + 86400000);
+            }
+            if (!days.length) return { ...week, noData: true };
+
+            const avg = key => {
+                const vals = days.map(d => {
+                    // Navigate nested structure: temperature.highF / lowF, precipitation, etc.
+                    const parts = key.split('.');
+                    let v = d;
+                    for (const p of parts) v = v?.[p];
+                    return typeof v === 'number' ? v : null;
+                }).filter(v => v !== null);
+                return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
+            };
+
+            const sum = key => {
+                const vals = days.map(d => {
+                    const parts = key.split('.');
+                    let v = d;
+                    for (const p of parts) v = v?.[p];
+                    return typeof v === 'number' ? v : null;
+                }).filter(v => v !== null);
+                return vals.length ? vals.reduce((a, b) => a + b, 0) : null;
+            };
+
+            return {
+                ...week,
+                tempHiC: fToC(avg('temperature.highF')),
+                tempLoC: fToC(avg('temperature.lowF')),
+                precipMm: inToMm(sum('precipitation.avgInchesPerDay')),
+                humidityPct: avg('humidityPct'),
+                uvIndex: avg('uvIndex'),
+                conditions: days[Math.floor(days.length / 2)]?.conditions?.description || '—',
+                conditionsEmoji: days[Math.floor(days.length / 2)]?.conditions?.emoji || '',
+            };
+        });
+    }
+
+    function fToC(f) { return f !== null && f !== undefined ? Math.round((f - 32) * 5 / 9 * 10) / 10 : null; }
+    function inToMm(i) { return i !== null && i !== undefined ? Math.round(i * 25.4 * 10) / 10 : null; }
+
+    /* ═══════════════════════════════════════════════════
+       DETAIL PANEL RENDER
+    ═══════════════════════════════════════════════════ */
+    function renderDetailPanel(loc, s, e, weeks) {
+        document.getElementById('detail-panel').classList.add('visible');
+        document.getElementById('detail-empty').style.display = 'none';
+        document.getElementById('detail-content').style.display = 'block';
+
+        document.getElementById('detail-location-name').textContent =
+            `${loc.name}${loc.country ? ', ' + loc.country : ''}`;
+        document.getElementById('detail-date-badge').textContent =
+            `${formatDate(s)} → ${formatDate(e)} · ${weeks.length} weeks`;
+
+        renderMetricCards(weeks);
+        renderMetricTabs();
+        renderChart(weeks, activeMetric);
+        renderTable(weeks);
+    }
+
+    function formatDate(d) {
+        return new Date(d + 'T00:00:00Z').toLocaleDateString('en-GB', {
+            day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC'
+        });
+    }
+
+    const METRICS = [
+        { key: 'tempHiC', label: 'High Temp', unit: '°C', color: '#e8b84b' },
+        { key: 'tempLoC', label: 'Low Temp', unit: '°C', color: '#6baed6' },
+        { key: 'precipMm', label: 'Precip', unit: 'mm', color: '#74c476' },
+        { key: 'humidityPct', label: 'Humidity', unit: '%', color: '#9ecae1' },
+        { key: 'uvIndex', label: 'UV Index', unit: '', color: '#fd8d3c' },
+    ];
+
+    function renderMetricCards(weeks) {
+        const cards = document.getElementById('metric-cards');
+        cards.innerHTML = '';
+        METRICS.forEach(m => {
+            const vals = weeks.map(w => w[m.key]).filter(v => v !== null && v !== undefined);
+            const mx = vals.length ? Math.max(...vals) : null;
+            const mn = vals.length ? Math.min(...vals) : null;
+            const card = document.createElement('div');
+            card.className = 'metric-card' + (m.key === activeMetric ? ' active' : '');
+            card.innerHTML = `
         <div class="mc-unit">${m.unit}</div>
         <div class="mc-label">${m.label}</div>
         <div class="mc-max" style="color:${m.color}">${mx !== null ? mx.toFixed(1) : '—'}</div>
         <div class="mc-min">↓ ${mn !== null ? mn.toFixed(1) : '—'}</div>
       `;
-                card.addEventListener('click', () => {
-                    activeMetric = m.key;
-                    renderMetricCards(fetchedWeeks);
-                    renderChart(fetchedWeeks, activeMetric);
-                });
-                cards.appendChild(card);
+            card.addEventListener('click', () => {
+                activeMetric = m.key;
+                renderMetricCards(fetchedWeeks);
+                renderChart(fetchedWeeks, activeMetric);
             });
-        }
+            cards.appendChild(card);
+        });
+    }
 
-        function renderMetricTabs() {
-            const tabs = document.getElementById('metric-tabs');
-            tabs.innerHTML = '';
-            METRICS.forEach(m => {
-                const btn = document.createElement('button');
-                btn.className = 'metric-tab' + (m.key === activeMetric ? ' active' : '');
-                btn.textContent = m.label;
-                btn.addEventListener('click', () => {
-                    activeMetric = m.key;
-                    renderMetricCards(fetchedWeeks);
-                    renderMetricTabs();
-                    renderChart(fetchedWeeks, activeMetric);
-                });
-                tabs.appendChild(btn);
+    function renderMetricTabs() {
+        const tabs = document.getElementById('metric-tabs');
+        tabs.innerHTML = '';
+        METRICS.forEach(m => {
+            const btn = document.createElement('button');
+            btn.className = 'metric-tab' + (m.key === activeMetric ? ' active' : '');
+            btn.textContent = m.label;
+            btn.addEventListener('click', () => {
+                activeMetric = m.key;
+                renderMetricCards(fetchedWeeks);
+                renderMetricTabs();
+                renderChart(fetchedWeeks, activeMetric);
             });
-        }
+            tabs.appendChild(btn);
+        });
+    }
 
-        function renderChart(weeks, metricKey) {
-            const metric = METRICS.find(m => m.key === metricKey);
-            const labels = weeks.map(w => w.label);
-            const data = weeks.map(w => w[metricKey] ?? null);
+    function renderChart(weeks, metricKey) {
+        const metric = METRICS.find(m => m.key === metricKey);
+        const labels = weeks.map(w => w.label);
+        const data = weeks.map(w => w[metricKey] ?? null);
 
-            if (detailChart) detailChart.destroy();
-            detailChart = new Chart(document.getElementById('detail-chart'), {
-                type: 'line',
-                data: {
-                    labels,
-                    datasets: [{
-                        label: metric.label,
-                        data,
-                        borderColor: metric.color,
-                        backgroundColor: metric.color + '22',
-                        borderWidth: 2,
-                        pointBackgroundColor: metric.color,
-                        pointRadius: 4,
-                        tension: 0.35,
-                        fill: true,
-                        spanGaps: true,
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            backgroundColor: 'rgba(13,31,53,0.95)',
-                            borderColor: 'rgba(201,146,42,0.4)',
-                            borderWidth: 1,
-                            titleColor: '#f5ead8',
-                            bodyColor: '#d4c4a8',
-                            callbacks: {
-                                label: ctx => `${ctx.parsed.y !== null ? ctx.parsed.y.toFixed(1) : '—'} ${metric.unit}`
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            ticks: { color: '#a89b85', font: { size: 11 } },
-                            grid: { color: 'rgba(201,146,42,0.08)' },
-                        },
-                        y: {
-                            ticks: { color: '#a89b85', font: { size: 11 } },
-                            grid: { color: 'rgba(201,146,42,0.08)' },
+        if (detailChart) detailChart.destroy();
+        detailChart = new Chart(document.getElementById('detail-chart'), {
+            type: 'line',
+            data: {
+                labels,
+                datasets: [{
+                    label: metric.label,
+                    data,
+                    borderColor: metric.color,
+                    backgroundColor: metric.color + '22',
+                    borderWidth: 2,
+                    pointBackgroundColor: metric.color,
+                    pointRadius: 4,
+                    tension: 0.35,
+                    fill: true,
+                    spanGaps: true,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: 'rgba(13,31,53,0.95)',
+                        borderColor: 'rgba(201,146,42,0.4)',
+                        borderWidth: 1,
+                        titleColor: '#f5ead8',
+                        bodyColor: '#d4c4a8',
+                        callbacks: {
+                            label: ctx => `${ctx.parsed.y !== null ? ctx.parsed.y.toFixed(1) : '—'} ${metric.unit}`
                         }
                     }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: '#a89b85', font: { size: 11 } },
+                        grid: { color: 'rgba(201,146,42,0.08)' },
+                    },
+                    y: {
+                        ticks: { color: '#a89b85', font: { size: 11 } },
+                        grid: { color: 'rgba(201,146,42,0.08)' },
+                    }
                 }
-            });
-        }
+            }
+        });
+    }
 
-        function renderTable(weeks) {
-            const tbody = document.getElementById('weekly-tbody');
-            tbody.innerHTML = '';
-            const fmt = d => new Date(d + 'T00:00:00Z').toLocaleDateString('en-GB', {
-                day: 'numeric', month: 'short', timeZone: 'UTC'
-            });
-            weeks.forEach(w => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
+    function renderTable(weeks) {
+        const tbody = document.getElementById('weekly-tbody');
+        tbody.innerHTML = '';
+        const fmt = d => new Date(d + 'T00:00:00Z').toLocaleDateString('en-GB', {
+            day: 'numeric', month: 'short', timeZone: 'UTC'
+        });
+        weeks.forEach(w => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
         <td>${w.label}</td>
         <td>${fmt(w.startDate)} – ${fmt(w.endDate)}</td>
         <td class="temp-hi">${w.tempHiC !== null && w.tempHiC !== undefined ? w.tempHiC.toFixed(1) : '—'}</td>
@@ -1442,104 +1434,101 @@
         <td>${w.uvIndex !== null && w.uvIndex !== undefined ? w.uvIndex.toFixed(1) : '—'}</td>
         <td class="condition-emoji">${w.conditionsEmoji || ''} ${w.conditions || '—'}</td>
       `;
-                tbody.appendChild(tr);
-            });
-        }
+            tbody.appendChild(tr);
+        });
+    }
 
-        /* ═══════════════════════════════════════════════════
-           RECENT LOOKUPS
-        ═══════════════════════════════════════════════════ */
-        function saveRecent(loc, s, e) {
-            try {
-                const key = 'flomads-sit-scout-recent';
-                const existing = JSON.parse(localStorage.getItem(key) || '[]');
-                const entry = { name: loc.name, country: loc.country, lat: loc.lat, lon: loc.lon, start: s, end: e, ts: Date.now() };
-                const updated = [entry, ...existing.filter(r => !(r.name === loc.name && r.start === s && r.end === e))].slice(0, 6);
-                localStorage.setItem(key, JSON.stringify(updated));
-                renderRecent(updated);
-            } catch { }
-        }
-
-        function renderRecent(items) {
-            if (!items.length) return;
-            const section = document.getElementById('saved-sits-section');
-            const list = document.getElementById('saved-sits-list');
-            section.style.display = 'block';
-            list.innerHTML = '';
-            items.forEach(item => {
-                const div = document.createElement('div');
-                div.style.cssText = 'padding:0.4rem 0; border-bottom:1px solid rgba(201,146,42,0.1); cursor:pointer; font-size:0.82rem;';
-                div.innerHTML = `<span style="color:var(--gold-light)">${item.name}</span> <span style="color:var(--text-muted)">${item.start} → ${item.end}</span>`;
-                div.addEventListener('click', () => {
-                    selectedLoc = { name: item.name, country: item.country, lat: item.lat, lon: item.lon };
-                    document.getElementById('date-start').value = item.start;
-                    document.getElementById('date-end').value = item.end;
-                    locInput.value = `${item.name}, ${item.country}`;
-                    showSelectedBadge();
-                    onDatesChange();
-                    updateFetchBtn();
-                });
-                list.appendChild(div);
-            });
-        }
-
-        // Load recent on startup
+    /* ═══════════════════════════════════════════════════
+       RECENT LOOKUPS
+    ═══════════════════════════════════════════════════ */
+    function saveRecent(loc, s, e) {
         try {
-            const saved = JSON.parse(localStorage.getItem('flomads-sit-scout-recent') || '[]');
-            if (saved.length) renderRecent(saved);
+            const key = 'flomads-sit-scout-recent';
+            const existing = JSON.parse(localStorage.getItem(key) || '[]');
+            const entry = { name: loc.name, country: loc.country, lat: loc.lat, lon: loc.lon, start: s, end: e, ts: Date.now() };
+            const updated = [entry, ...existing.filter(r => !(r.name === loc.name && r.start === s && r.end === e))].slice(0, 6);
+            localStorage.setItem(key, JSON.stringify(updated));
+            renderRecent(updated);
         } catch { }
+    }
 
-        /* ═══════════════════════════════════════════════════
-           MOCK DATA (used when no WeatherLens key or for dev)
-        ═══════════════════════════════════════════════════ */
-        function buildMockClimateResp(loc, s, e) {
-            // Generate plausible mock daily data for the date range
-            // based on latitude — rough approximation
-            const latFactor = Math.cos(loc.lat * Math.PI / 180);
-            const baseTemp = 15 + latFactor * 15; // tropics warmer
-            const climate = [];
+    function renderRecent(items) {
+        if (!items.length) return;
+        const section = document.getElementById('saved-sits-section');
+        const list = document.getElementById('saved-sits-list');
+        section.style.display = 'block';
+        list.innerHTML = '';
+        items.forEach(item => {
+            const div = document.createElement('div');
+            div.style.cssText = 'padding:0.4rem 0; border-bottom:1px solid rgba(201,146,42,0.1); cursor:pointer; font-size:0.82rem;';
+            div.innerHTML = `<span style="color:var(--gold-light)">${item.name}</span> <span style="color:var(--text-muted)">${item.start} → ${item.end}</span>`;
+            div.addEventListener('click', () => {
+                selectedLoc = { name: item.name, country: item.country, lat: item.lat, lon: item.lon };
+                document.getElementById('date-start').value = item.start;
+                document.getElementById('date-end').value = item.end;
+                locInput.value = `${item.name}, ${item.country}`;
+                showSelectedBadge();
+                onDatesChange();
+                updateFetchBtn();
+            });
+            list.appendChild(div);
+        });
+    }
 
-            let cur = new Date(s + 'T00:00:00Z');
-            const end = new Date(e + 'T00:00:00Z');
-            while (cur <= end) {
-                const mmdd = cur.toISOString().slice(5, 10);
-                const month = cur.getUTCMonth(); // 0-11
-                // Simple seasonal wave: hotter in Jul for N hemisphere, Jan for S
-                const seasonalOffset = loc.lat >= 0
-                    ? Math.sin((month - 1) * Math.PI / 6) * 8
-                    : Math.sin((month + 5) * Math.PI / 6) * 8;
-                const hi = baseTemp + seasonalOffset + 5;
-                const lo = baseTemp + seasonalOffset - 5;
-                climate.push({
-                    date: mmdd,
-                    temperature: { highF: hi * 9 / 5 + 32, lowF: lo * 9 / 5 + 32 },
-                    precipitation: { avgInchesPerDay: Math.random() * 0.15 },
-                    humidityPct: 55 + Math.random() * 25,
-                    uvIndex: 3 + latFactor * 6 + Math.sin((month - 3) * Math.PI / 6) * 2,
-                    conditions: { description: month >= 5 && month <= 8 ? 'Partly Cloudy' : 'Clear', emoji: '⛅' },
-                });
-                cur = new Date(cur.getTime() + 86400000);
-            }
-            return { climate };
+    // Load recent on startup
+    try {
+        const saved = JSON.parse(localStorage.getItem('flomads-sit-scout-recent') || '[]');
+        if (saved.length) renderRecent(saved);
+    } catch { }
+
+    /* ═══════════════════════════════════════════════════
+       MOCK DATA (used when no WeatherLens key or for dev)
+    ═══════════════════════════════════════════════════ */
+    function buildMockClimateResp(loc, s, e) {
+        // Generate plausible mock daily data for the date range
+        // based on latitude — rough approximation
+        const latFactor = Math.cos(loc.lat * Math.PI / 180);
+        const baseTemp = 15 + latFactor * 15; // tropics warmer
+        const climate = [];
+
+        let cur = new Date(s + 'T00:00:00Z');
+        const end = new Date(e + 'T00:00:00Z');
+        while (cur <= end) {
+            const mmdd = cur.toISOString().slice(5, 10);
+            const month = cur.getUTCMonth(); // 0-11
+            // Simple seasonal wave: hotter in Jul for N hemisphere, Jan for S
+            const seasonalOffset = loc.lat >= 0
+                ? Math.sin((month - 1) * Math.PI / 6) * 8
+                : Math.sin((month + 5) * Math.PI / 6) * 8;
+            const hi = baseTemp + seasonalOffset + 5;
+            const lo = baseTemp + seasonalOffset - 5;
+            climate.push({
+                date: mmdd,
+                temperature: { highF: hi * 9 / 5 + 32, lowF: lo * 9 / 5 + 32 },
+                precipitation: { avgInchesPerDay: Math.random() * 0.15 },
+                humidityPct: 55 + Math.random() * 25,
+                uvIndex: 3 + latFactor * 6 + Math.sin((month - 3) * Math.PI / 6) * 2,
+                conditions: { description: month >= 5 && month <= 8 ? 'Partly Cloudy' : 'Clear', emoji: '⛅' },
+            });
+            cur = new Date(cur.getTime() + 86400000);
         }
+        return { climate };
+    }
 
-        /* ═══════════════════════════════════════════════════
-           FALLBACK CLIMATE DATA (test data from generation run)
-        ═══════════════════════════════════════════════════ */
-        const FALLBACK_CLIMATE_DATA = { "meta": { "generated": "2026-05-17T15:45:52.020240+00:00", "source": "Open-Meteo Climate API — ERA5 1991-2020 monthly normals", "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], "units": { "temp_max": "°C average daily high", "temp_min": "°C average daily low", "temp_mean": "°C average mean", "precip": "mm total for month (averaged over 30 years)" }, "note": "Index 0 = January, index 11 = December" }, "countries": { "EC": { "name": "Ecuador", "lat": -1.83, "lon": -78.18, "monthly": { "temp_max": [21.6, 21.8, 21.8, 21.6, 21.3, 20.4, 20.1, 21.0, 22.0, 22.2, 22.0, 21.6], "temp_min": [15.7, 16.0, 16.1, 16.0, 15.6, 14.7, 13.9, 13.7, 14.2, 15.2, 15.7, 15.8], "temp_mean": [18.4, 18.6, 18.6, 18.5, 18.2, 17.4, 16.9, 17.3, 18.1, 18.6, 18.7, 18.5], "precip": [7.2, 7.5, 8.1, 7.3, 6.8, 5.6, 4.9, 3.0, 3.0, 5.8, 8.2, 7.9] } }, "US": { "name": "United States", "lat": 37.09, "lon": -95.71, "monthly": { "temp_max": [7.3, 10.3, 15.8, 20.8, 25.4, 30.1, 32.8, 32.4, 27.9, 21.3, 14.2, 8.3], "temp_min": [-1.7, 0.3, 5.2, 10.4, 15.7, 20.8, 23.4, 22.8, 18.5, 12.2, 5.7, 0.2], "temp_mean": [1.8, 4.3, 9.5, 14.8, 20.0, 25.1, 27.7, 27.2, 22.6, 16.1, 9.3, 3.6], "precip": [1.3, 1.8, 2.8, 4.2, 5.2, 4.1, 2.6, 2.5, 3.2, 2.9, 2.1, 1.8] } } } };
+    /* ═══════════════════════════════════════════════════
+       FALLBACK CLIMATE DATA (test data from generation run)
+    ═══════════════════════════════════════════════════ */
+    const FALLBACK_CLIMATE_DATA = { "meta": { "generated": "2026-05-17T15:45:52.020240+00:00", "source": "Open-Meteo Climate API — ERA5 1991-2020 monthly normals", "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], "units": { "temp_max": "°C average daily high", "temp_min": "°C average daily low", "temp_mean": "°C average mean", "precip": "mm total for month (averaged over 30 years)" }, "note": "Index 0 = January, index 11 = December" }, "countries": { "EC": { "name": "Ecuador", "lat": -1.83, "lon": -78.18, "monthly": { "temp_max": [21.6, 21.8, 21.8, 21.6, 21.3, 20.4, 20.1, 21.0, 22.0, 22.2, 22.0, 21.6], "temp_min": [15.7, 16.0, 16.1, 16.0, 15.6, 14.7, 13.9, 13.7, 14.2, 15.2, 15.7, 15.8], "temp_mean": [18.4, 18.6, 18.6, 18.5, 18.2, 17.4, 16.9, 17.3, 18.1, 18.6, 18.7, 18.5], "precip": [7.2, 7.5, 8.1, 7.3, 6.8, 5.6, 4.9, 3.0, 3.0, 5.8, 8.2, 7.9] } }, "US": { "name": "United States", "lat": 37.09, "lon": -95.71, "monthly": { "temp_max": [7.3, 10.3, 15.8, 20.8, 25.4, 30.1, 32.8, 32.4, 27.9, 21.3, 14.2, 8.3], "temp_min": [-1.7, 0.3, 5.2, 10.4, 15.7, 20.8, 23.4, 22.8, 18.5, 12.2, 5.7, 0.2], "temp_mean": [1.8, 4.3, 9.5, 14.8, 20.0, 25.1, 27.7, 27.2, 22.6, 16.1, 9.3, 3.6], "precip": [1.3, 1.8, 2.8, 4.2, 5.2, 4.1, 2.6, 2.5, 3.2, 2.9, 2.1, 1.8] } } } };
 
-        /* ═══════════════════════════════════════════════════
-           WIRE UP DATE INPUTS
-        ═══════════════════════════════════════════════════ */
-        document.getElementById('date-start').addEventListener('change', onDatesChange);
-        document.getElementById('date-end').addEventListener('change', onDatesChange);
+    /* ═══════════════════════════════════════════════════
+       WIRE UP DATE INPUTS
+    ═══════════════════════════════════════════════════ */
+    document.getElementById('date-start').addEventListener('change', onDatesChange);
+    document.getElementById('date-end').addEventListener('change', onDatesChange);
 
-        /* ═══════════════════════════════════════════════════
-           BOOT
-        ═══════════════════════════════════════════════════ */
-        loadClimateGrid();
+    /* ═══════════════════════════════════════════════════
+       BOOT
+    ═══════════════════════════════════════════════════ */
+    loadClimateGrid();
 
-    </script>
-</body>
-
-</html>
+</script>
