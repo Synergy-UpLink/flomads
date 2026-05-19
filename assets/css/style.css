@@ -112,7 +112,7 @@ em { font-style: italic; color: var(--gold-light); }
 #main-nav {
   position: fixed;
   top: 0; left: 0; right: 0;
-  z-index: 100;
+  z-index: 1500;
   padding: 0.9rem 1.5rem;
   background: rgba(13,31,53,0.95);
   backdrop-filter: blur(12px);

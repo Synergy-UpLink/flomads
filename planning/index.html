@@ -9,765 +9,91 @@ description: Planning page for specific sits
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
-
-<style>
-    /* ── Inherit Flomads palette ── */
-    :root {
-        --navy: #0d1f35;
-        --navy-mid: #152d4a;
-        --navy-light: #1e3f63;
-        --cream: #f5ead8;
-        --cream-dim: #d4c4a8;
-        --gold: #c9922a;
-        --gold-light: #e8b84b;
-        --red: #c0392b;
-        --red-bright: #e74c3c;
-        --white: #ffffff;
-        --text-main: #f5ead8;
-        --text-muted: #a89b85;
-        --border: rgba(201, 146, 42, 0.25);
-        --font-display: 'Playfair Display', Georgia, serif;
-        --font-deco: 'Cinzel Decorative', serif;
-        --font-body: 'DM Sans', system-ui, sans-serif;
-        --radius: 6px;
-        --radius-lg: 14px;
-        --transition: 0.3s ease;
-    }
-
-    *,
-    *::before,
-    *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-
-    html {
-        scroll-behavior: smooth;
-    }
-
-    body {
-        background: var(--navy);
-        color: var(--text-main);
-        font-family: var(--font-body);
-        font-size: 16px;
-        line-height: 1.7;
-        min-height: 100vh;
-    }
-
-    /* ── Page header ── */
-    .scout-header {
-        padding: 2.5rem 2rem 1.5rem;
-        border-bottom: 1px solid var(--border);
-        background: linear-gradient(180deg, rgba(21, 45, 74, 0.9) 0%, transparent 100%);
-    }
-
-    .scout-header h1 {
-        font-family: var(--font-display);
-        font-size: clamp(1.8rem, 4vw, 2.8rem);
-        color: var(--cream);
-        font-weight: 900;
-        letter-spacing: -0.01em;
-    }
-
-    .scout-header h1 span {
-        color: var(--gold-light);
-    }
-
-    .scout-header p {
-        color: var(--text-muted);
-        font-size: 0.9rem;
-        margin-top: 0.3rem;
-    }
-
-    /* ── Main layout ── */
-    .scout-layout {
-        display: grid;
-        grid-template-columns: 340px 1fr;
-        grid-template-rows: auto 1fr;
-        min-height: calc(100vh - 120px);
-    }
-
-    /* ── Sidebar ── */
-    .sidebar {
-        grid-row: 1 / 3;
-        background: var(--navy-mid);
-        border-right: 1px solid var(--border);
-        padding: 1.5rem;
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        overflow-y: auto;
-    }
-
-    .sidebar-section {
-        border: 1px solid var(--border);
-        border-radius: var(--radius-lg);
-        padding: 1.2rem;
-        background: rgba(13, 31, 53, 0.5);
-    }
-
-    .sidebar-section-title {
-        font-family: var(--font-display);
-        font-size: 0.75rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--gold);
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .sidebar-section-title::after {
-        content: '';
-        flex: 1;
-        height: 1px;
-        background: var(--border);
-    }
-
-    /* ── Date range ── */
-    .date-inputs {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0.75rem;
-    }
-
-    .field-group {
-        display: flex;
-        flex-direction: column;
-        gap: 0.3rem;
-    }
-
-    .field-group label {
-        font-size: 0.75rem;
-        color: var(--text-muted);
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-    }
-
-    .field-group input[type="date"] {
-        background: rgba(13, 31, 53, 0.8);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        color: var(--cream);
-        font-family: var(--font-body);
-        font-size: 0.9rem;
-        padding: 0.5rem 0.7rem;
-        width: 100%;
-        outline: none;
-        transition: border-color var(--transition);
-        color-scheme: dark;
-    }
-
-    .field-group input[type="date"]:focus {
-        border-color: var(--gold);
-    }
-
-    /* ── Location search ── */
-    .location-wrap {
-        position: relative;
-    }
-
-    .location-input {
-        width: 100%;
-        background: rgba(13, 31, 53, 0.8);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        color: var(--cream);
-        font-family: var(--font-body);
-        font-size: 0.9rem;
-        padding: 0.55rem 0.8rem 0.55rem 2.2rem;
-        outline: none;
-        transition: border-color var(--transition);
-    }
-
-    .location-input:focus {
-        border-color: var(--gold);
-    }
-
-    .location-input::placeholder {
-        color: var(--text-muted);
-    }
-
-    .search-icon {
-        position: absolute;
-        left: 0.65rem;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--text-muted);
-        font-size: 0.85rem;
-        pointer-events: none;
-    }
-
-    .autocomplete-list {
-        position: absolute;
-        top: calc(100% + 4px);
-        left: 0;
-        right: 0;
-        background: var(--navy-mid);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        max-height: 200px;
-        overflow-y: auto;
-        z-index: 200;
-        display: none;
-    }
-
-    .autocomplete-list.open {
-        display: block;
-    }
-
-    .autocomplete-item {
-        padding: 0.6rem 0.8rem;
-        cursor: pointer;
-        font-size: 0.88rem;
-        color: var(--cream-dim);
-        border-bottom: 1px solid rgba(201, 146, 42, 0.1);
-        transition: background var(--transition);
-    }
-
-    .autocomplete-item:last-child {
-        border-bottom: none;
-    }
-
-    .autocomplete-item:hover {
-        background: rgba(201, 146, 42, 0.12);
-        color: var(--cream);
-    }
-
-    .autocomplete-item .ac-country {
-        color: var(--text-muted);
-        font-size: 0.78rem;
-    }
-
-    .btn-fetch {
-        width: 100%;
-        padding: 0.7rem;
-        background: var(--gold);
-        color: var(--navy);
-        border: none;
-        border-radius: var(--radius);
-        font-family: var(--font-body);
-        font-size: 0.88rem;
-        font-weight: 600;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        cursor: pointer;
-        transition: all var(--transition);
-        margin-top: 0.5rem;
-    }
-
-    .btn-fetch:hover {
-        background: var(--gold-light);
-        transform: translateY(-1px);
-    }
-
-    .btn-fetch:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        transform: none;
-    }
-
-    /* ── Selected location badge ── */
-    .selected-loc {
-        display: none;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 0.7rem;
-        background: rgba(201, 146, 42, 0.1);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        font-size: 0.83rem;
-        color: var(--gold-light);
-    }
-
-    .selected-loc.visible {
-        display: flex;
-    }
-
-    .selected-loc button {
-        margin-left: auto;
-        background: none;
-        border: none;
-        color: var(--text-muted);
-        cursor: pointer;
-        font-size: 1rem;
-        line-height: 1;
-        padding: 0;
-    }
-
-    .selected-loc button:hover {
-        color: var(--red-bright);
-    }
-
-    /* ── Status / log ── */
-    .status-line {
-        font-size: 0.78rem;
-        color: var(--text-muted);
-        min-height: 1.2em;
-        font-style: italic;
-    }
-
-    .status-line.error {
-        color: var(--red-bright);
-    }
-
-    .status-line.ok {
-        color: #5cb85c;
-    }
-
-    /* ── Map area ── */
-    .map-panel {
-        position: relative;
-        background: var(--navy);
-    }
-
-    .map-controls {
-        position: absolute;
-        top: 0.8rem;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 50;
-        display: flex;
-        gap: 0.5rem;
-        background: rgba(13, 31, 53, 0.92);
-        border: 1px solid var(--border);
-        border-radius: 999px;
-        padding: 0.4rem 0.7rem;
-        align-items: center;
-    }
-
-    .map-controls label {
-        font-size: 0.75rem;
-        color: var(--text-muted);
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-    }
-
-    .week-slider {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 180px;
-        height: 4px;
-        background: var(--navy-light);
-        border-radius: 2px;
-        outline: none;
-    }
-
-    .week-slider::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
-        background: var(--gold);
-        cursor: pointer;
-    }
-
-    .week-label {
-        font-size: 0.8rem;
-        color: var(--gold-light);
-        min-width: 80px;
-        text-align: center;
-        font-family: var(--font-display);
-    }
-
-    .play-btn {
-        background: none;
-        border: none;
-        color: var(--gold);
-        font-size: 1rem;
-        cursor: pointer;
-        padding: 0 0.2rem;
-        line-height: 1;
-        transition: color var(--transition);
-    }
-
-    .play-btn:hover {
-        color: var(--gold-light);
-    }
-
-    #map {
-        width: 100%;
-        height: 100%;
-        min-height: 420px;
-    }
-
-    /* Override Leaflet tile brightness for dark theme */
-    .leaflet-tile {
-        filter: brightness(0.55) saturate(0.4);
-    }
-
-    .leaflet-container {
-        background: var(--navy);
-    }
-
-    /* ── Legend ── */
-    .map-legend {
-        position: absolute;
-        bottom: 1.2rem;
-        right: 1rem;
-        z-index: 50;
-        background: rgba(13, 31, 53, 0.92);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 0.7rem 1rem;
-        font-size: 0.75rem;
-    }
-
-    .legend-title {
-        color: var(--text-muted);
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        margin-bottom: 0.4rem;
-        font-size: 0.7rem;
-    }
-
-    .legend-bar {
-        display: flex;
-        gap: 0;
-        height: 10px;
-        border-radius: 3px;
-        overflow: hidden;
-        width: 140px;
-        margin-bottom: 0.3rem;
-    }
-
-    .legend-labels {
-        display: flex;
-        justify-content: space-between;
-        color: var(--text-muted);
-        font-size: 0.68rem;
-    }
-
-    /* ── Detail panel ── */
-    .detail-panel {
-        grid-column: 2;
-        background: var(--navy-mid);
-        border-top: 1px solid var(--border);
-        padding: 1.5rem;
-        display: none;
-    }
-
-    .detail-panel.visible {
-        display: block;
-    }
-
-    .detail-header {
-        display: flex;
-        align-items: baseline;
-        gap: 1rem;
-        margin-bottom: 1.2rem;
-        flex-wrap: wrap;
-    }
-
-    .detail-header h2 {
-        font-family: var(--font-display);
-        font-size: 1.4rem;
-        color: var(--cream);
-        font-weight: 700;
-    }
-
-    .detail-header .date-range-badge {
-        font-size: 0.8rem;
-        color: var(--text-muted);
-        font-style: italic;
-    }
-
-    /* ── Metric cards ── */
-    .metric-cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-        gap: 0.75rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .metric-card {
-        background: rgba(13, 31, 53, 0.6);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-lg);
-        padding: 1rem;
-        text-align: center;
-        transition: all var(--transition);
-        cursor: pointer;
-        position: relative;
-    }
-
-    .metric-card.active {
-        border-color: var(--gold);
-        background: rgba(201, 146, 42, 0.1);
-    }
-
-    .metric-card:hover {
-        border-color: rgba(201, 146, 42, 0.5);
-    }
-
-    .metric-card .mc-label {
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--text-muted);
-        margin-bottom: 0.3rem;
-    }
-
-    .metric-card .mc-max {
-        font-family: var(--font-display);
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--gold-light);
-        line-height: 1;
-    }
-
-    .metric-card .mc-min {
-        font-size: 0.78rem;
-        color: var(--text-muted);
-        margin-top: 0.1rem;
-    }
-
-    .metric-card .mc-unit {
-        font-size: 0.68rem;
-        color: var(--text-muted);
-        position: absolute;
-        top: 0.5rem;
-        right: 0.6rem;
-    }
-
-    /* ── Metric selector tabs ── */
-    .metric-tabs {
-        display: flex;
-        gap: 0.4rem;
-        margin-bottom: 1rem;
-        flex-wrap: wrap;
-    }
-
-    .metric-tab {
-        padding: 0.35rem 0.8rem;
-        border-radius: 999px;
-        font-size: 0.78rem;
-        font-weight: 500;
-        cursor: pointer;
-        border: 1px solid var(--border);
-        background: transparent;
-        color: var(--text-muted);
-        transition: all var(--transition);
-        letter-spacing: 0.03em;
-    }
-
-    .metric-tab.active {
-        background: var(--gold);
-        border-color: var(--gold);
-        color: var(--navy);
-    }
-
-    .metric-tab:hover:not(.active) {
-        border-color: var(--gold);
-        color: var(--gold-light);
-    }
-
-    /* ── Chart ── */
-    .chart-wrap {
-        background: rgba(13, 31, 53, 0.5);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-lg);
-        padding: 1rem 1.2rem;
-        position: relative;
-        height: 220px;
-    }
-
-    .chart-wrap canvas {
-        max-height: 200px;
-    }
-
-    /* ── Weekly table ── */
-    .weekly-table-wrap {
-        margin-top: 1rem;
-        overflow-x: auto;
-    }
-
-    .weekly-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 0.82rem;
-    }
-
-    .weekly-table th {
-        text-align: left;
-        color: var(--text-muted);
-        font-size: 0.7rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        padding: 0.4rem 0.8rem;
-        border-bottom: 1px solid var(--border);
-    }
-
-    .weekly-table td {
-        padding: 0.5rem 0.8rem;
-        border-bottom: 1px solid rgba(201, 146, 42, 0.07);
-        color: var(--cream-dim);
-    }
-
-    .weekly-table tr:last-child td {
-        border-bottom: none;
-    }
-
-    .weekly-table tr:hover td {
-        background: rgba(201, 146, 42, 0.05);
-    }
-
-    .weekly-table .temp-hi {
-        color: var(--gold-light);
-        font-weight: 600;
-    }
-
-    .weekly-table .temp-lo {
-        color: #6baed6;
-    }
-
-    .weekly-table .condition-emoji {
-        font-size: 1rem;
-    }
-
-    /* ── Empty / loading states ── */
-    .empty-detail {
-        padding: 2rem;
-        text-align: center;
-        color: var(--text-muted);
-        font-style: italic;
-        font-size: 0.9rem;
-    }
-
-    .spinner {
-        display: inline-block;
-        width: 18px;
-        height: 18px;
-        border: 2px solid var(--border);
-        border-top-color: var(--gold);
-        border-radius: 50%;
-        animation: spin 0.7s linear infinite;
-        vertical-align: middle;
-        margin-right: 0.4rem;
-    }
-
-    @keyframes spin {
-        to {
-            transform: rotate(360deg);
-        }
-    }
-
-    /* ── Leaflet custom popup ── */
-    .leaflet-popup-content-wrapper {
-        background: var(--navy-mid) !important;
-        color: var(--cream) !important;
-        border: 1px solid var(--border) !important;
-        border-radius: var(--radius) !important;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
-    }
-
-    .leaflet-popup-tip {
-        background: var(--navy-mid) !important;
-    }
-
-    .leaflet-popup-content {
-        font-family: var(--font-body);
-        font-size: 0.88rem;
-        margin: 0.6rem 0.8rem;
-    }
-
-    @media (max-width: 900px) {
-        .scout-layout {
-            grid-template-columns: 1fr;
-            grid-template-rows: auto auto 1fr;
-        }
-
-        .sidebar {
-            grid-row: auto;
-            border-right: none;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .detail-panel {
-            grid-column: 1;
-        }
-
-        #map {
-            min-height: 300px;
-        }
-    }
-</style>
-<div class="scout-header">
-    <h1>Sit <span>Scout</span></h1>
-    <p>Select a date range to preview global climate, then enter a specific sit location for a full weekly
-        breakdown.</p>
-</div>
-<div class="date-range-slider-wrap">
-    <span id="range-slider-start-label"></span>
-    <div id="range-slider"></div>
-    <span id="range-slider-end-label"></span>
-</div>
-<div class="scout-layout">
-
-    <!-- ══ SIDEBAR ══ -->
-    <aside class="sidebar">
-
-        <div class="sidebar-section">
-            <div class="sidebar-section-title">📅 Sit Dates</div>
-            <div class="date-inputs">
-                <div class="field-group">
-                    <label>Start</label>
-                    <input type="date" id="date-start" />
-                </div>
-                <div class="field-group">
-                    <label>End</label>
-                    <input type="date" id="date-end" />
-                </div>
-            </div>
-            <div class="status-line" id="date-status" style="margin-top:0.6rem;"></div>
-        </div>
-
-        <div class="sidebar-section">
-            <div class="sidebar-section-title">📍 Specific Location</div>
-            <div class="location-wrap">
-                <span class="search-icon">🔍</span>
-                <input type="text" class="location-input" id="location-input" placeholder="City, country…"
-                    autocomplete="off" />
-                <div class="autocomplete-list" id="ac-list"></div>
-            </div>
-            <div class="selected-loc" id="selected-loc">
-                <span id="selected-loc-name"></span>
-                <button id="clear-loc" title="Clear">✕</button>
-            </div>
-            <button class="btn-fetch" id="btn-fetch" disabled>Fetch Climate Data</button>
-            <div class="status-line" id="fetch-status" style="margin-top:0.5rem;"></div>
-        </div>
-
+<link rel="stylesheet" href="{{ '/assets/css/planning.css' | relative_url }}?v={{ site.time }}" />
+
+<section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="container">
+        <h1 class="page-title">Sit Scout</h1>
+        <p class="page-subtitle">Just a little tool we can use to research potential sits. Use the slider or the date
+            fields to choose a time range, and then choose a location to see climate (and soon other) data.</p>
         <!-- Saved sits placeholder -->
         <div class="sidebar-section" id="saved-sits-section" style="display:none;">
             <div class="sidebar-section-title">🗂 Recent Lookups</div>
             <div id="saved-sits-list"></div>
         </div>
+    </div>
+</section>
 
-    </aside>
+<section class="section">
+    <div class="container" style="padding: 2rem;">
+        <div class="date-range-slider-wrap">
+            <span id="range-slider-start-label"></span>
+            <div id="range-slider"></div>
+            <span id="range-slider-end-label"></span>
+        </div>
+    </div>
+    <div class="container">
+        <div class="travel-grid">
+            <div class="travel-card">
+                <div class="sidebar-section-title">📅 Sit Dates</div>
+                <div class="date-inputs">
+                    <div class="field-group">
+                        <label>Start</label>
+                        <input type="date" id="date-start" />
+                    </div>
+                    <div class="field-group">
+                        <label>End</label>
+                        <input type="date" id="date-end" />
+                    </div>
+                </div>
+                <div class="status-line" id="date-status" style="margin-top:0.6rem;"></div>
+            </div>
+            <div class="travel-card">
+                <div class="sidebar-section-title">📍 Specific Location</div>
+                <div class="location-wrap">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="location-input" id="location-input" placeholder="City, country…"
+                        autocomplete="off" />
+                    <div class="autocomplete-list" id="ac-list"></div>
+                </div>
 
-    <!-- ══ MAP ══ -->
-    <div class="map-panel" id="map-panel">
+                <button class="btn-fetch" id="btn-fetch" disabled>Fetch Climate Data</button>
+                <div class="selected-loc" id="selected-loc">
+                    <span id="selected-loc-name"></span>
+                    <button id="clear-loc" title="Clear">✕</button>
+                </div>
+                <div class="status-line" id="fetch-status" style="margin-top:0.5rem;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- </section>
+
+
+<section class="section"> -->
+    <div class="container" style="display: none;">
+        <!-- ══ MAP ══ -->
         <div class="map-controls" id="map-controls" style="display:none;">
             <label>Week</label>
             <button class="play-btn" id="play-btn" title="Animate">▶</button>
             <input type="range" class="week-slider" id="week-slider" min="0" value="0" />
             <span class="week-label" id="week-label">—</span>
         </div>
-        <div id="map"></div>
-        <div class="map-legend" id="map-legend" style="display:none;">
-            <div class="legend-title">Avg Temp (°C)</div>
-            <div class="legend-bar" id="legend-bar"></div>
-            <div class="legend-labels">
-                <span id="legend-min"></span>
-                <span id="legend-mid"></span>
-                <span id="legend-max"></span>
+        <div class="map-panel" id="map-panel">
+            <div id="map"></div>
+            <div class="map-legend" id="map-legend" style="display:none;">
+                <div class="legend-title">Avg Temp (°C)</div>
+                <div class="legend-bar" id="legend-bar"></div>
+                <div class="legend-labels">
+                    <span id="legend-min"></span>
+                    <span id="legend-mid"></span>
+                    <span id="legend-max"></span>
+                </div>
             </div>
         </div>
     </div>
-
+</section>
+<section class="section">
     <!-- ══ DETAIL PANEL ══ -->
     <div class="detail-panel" id="detail-panel">
         <div class="empty-detail" id="detail-empty">
@@ -802,8 +128,8 @@ description: Planning page for specific sits
             </div>
         </div>
     </div>
+</section>
 
-</div><!-- /scout-layout -->
 
 <script>
     /* ═══════════════════════════════════════════════════
@@ -820,7 +146,7 @@ description: Planning page for specific sits
     let climateGrid = null;       // loaded from JSON
     let selectedLoc = null;       // { name, lat, lon, country }
     let fetchedWeeks = [];        // array of weekly objects from WeatherLens
-    let activeMetric = 'temp';
+    let activeMetric = 'tempHiC';
     let detailChart = null;
     let mapWeeks = [];            // [{label, startDate, endDate}] derived from date range
     let currentWeekIdx = 0;
@@ -856,8 +182,6 @@ description: Planning page for specific sits
 
         const startInput = document.getElementById('date-start');
         const endInput = document.getElementById('date-end');
-        const startLabel = document.getElementById('range-slider-start-label');
-        const endLabel = document.getElementById('range-slider-end-label');
 
         const today = new Date();
         today.setUTCHours(0, 0, 0, 0);
@@ -888,12 +212,12 @@ description: Planning page for specific sits
             const s = Math.round(values[0]);
             const e = Math.round(values[1]);
 
-            startInput.value = toISO(s);
-            endInput.value = toISO(e);
-            startLabel.textContent = fmt(s);
-            endLabel.textContent = fmt(e);
+            if (!startInput.value == toISO(s) || !endInput.value == toISO(e)) {
+                startInput.value = toISO(s);
+                endInput.value = toISO(e);
 
-            onDatesChange();
+                onDatesChange();
+            }
         });
     })();
     /* ═══════════════════════════════════════════════════
@@ -1060,6 +384,8 @@ description: Planning page for specific sits
             status.textContent = 'End date must be after start date.';
             return;
         }
+        // const rangeslider = document.getElementById('range-slider');
+        // rangeslider.noUiSlider.set([s, e]);
 
         mapWeeks = buildWeekList(s, e);
         const numWeeks = mapWeeks.length;
@@ -1072,7 +398,6 @@ description: Planning page for specific sits
         slider.value = 0;
         currentWeekIdx = 0;
         document.getElementById('map-controls').style.display = 'flex';
-
         renderChoropleth(0);
         updateFetchBtn();
     }
@@ -1134,6 +459,7 @@ description: Planning page for specific sits
             div.addEventListener('click', () => {
                 selectedLoc = { name: res.name, country: res.country || '', lat: res.latitude, lon: res.longitude };
                 locInput.value = `${res.name}${res.country ? ', ' + res.country : ''}`;
+                map.setView([res.latitude, res.longitude], 3);
                 acList.classList.remove('open');
                 showSelectedBadge();
                 updateFetchBtn();
