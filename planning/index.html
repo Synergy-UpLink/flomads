@@ -212,12 +212,11 @@ description: Planning page for specific sits
             const s = Math.round(values[0]);
             const e = Math.round(values[1]);
 
-            if (!startInput.value == toISO(s) || !endInput.value == toISO(e)) {
-                startInput.value = toISO(s);
-                endInput.value = toISO(e);
+            startInput.value = toISO(s);
+            endInput.value = toISO(e);
 
-                onDatesChange();
-            }
+            onDatesChange();
+
         });
     })();
     /* ═══════════════════════════════════════════════════
@@ -500,6 +499,17 @@ description: Planning page for specific sits
     ═══════════════════════════════════════════════════ */
     document.getElementById('btn-fetch').addEventListener('click', fetchClimateData);
 
+    function getUniqueDatesForRange(s, e) {
+        const dates = [];
+        let cur = new Date(s + 'T00:00:00Z');
+        const end = new Date(e + 'T00:00:00Z');
+        while (cur <= end) {
+            dates.push(cur.toISOString().slice(0, 10));
+            cur = new Date(cur.getTime() + 86400000);
+        }
+        return dates;
+    }
+
     async function fetchClimateData() {
         if (!selectedLoc) return;
         const s = document.getElementById('date-start').value;
@@ -512,33 +522,42 @@ description: Planning page for specific sits
         btn.disabled = true;
 
         try {
-            // Build list of unique months needed
             const weeks = buildWeekList(s, e);
-            const uniqueDates = getUniqueDatesForRange(s, e);
 
-            // Call WeatherLens /climate for the full range (comma-separated dates)
-            // WeatherLens accepts YYYY-MM-DD, single or comma-separated
-            const climateUrl = `${WEATHERLENS_BASE}/climate` +
-                `?lat=${selectedLoc.lat}&lon=${selectedLoc.lon}` +
-                `&date=${s},${e}`;
+            const params = new URLSearchParams({
+                latitude: selectedLoc.lat,
+                longitude: selectedLoc.lon,
+                start_date: s,
+                end_date: e,
+                models: 'EC_Earth3P_HR',
+                daily: [
+                    'temperature_2m_max',
+                    'temperature_2m_min',
+                    'precipitation_sum',
+                    'wind_speed_10m_max',
+                ].join(','),
+            });
 
-            let climateResp;
-            if (WEATHERLENS_KEY) {
-                const r = await fetch(climateUrl, { headers: { 'X-API-Key': WEATHERLENS_KEY } });
-                if (!r.ok) throw new Error(`WeatherLens ${r.status}: ${r.statusText}`);
-                climateResp = await r.json();
-            } else {
-                // No key — use demo/mock data for development
-                climateResp = buildMockClimateResp(selectedLoc, s, e);
-            }
+            const r = await fetch(`https://climate-api.open-meteo.com/v1/climate?${params}`);
+            if (!r.ok) throw new Error(`Open-Meteo ${r.status}: ${r.statusText}`);
+            const data = await r.json();
 
-            fetchedWeeks = aggregateIntoWeeks(climateResp.climate || [], weeks);
+            // Zip parallel arrays into per-day objects keyed by full date string
+            const dailyMap = {};
+            data.daily.time.forEach((date, i) => {
+                dailyMap[date] = {
+                    tempMaxC: data.daily.temperature_2m_max[i],
+                    tempMinC: data.daily.temperature_2m_min[i],
+                    precipMm: data.daily.precipitation_sum[i],
+                    windKph: data.daily.wind_speed_10m_max[i],
+                };
+            });
+
+            fetchedWeeks = aggregateIntoWeeks(dailyMap, weeks);
             renderDetailPanel(selectedLoc, s, e, fetchedWeeks);
 
             statusEl.className = 'status-line ok';
             statusEl.textContent = `✓ ${fetchedWeeks.length} weeks loaded.`;
-
-            // Save to recent
             saveRecent(selectedLoc, s, e);
 
         } catch (err) {
@@ -550,68 +569,40 @@ description: Planning page for specific sits
         }
     }
 
-    function getUniqueDatesForRange(s, e) {
-        const dates = [];
-        let cur = new Date(s + 'T00:00:00Z');
-        const end = new Date(e + 'T00:00:00Z');
-        while (cur <= end) {
-            dates.push(cur.toISOString().slice(0, 10));
-            cur = new Date(cur.getTime() + 86400000);
-        }
-        return dates;
-    }
-
-    function aggregateIntoWeeks(dailyClimate, weeks) {
-        // dailyClimate: array of WeatherLens climate objects keyed by date "MM-DD"
-        // Build a map by "MM-DD" for O(1) lookup
-        const byDate = {};
-        dailyClimate.forEach(d => { byDate[d.date] = d; });
-
+    function aggregateIntoWeeks(dailyMap, weeks) {
         return weeks.map(week => {
             const days = [];
             let cur = new Date(week.startDate + 'T00:00:00Z');
             const end = new Date(week.endDate + 'T00:00:00Z');
             while (cur <= end) {
-                const mmdd = cur.toISOString().slice(5, 10); // "MM-DD"
-                if (byDate[mmdd]) days.push(byDate[mmdd]);
+                const dateStr = cur.toISOString().slice(0, 10);
+                if (dailyMap[dateStr]) days.push(dailyMap[dateStr]);
                 cur = new Date(cur.getTime() + 86400000);
             }
+
             if (!days.length) return { ...week, noData: true };
 
             const avg = key => {
-                const vals = days.map(d => {
-                    // Navigate nested structure: temperature.highF / lowF, precipitation, etc.
-                    const parts = key.split('.');
-                    let v = d;
-                    for (const p of parts) v = v?.[p];
-                    return typeof v === 'number' ? v : null;
-                }).filter(v => v !== null);
+                const vals = days.map(d => d[key]).filter(v => v !== null && v !== undefined);
                 return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
             };
-
             const sum = key => {
-                const vals = days.map(d => {
-                    const parts = key.split('.');
-                    let v = d;
-                    for (const p of parts) v = v?.[p];
-                    return typeof v === 'number' ? v : null;
-                }).filter(v => v !== null);
+                const vals = days.map(d => d[key]).filter(v => v !== null && v !== undefined);
                 return vals.length ? vals.reduce((a, b) => a + b, 0) : null;
             };
 
             return {
                 ...week,
-                tempHiC: fToC(avg('temperature.highF')),
-                tempLoC: fToC(avg('temperature.lowF')),
-                precipMm: inToMm(sum('precipitation.avgInchesPerDay')),
-                humidityPct: avg('humidityPct'),
-                uvIndex: avg('uvIndex'),
-                conditions: days[Math.floor(days.length / 2)]?.conditions?.description || '—',
-                conditionsEmoji: days[Math.floor(days.length / 2)]?.conditions?.emoji || '',
+                tempHiC: avg('tempMaxC'),
+                tempLoC: avg('tempMinC'),
+                precipMm: sum('precipMm'),
+                humidityPct: null,   // not available from this endpoint
+                uvIndex: null,   // not available from this endpoint
+                conditions: '—',
+                conditionsEmoji: '',
             };
         });
     }
-
     function fToC(f) { return f !== null && f !== undefined ? Math.round((f - 32) * 5 / 9 * 10) / 10 : null; }
     function inToMm(i) { return i !== null && i !== undefined ? Math.round(i * 25.4 * 10) / 10 : null; }
 
