@@ -30,9 +30,9 @@
 
     const customIcon = L.divIcon({
         html: svgPin,
-        iconSize: [40, 50],
-        iconAnchor: [20, 50],
-        popupAnchor: [0, -50],
+        iconSize: [44, 50],
+        iconAnchor: [4, 50],   // ← was [20, 50]
+        popupAnchor: [18, -50], // ← offset popup rightward to compensate
         className: 'now-custom-marker'
     });
     // /*Albi, France*/
