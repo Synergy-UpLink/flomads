@@ -6,7 +6,7 @@
 
 <script>
     // Initialize map centered on Albrighton, Shropshire
-    const map = L.map('now-map').setView([51.57462, 0.1845609], 12);
+    const map = L.map('now-map').setView([51.5604991,0.5389142], 12);
 
 	// OPTION 2: OpenStreetMap Standard (clean, neutral)
 	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -39,11 +39,11 @@
     // L.marker([43.8918908,5.7282172], { icon: customIcon })
     //     .bindPopup('<div class="now-map-popup"><strong>Albi, France</strong></div>')
     //     .addTo(map);
-    // /* Southend-On-Sea*/
-    // L.marker([51.540674, 0.6947366], { icon: customIcon })
-    //     .bindPopup('<div class="now-map-popup"><strong>Southend-On-Sea</strong></div>')
-    //     .addTo(map);    
-    /* Southend-On-Sea*/
+    // /* South Benfleet*/
+    L.marker([51.5604991,0.5389142], { icon: customIcon })
+        .bindPopup('<div class="now-map-popup"><strong>South Benfleet</strong></div>')
+        .addTo(map);    
+    /* Romford*/
     L.marker([51.57462, 0.1845609], { icon: customIcon })
         .bindPopup('<div class="now-map-popup"><strong>Romford</strong></div>')
         .addTo(map);
