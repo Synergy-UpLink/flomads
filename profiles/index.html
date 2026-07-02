@@ -1,0 +1,72 @@
+---
+layout: default
+title: "Profiles"
+description: "Where to find the Flomads' sitter profiles, past sit history, and reviews from homeowners we've sat for."
+---
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="container">
+    <p class="page-eyebrow">Track Record</p>
+    <h1 class="page-title">Our Sitter Profiles</h1>
+    <p class="page-subtitle">Everywhere you can find us, and what homeowners have said after we've left.</p>
+  </div>
+</section>
+
+<!-- PLATFORM PROFILES -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title center">Find Us On</h2>
+    <div class="platform-grid">
+      {% for p in site.data.sits.platforms %}
+      <a href="{{ p.url }}" class="platform-card" target="_blank" rel="noopener">
+        <div class="platform-icon">{{ p.icon }}</div>
+        <h3>{{ p.name }}</h3>
+        <p>{{ p.blurb }}</p>
+        <span class="btn btn-ghost">View Profile →</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="section" style="background: var(--navy-mid);">
+  <div class="container">
+    <h2 class="section-title center">What Homeowners Say</h2>
+    <div class="testimonials-grid">
+      {% for t in site.data.sits.testimonials %}
+      <div class="testi-card">
+        <blockquote>{{ t.quote }}</blockquote>
+        <div class="testi-meta">
+          <div class="testi-name">{{ t.name }}</div>
+          <div class="testi-loc">{{ t.location }}</div>
+          <span class="testi-platform">{{ t.platform }}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- SIT HISTORY -->
+<section class="section history-section">
+  <div class="container">
+    <h2 class="section-title center">Where We've Sat</h2>
+    <div class="timeline">
+      {% for s in site.data.sits.sits %}
+      <div class="tl-item{% if s.current %} active{% endif %}">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <span class="tl-date">{{ s.dates }}</span>
+          <h4><span class="tl-flag">{{ s.flag }}</span>{{ s.location }}{% if s.current %}<span class="tl-current-badge">Current</span>{% endif %}</h4>
+          {% if s.testimonial.quote != "" %}
+          <p><em>"{{ s.testimonial.quote | truncatewords: 28 }}"</em> — {{ s.testimonial.name }}</p>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

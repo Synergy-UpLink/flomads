@@ -37,6 +37,25 @@ contact:
   #   value: "https://facebook.com/theflomads"
   #   primary: false
 
+# ── Sitting platform profiles ──────────────────────────────────
+# Shown as cards on the public /profiles/ page.
+# icon: any emoji; url: link to our profile on that platform.
+platforms:
+  - name: "TrustedHouseSitters"
+    icon: "🐾"
+    url: "https://www.trustedhousesitters.com/house-and-pet-sitters/united-states-of-america/colorado-springs/"
+    blurb: "Our primary platform — full sit history and verified homeowner reviews."
+
+  - name: "MindMyHouse"
+    icon: "🏠"
+    url: "https://www.mindmyhouse.com/owners/sitter_listing/63981"
+    blurb: "Additional listing and references."
+
+  - name: "Nomador"
+    icon: "🗺️"
+    url: "https://www.nomador.com/profile/388334"
+    blurb: "European-focused sits and reviews."
+
 # ── Sits ─────────────────────────────────────────────────────
 # Fields:
 #   id:           unique slug (used for anchor links)
