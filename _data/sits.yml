@@ -50,8 +50,8 @@ sits:
     country: "England, UK"
     flag: "🇬🇧"
     dates: "February - June 2026"
-    lat: 52.632
-    lng: -2.248
+    lat: 52.6353685
+    lng: -2.2781400
     current: true
     owners: "False"
     testimonial:
@@ -82,13 +82,13 @@ sits:
         care_notes: "Fed twice daily with Trixie. Easy on-leash. Enjoys a long sniff-walk more than a fast one."
         challenges: "Buddy was prevoiusly scheduled for major dental work while we were there. We took him to the vet, handled the special diet, medication, and aftercare."
 
-  - id: melbourne-fl-2025
-    location: "Melbourne, FL"
+  - id: space-coast-fl-2025
+    location: "Space Coast, FL"
     country: "United States"
     flag: "🇺🇸"
     dates: "2025 (two stays)"
-    lat: 28.083
-    lng: -80.608
+    lat: 28.1924975
+    lng: -80.5677636
     current: false
     notes: "A homestead in the middle of the city. Galadriel was the primary responsibility, but we also took care of ducks, chickens, 2 cows, and 2 snakes."
     photos:
@@ -110,8 +110,8 @@ sits:
     country: "Mexico"
     flag: "🇲🇽"
     dates: "Early 2022 (3 months)"
-    lat: 23.446
-    lng: -110.225
+    lat: 23.4594298
+    lng: -110.2566555
     current: false
     owners: "Patricia"
     testimonial:
@@ -139,13 +139,13 @@ sits:
         care_notes: "Same routine as Duncan."
         challenges: ""
 
-  - id: dorset-vt-2022
-    location: "Dorset, VT"
+  - id: manchester-vt-2022
+    location: "Manchester, VT"
     country: "United States"
     flag: "🇺🇸"
     dates: "2022 (3 months)"
-    lat: 43.256
-    lng: -73.073
+    lat: 43.1656731
+    lng: -73.1095669
     current: false
     owners: "Caren"
     testimonial:
@@ -178,8 +178,8 @@ sits:
     country: "Costa Rica"
     flag: "🇨🇷"
     dates: "2021 (3 months)"
-    lat: 9.735
-    lng: -83.99
+    lat: 9.5850098
+    lng: -84.0381806
     current: false
     owners: "Tom & Alethia"
     testimonial:
@@ -227,3 +227,18 @@ testimonials:
     name: "Heather Baker"
     location: "Colorado Springs, CO, USA"
     platform: "Direct"
+
+  - quote: "Christine is great with my cats! They are always happy to see her, and she actually leaves my house cleaner than when she came! She always shows up when she says she will and treats my babies like they are her own."
+    name: "Stephanie"
+    location: "Reference from a family member"
+    platform: "TrustedHouseSitters"
+
+  - quote: "Christine is a former boss and years long friend. She is a very smart responsible trustworthy and caring person. She would be a wonderful option to take care of your pets as she had some of her own in the past."
+    name: "Sheila Perry"
+    location: "Reference from a colleague"
+    platform: "TrustedHouseSitters"
+
+  - quote: "Christine was awesome. I would highly recommend her for your pet/house services. Super nice, responsible, respectful, incredibly professional, and very caring. If she's not on the top of your list, you're doing it wrong."
+    name: "Dustin"
+    location: "Home & pet sitting reference"
+    platform: "TrustedHouseSitters"

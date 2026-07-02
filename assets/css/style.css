@@ -845,53 +845,57 @@ em { font-style: italic; color: var(--gold-light); }
 }
 .platform-pill-arrow { color: var(--gold-light); font-size: 0.8rem; }
 
-/* ── Testimonials ── */
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+/* ── Testimonials (stacked rows) ── */
+.testimonials-list {
+  display: flex;
+  flex-direction: column;
 }
-.testi-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius-lg);
-  padding: 2rem;
-  position: relative;
-  transition: all var(--transition);
+.testi-row {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+  padding: 1.8rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
-.testi-card:hover { border-color: var(--border); background: rgba(255,255,255,0.06); }
-.testi-card::before {
-  content: '\201C';
-  font-family: var(--font-display);
-  font-size: 4rem;
-  color: var(--gold);
-  opacity: 0.3;
-  position: absolute;
-  top: 0.5rem; left: 1.2rem;
-  line-height: 1;
-}
-.testi-card blockquote {
+.testi-row:first-child { padding-top: 0; }
+.testi-row:last-child { border-bottom: none; padding-bottom: 0; }
+.testi-row blockquote {
+  flex: 1;
+  min-width: 0;
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 1rem;
+  font-size: 1.05rem;
   line-height: 1.7;
   color: var(--cream);
-  margin-bottom: 1.2rem;
-  padding-top: 1.5rem;
+  position: relative;
+  padding-left: 1.6rem;
 }
-.testi-meta { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 0.8rem; }
+.testi-row blockquote::before {
+  content: '\201C';
+  position: absolute;
+  left: -0.3rem; top: -0.4rem;
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  color: var(--gold);
+  opacity: 0.45;
+}
+.testi-row-meta {
+  flex-shrink: 0;
+  width: 190px;
+  text-align: right;
+}
 .testi-name { font-weight: 600; font-size: 0.9rem; color: var(--gold-light); }
-.testi-loc { font-size: 0.8rem; color: var(--text-muted); }
+.testi-loc { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.15rem; }
 .testi-platform {
   display: inline-block;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--navy);
   background: var(--gold);
   border-radius: 20px;
   padding: 0.15rem 0.6rem;
-  margin-top: 0.4rem;
+  margin-top: 0.5rem;
 }
 
 /* ── Sit summary badge (reuses .timeline / .tl-item) ── */
@@ -924,7 +928,8 @@ em { font-style: italic; color: var(--gold-light); }
   .what-grid { grid-template-columns: 1fr; gap: 2rem; }
   .what-cards { max-width: 400px; }
   .crew-grid { grid-template-columns: 1fr; }
-  .testimonials-grid { grid-template-columns: 1fr; }
+  .testi-row { flex-direction: column; gap: 0.8rem; }
+  .testi-row-meta { width: auto; text-align: left; }
   .footer-inner { flex-direction: column; align-items: center; text-align: center; }
 }
 @media (max-width: 640px) {

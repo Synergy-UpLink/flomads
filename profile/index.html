@@ -34,12 +34,12 @@ description: "Where to find the Flomads' sitter profiles, past sit history, and 
 <section class="section" style="background: var(--navy-mid);">
   <div class="container">
     <h2 class="section-title center">What Pet Parents Say</h2>
-    <div class="testimonials-grid">
+    <div class="testimonials-list">
       {% for s in site.data.sits.sits %}
       {% if s.testimonial.quote and s.testimonial.quote != "" %}
-      <div class="testi-card">
+      <div class="testi-row">
         <blockquote>{{ s.testimonial.quote }}</blockquote>
-        <div class="testi-meta">
+        <div class="testi-row-meta">
           <div class="testi-name">{{ s.testimonial.name }}</div>
           <div class="testi-loc">{{ s.location }}</div>
           <span class="testi-platform">Verified Sit</span>
@@ -48,9 +48,9 @@ description: "Where to find the Flomads' sitter profiles, past sit history, and 
       {% endif %}
       {% endfor %}
       {% for t in site.data.sits.testimonials %}
-      <div class="testi-card">
+      <div class="testi-row">
         <blockquote>{{ t.quote }}</blockquote>
-        <div class="testi-meta">
+        <div class="testi-row-meta">
           <div class="testi-name">{{ t.name }}</div>
           <div class="testi-loc">{{ t.location }}</div>
           <span class="testi-platform">{{ t.platform }}</span>
