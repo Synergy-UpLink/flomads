@@ -701,6 +701,21 @@ em { font-style: italic; color: var(--gold-light); }
 }
 .tl-content h4 { font-size: 1.05rem; margin-bottom: 0.3rem; }
 .tl-content p { font-size: 0.92rem; line-height: 1.65; }
+.tl-pets {
+  color: var(--text-muted);
+  font-size: 0.85rem !important;
+}
+.tl-highlight {
+  color: var(--cream-dim);
+  border-left: 2px solid var(--gold);
+  padding-left: 0.7rem;
+  margin-top: 0.5rem;
+}
+.tl-notes {
+  color: var(--text-muted);
+  font-size: 0.85rem !important;
+  margin-top: 0.5rem;
+}
 
 /* ══════════════════════════════════════════
    ABOUT — DREAM SECTION

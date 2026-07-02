@@ -72,8 +72,15 @@ description: "Where to find the Flomads' sitter profiles, past sit history, and 
         <div class="tl-content">
           <span class="tl-date">{{ s.dates }}</span>
           <h4><span class="tl-flag">{{ s.flag }}</span>{{ s.location }}{% if s.current %}<span class="tl-current-badge">Current</span>{% endif %}</h4>
-          {% if s.testimonial.quote != "" %}
-          <p><em>"{{ s.testimonial.quote | truncatewords: 28 }}"</em> — {{ s.testimonial.name }}</p>
+          {% if s.animals and s.animals.size > 0 %}
+          <p class="tl-pets">Cared for {{ s.animals | map: "name" | join: ", " }}</p>
+          {% endif %}
+          {% assign challenge_animal = s.animals | where_exp: "a", "a.challenges != ''" | first %}
+          {% if challenge_animal %}
+          <p class="tl-highlight">{{ challenge_animal.challenges }}</p>
+          {% endif %}
+          {% if s.notes and s.notes != "" %}
+          <p class="tl-notes"><em>{{ s.notes }}</em></p>
           {% endif %}
         </div>
       </div>

@@ -27,6 +27,9 @@ platforms:
 #   lat/lng:      for the map pin
 #   current:      true = highlighted as current sit
 #   owners:       first names of the homeowners
+#   notes:        optional freeform context, shown on the timeline when
+#                 there's no public review yet (sit in progress, review
+#                 not posted publicly, etc.)
 #   testimonial:
 #     quote:      their words (no surrounding quotes needed)
 #     name:       how they want to be credited
@@ -69,7 +72,7 @@ sits:
         photo: "albrighton/trixie.jpg"
         personality: "Opinionated, vocal, and absolutely convinced she should be on the furniture. Loves fetch and will carry her favourite ball everywhere as a greeting gift."
         care_notes: "Fed twice daily (7am / 5pm). Wears a harness for walks — pulls enthusiastically. Needs a good 45-min walk each morning."
-        challenges: ""
+        challenges: "When we arrived, Trixie had a stomach bug. Combined with new humans, she didn't have much of an appetite. We switched up her food to boiled chicken and rice for ease of digestion, and she recovered within 4 days without needing to go to the vet."
       - name: "Buddy"
         species: "Dog"
         breed: "Golden Lab Mix"
@@ -77,7 +80,7 @@ sits:
         photo: "albrighton/buddy.jpg"
         personality: "Gentle, calm, and a masterclass in mournful eyes at mealtimes. Best friends with Trixie despite pretending otherwise."
         care_notes: "Fed twice daily with Trixie. Easy on-leash. Enjoys a long sniff-walk more than a fast one."
-        challenges: ""
+        challenges: "Buddy was prevoiusly scheduled for major dental work while we were there. We took him to the vet, handled the special diet, medication, and aftercare."
 
   - id: melbourne-fl-2025
     location: "Melbourne, FL"
@@ -87,6 +90,7 @@ sits:
     lat: 28.083
     lng: -80.608
     current: false
+    notes: "A homestead in the middle of the city. Galadriel was the primary responsibility, but we also took care of ducks, chickens, 2 cows, and 2 snakes."
     photos:
       slideshow: []
       album_url: ""
@@ -99,7 +103,7 @@ sits:
         photo: ""
         personality: "Majestic, affectionate, and completely unaware of her own size. Prefers to drape herself across humans rather than sit beside them."
         care_notes: "Large-breed kibble twice daily. Slow feeder bowl required — bloat risk. Needs companionship and doesn't do well alone for long stretches."
-        challenges: "Arrived to a significant flea infestation. We handled a full treatment protocol — Galadriel, all bedding, and the house — coordinating with the vet and resolving it completely before the owners returned."
+        challenges: "An existing flea issue turned into an infestation. Lots of cleaning, and a medicated bath for a giant puppy that would get sunburned before air drying."
 
   - id: todos-santos-2022
     location: "Todos Santos, Baja California Sur"
@@ -125,7 +129,7 @@ sits:
         photo: ""
         personality: "Bold, energetic, and deeply suspicious of strangers — until he isn't. Once he trusts you, he's all in."
         care_notes: "High-energy breed. Needs significant daily exercise. Free-fed in this household."
-        challenges: ""
+        challenges: "Duncan had a bad reaction to the stitches when he was fixed prior to our arrival. It had mostly resolved itself by the time we arrived, but we monitored him closely and communicated with the vet at a follow up appointment."
       - name: "Ruby"
         species: "Dog"
         breed: "Gordon Setter"
@@ -177,10 +181,11 @@ sits:
     lat: 9.735
     lng: -83.99
     current: false
-    owners: "Local family"
+    owners: "Tom & Alethia"
     testimonial:
       quote: "Christine and Jordan are both relaxed and reliable. They love animals and know how care for them and train them. Christine was always quick to respond and take care of anything that needed to be done. Communication was great. She was always proactive which took the worry away from us. She was attentive to medication, vet visits and getting food for the dogs along with anything else that needed to be done. We feel very lucky to have had them taking care of our animals and home! Thank you so much!"
       name: "Tom & Alethia"
+    notes: "These were all former strays and had some bad habits and an aversion to leashes we resolved."
     photos:
       slideshow: []
       album_url: ""
@@ -188,7 +193,7 @@ sits:
     animals:
       - name: "Wolfe"
         species: "Dog"
-        breed: "Mixed Breed"
+        breed: "Mutt - German Shepherd Mix"
         age: "Unknown"
         photo: ""
         personality: "Loyal and protective of the property. Warmed up quickly."
@@ -196,15 +201,15 @@ sits:
         challenges: ""
       - name: "Puppy"
         species: "Dog"
-        breed: "Mixed Breed"
-        age: "Puppy"
+        breed: "Mutt"
+        age: "Unknown"
         photo: ""
         personality: "All energy, no brakes."
         care_notes: "Puppy-appropriate portions."
-        challenges: ""
+        challenges: "Puppy was a darter, and would run away if given half a chance. He did accidentally bite Jordan while playing with Wolfe."
       - name: "Mora"
-        species: "Cat"
-        breed: "Domestic"
+        species: "Dog"
+        breed: "Mutt - Black Lab"
         age: "Adult"
         photo: ""
         personality: "Indoor/outdoor, independent, friendly on her terms."
