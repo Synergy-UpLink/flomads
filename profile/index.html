@@ -37,11 +37,13 @@ description: "Where to find the Flomads' sitter profiles, past sit history, and 
     <div class="testimonials-list">
       {% for s in site.data.sits.sits %}
       {% if s.testimonial.quote and s.testimonial.quote != "" %}
+      {% assign v = site.data.locations.visits | where: "id", s.id | first %}
+      {% assign loc = site.data.locations.locations | where: "id", v.location_id | first %}
       <div class="testi-row">
         <blockquote>{{ s.testimonial.quote }}</blockquote>
         <div class="testi-row-meta">
           <div class="testi-name">{{ s.testimonial.name }}</div>
-          <div class="testi-loc">{{ s.location }}</div>
+          <div class="testi-loc">{{ loc.name }}</div>
           <span class="testi-platform">Verified Sit</span>
         </div>
       </div>
@@ -67,11 +69,13 @@ description: "Where to find the Flomads' sitter profiles, past sit history, and 
     <h2 class="section-title center">Where We've Sat</h2>
     <div class="timeline">
       {% for s in site.data.sits.sits %}
-      <div class="tl-item{% if s.current %} active{% endif %}">
+      {% assign v = site.data.locations.visits | where: "id", s.id | first %}
+      {% assign loc = site.data.locations.locations | where: "id", v.location_id | first %}
+      <div class="tl-item{% if v.current %} active{% endif %}">
         <div class="tl-dot"></div>
         <div class="tl-content">
-          <span class="tl-date">{{ s.dates }}</span>
-          <h4><span class="tl-flag">{{ s.flag }}</span>{{ s.location }}{% if s.current %}<span class="tl-current-badge">Current</span>{% endif %}</h4>
+          <span class="tl-date">{{ v.label }}</span>
+          <h4><span class="tl-flag">{{ loc.flag }}</span>{{ loc.name }}{% if v.current %}<span class="tl-current-badge">Current</span>{% endif %}</h4>
           {% if s.animals and s.animals.size > 0 %}
           <p class="tl-pets">Cared for {{ s.animals | map: "name" | join: ", " }}</p>
           {% endif %}

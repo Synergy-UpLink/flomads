@@ -18,14 +18,12 @@ platforms:
     blurb: "European-focused sits and reviews."
 
 # ── Sits ─────────────────────────────────────────────────────
+# Location/dates/lat/lng now live in _data/locations.yml. Each
+# sit's `id` here must match a visit `id` there — that's the
+# whole link, no separate foreign-key field needed.
+#
 # Fields:
-#   id:           unique slug (used for anchor links)
-#   location:     city/region
-#   country:      country name
-#   flag:         emoji flag
-#   dates:        human-readable date range
-#   lat/lng:      for the map pin
-#   current:      true = highlighted as current sit
+#   id:           unique slug — MUST match a visit id in locations.yml
 #   owners:       first names of the homeowners
 #   notes:        optional freeform context, shown on the timeline when
 #                 there's no public review yet (sit in progress, review
@@ -44,15 +42,34 @@ platforms:
 #   personality, care_notes, challenges
 
 sits:
-
+  - id: south-benfleet-2026
+    owners: "Terry & Becky"
+    testimonials:
+      quote: "Christine and Jordan were very good sitters. Our Bertie took to them immediately which is a good sign that he was comfortable from the beginning. Our home was clean and tidy when we returned as well as the chores in garden of keeping our plants well watered during the hot weather."
+      name: "Terry"
+    photos:
+      slideshow: 
+        - ""
+      album_url: ""
+      album_label: "Cat"
+    animals:
+      - name: "Bertie"
+        species: "Dog"
+        breed: "French Bulldog Pug Mix"
+        age: "Cat"
+        photo: "benfleet/bertie.jpg"
+        personality: ""
+        care_notes: ""
+        challenges: ""
+      - name: "Huxley"
+        species: "Cat"
+        breed: ""
+        photo: "benfleet/huxley.jpg"
+        personality: ""
+        care_notes: ""
+        challenges: ""
+        
   - id: albrighton-2026
-    location: "Albrighton, Shropshire"
-    country: "England, UK"
-    flag: "🇬🇧"
-    dates: "February - June 2026"
-    lat: 52.6353685
-    lng: -2.2781400
-    current: true
     owners: "False"
     testimonial:
       quote: "Lovely pupdates. The dogs were so happy and cared for and the house was lovely when I got home. The contact before and during the stay was excellent! ❤️"
@@ -83,13 +100,6 @@ sits:
         challenges: "Buddy was prevoiusly scheduled for major dental work while we were there. We took him to the vet, handled the special diet, medication, and aftercare."
 
   - id: space-coast-fl-2025
-    location: "Space Coast, FL"
-    country: "United States"
-    flag: "🇺🇸"
-    dates: "2025 (two stays)"
-    lat: 28.1924975
-    lng: -80.5677636
-    current: false
     notes: "A homestead in the middle of the city. Galadriel was the primary responsibility, but we also took care of ducks, chickens, 2 cows, and 2 snakes."
     photos:
       slideshow: []
@@ -106,13 +116,6 @@ sits:
         challenges: "An existing flea issue turned into an infestation. Lots of cleaning, and a medicated bath for a giant puppy that would get sunburned before air drying."
 
   - id: todos-santos-2022
-    location: "Todos Santos, Baja California Sur"
-    country: "Mexico"
-    flag: "🇲🇽"
-    dates: "Early 2022 (3 months)"
-    lat: 23.4594298
-    lng: -110.2566555
-    current: false
     owners: "Patricia"
     testimonial:
       quote: "Christine and her partner Jordan were absolutely fantastic. I can't say enough about how great they were with our two Gordon Setters, Ruby -9 years old and Duncan-18 months old. Several weeks before they arrive, Duncan was neutered and there were complications that required us to apply raw sugar to his testicles several times a day to reduce the swelling. We let Christine and Jordan know that while we hoped we would have the situation resolved before they came, they might have to take over for a day or two. Their response was immediate and afirmative. Talk about going above and beyond! During  our 9 week absence, we received timely updates with photos of the dogs. When we returned, our house was spotless, sheets and towels washed. The dogs clearly loved them, which is really important to us. We would have them back in a heart beat."
@@ -140,13 +143,6 @@ sits:
         challenges: ""
 
   - id: manchester-vt-2022
-    location: "Manchester, VT"
-    country: "United States"
-    flag: "🇺🇸"
-    dates: "2022 (3 months)"
-    lat: 43.1656731
-    lng: -73.1095669
-    current: false
     owners: "Caren"
     testimonial:
       quote: "Christine and Jordan stayed with our pets for two months and they were fantastic! We loved getting the wonderful photos of all their hiking adventures with June Bug. They left the house in beautiful condition and did a great job helping the property transition from fall to winter. I highly recommend them and we hope to have them back for another stay."
@@ -174,13 +170,6 @@ sits:
         challenges: ""
 
   - id: santa-maria-dota-2021
-    location: "Santa Maria de Dota"
-    country: "Costa Rica"
-    flag: "🇨🇷"
-    dates: "2021 (3 months)"
-    lat: 9.5850098
-    lng: -84.0381806
-    current: false
     owners: "Tom & Alethia"
     testimonial:
       quote: "Christine and Jordan are both relaxed and reliable. They love animals and know how care for them and train them. Christine was always quick to respond and take care of anything that needed to be done. Communication was great. She was always proactive which took the worry away from us. She was attentive to medication, vet visits and getting food for the dogs along with anything else that needed to be done. We feel very lucky to have had them taking care of our animals and home! Thank you so much!"

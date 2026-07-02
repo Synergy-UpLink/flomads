@@ -1,0 +1,260 @@
+# ── Locations ────────────────────────────────────────────────
+# One entry per physical place. Coordinates copied over from the
+# old hardcoded now_map.html markers (now the single source of
+# truth for lat/lng — now_map.html, sits.yml, and profile/index.html
+# all read from here instead of each keeping their own copy).
+#
+# Fields:
+#   id:           unique slug
+#   name:         display name (kept intentionally general in a
+#                 couple of spots — e.g. "Space Coast, FL" instead
+#                 of the exact town — to avoid pinpointing exactly
+#                 where homeowners live)
+#   country:      country name
+#   flag:         emoji flag
+#   lat/lng:      coordinates, used by the map marker
+#   description:  optional short blurb about the PLACE itself
+#                 (not any specific stay there)
+
+locations:
+  - id: albi-france
+    name: "Albi, France"
+    country: "France"
+    flag: "🇫🇷"
+    lat: 43.8918908
+    lng: 5.7282172
+    description: ""
+
+  - id: south-benfleet
+    name: "South Benfleet"
+    country: "England, UK"
+    flag: "🇬🇧"
+    lat: 51.5604991
+    lng: 0.5389142
+    description: ""
+
+  - id: romford
+    name: "Romford"
+    country: "England, UK"
+    flag: "🇬🇧"
+    lat: 51.57462
+    lng: 0.1845609
+    description: ""
+
+  - id: albrighton
+    name: "Albrighton, Shropshire"
+    country: "England, UK"
+    flag: "🇬🇧"
+    lat: 52.6353685
+    lng: -2.2781400
+    description: ""
+
+  - id: colorado-springs
+    name: "Colorado Springs, CO"
+    country: "United States"
+    flag: "🇺🇸"
+    lat: 38.8756732
+    lng: -104.9168954
+    description: "Home base before the nomad years began."
+
+  - id: cancun-mx
+    name: "Cancun, MX"
+    country: "Mexico"
+    flag: "🇲🇽"
+    lat: 21.1230253
+    lng: -86.9388049
+    description: ""
+
+  - id: todos-santos-mx
+    name: "Todos Santos, Baja California Sur"
+    country: "Mexico"
+    flag: "🇲🇽"
+    lat: 23.4594298
+    lng: -110.2566555
+    description: ""
+
+  - id: cuenca-ec
+    name: "Cuenca, EC"
+    country: "Ecuador"
+    flag: "🇪🇨"
+    lat: -2.8922685
+    lng: -79.0305797
+    description: "Cloud-forest city in the Andes; five months of remote work and the first real 'maybe we could live somewhere like this' feeling."
+
+  - id: santa-maria-de-dota-cr
+    name: "Santa María de Dota"
+    country: "Costa Rica"
+    flag: "🇨🇷"
+    lat: 9.5850098
+    lng: -84.0381806
+    description: ""
+
+  - id: exuma-bs
+    name: "Exuma, BS"
+    country: "Bahamas"
+    flag: "🇧🇸"
+    lat: 24.1137938
+    lng: -76.7958054
+    description: "A year living aboard Encantado in the Bahamas — glassy flats, absurd stars, and the high point of the liveaboard years."
+
+  - id: la-fortuna-cr
+    name: "La Fortuna, CR"
+    country: "Costa Rica"
+    flag: "🇨🇷"
+    lat: 10.4731966
+    lng: -85.0506821
+    description: ""
+
+  - id: manchester-vt
+    name: "Manchester, VT"
+    country: "United States"
+    flag: "🇺🇸"
+    lat: 43.1656731
+    lng: -73.1095669
+    description: ""
+
+  - id: space-coast-fl
+    name: "Space Coast, FL"
+    country: "United States"
+    flag: "🇺🇸"
+    lat: 28.1924975
+    lng: -80.5677636
+    description: ""
+
+# ── Visits ───────────────────────────────────────────────────
+# Flat list (not nested under locations) so it can be sorted
+# chronologically regardless of entry order, and so a location
+# can rack up multiple non-contiguous visits over time.
+#
+# Fields:
+#   id:           unique slug. Sit-type visits use the SAME id as
+#                 the matching entry in sits.yml — that shared id
+#                 IS the foreign key, no separate field needed.
+#   location_id:  which location (see above)
+#   type:         sit | rental | sailing | vacation | home_base
+#                 (freeform — add types as needed)
+#   start / end:  YYYY-MM-DD when known. Leave "" if unknown/TBD.
+#   label:        optional human-readable override for display
+#                 (e.g. "2025 (two stays)") when start/end alone
+#                 doesn't tell the right story. Falls back to
+#                 start/end if blank.
+#   current:      true = this is the present-day visit
+#   blurb:        optional short note about this specific stay
+
+visits:
+  - id: albi-france-2026
+    location_id: albi-france
+    type: sit
+    start: ""
+    end: ""
+    label: ""  # TODO: confirm exact dates — Now page says "short one week stay"
+    current: true
+    blurb: "A short one-week pet sit — a change of pace from the usual longer stays."
+
+  - id: south-benfleet-2026
+    location_id: south-benfleet
+    type: sit
+    start: ""
+    end: ""
+    label: ""  # TODO: confirm type + exact dates
+    current: false
+    blurb: ""
+
+  - id: romford-2026
+    location_id: romford
+    type: sit
+    start: ""
+    end: ""
+    label: ""  # TODO: confirm type + exact dates
+    current: false
+    blurb: ""
+
+  - id: albrighton-2026
+    location_id: albrighton
+    type: sit
+    start: "2026-02-01"
+    end: "2026-06-05"
+    label: "February - June 2026"
+    current: false
+    blurb: ""
+
+  - id: colorado-springs-home
+    location_id: colorado-springs
+    type: home_base
+    start: "2009-01-01"
+    end: "2019-01-01"
+    label: "2009 – 2019"
+    current: false
+    blurb: "A decade in one place before the leap into full-time travel."
+
+  - id: cancun-mx-visit
+    location_id: cancun-mx
+    type: vacation
+    start: ""
+    end: ""
+    label: ""  # TODO: confirm type + exact dates
+    current: false
+    blurb: ""
+
+  - id: todos-santos-2022
+    location_id: todos-santos-mx
+    type: sit
+    start: ""
+    end: ""
+    label: "Early 2022 (3 months)"
+    current: false
+    blurb: ""
+
+  - id: cuenca-ec-2024
+    location_id: cuenca-ec
+    type: rental
+    start: ""
+    end: ""
+    label: "2024 (5 months)"
+    current: false
+    blurb: ""
+
+  - id: santa-maria-dota-2021
+    location_id: santa-maria-de-dota-cr
+    type: sit
+    start: ""
+    end: ""
+    label: "2021 (3 months)"
+    current: false
+    blurb: ""
+
+  - id: exuma-bs-2023
+    location_id: exuma-bs
+    type: sailing
+    start: ""
+    end: ""
+    label: "2023"
+    current: false
+    blurb: ""
+
+  - id: la-fortuna-cr-visit
+    location_id: la-fortuna-cr
+    type: rental
+    start: ""
+    end: ""
+    label: "3 months"  # TODO: confirm year — see note to Jordan
+    current: false
+    blurb: ""
+
+  - id: manchester-vt-2022
+    location_id: manchester-vt
+    type: sit
+    start: ""
+    end: ""
+    label: "2022 (3 months)"
+    current: false
+    blurb: ""
+
+  - id: space-coast-fl-2025
+    location_id: space-coast-fl
+    type: sit
+    start: ""
+    end: ""
+    label: "2025 (two stays)"
+    current: false
+    blurb: ""

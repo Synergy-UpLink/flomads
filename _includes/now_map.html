@@ -5,8 +5,11 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
 <script>
+    {% assign current_visit = site.data.locations.visits | where: "current", true | first %}
+    {% assign current_loc = site.data.locations.locations | where: "id", current_visit.location_id | first %}
+    {% unless current_loc %}{% assign current_loc = site.data.locations.locations | first %}{% endunless %}
     // Initialize map centered on current location
-    const map = L.map('now-map').setView([43.8918908,5.7282172], 12);
+    const map = L.map('now-map').setView([{{ current_loc.lat }}, {{ current_loc.lng }}], 12);
 
 	// OPTION 2: OpenStreetMap Standard (clean, neutral)
 	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -35,58 +38,11 @@
         popupAnchor: [18, -50], // ← offset popup rightward to compensate
         className: 'now-custom-marker'
     });
-    /*Albi, France*/
-    L.marker([43.8918908,5.7282172], { icon: customIcon })
-         .bindPopup('<div class="now-map-popup"><strong>Albi, France</strong></div>')
-         .addTo(map);
-    /* South Benfleet*/
-    L.marker([51.5604991,0.5389142], { icon: customIcon })
-        .bindPopup('<div class="now-map-popup"><strong>South Benfleet</strong></div>')
-        .addTo(map);    
-    /* Romford*/
-    L.marker([51.57462, 0.1845609], { icon: customIcon })
-        .bindPopup('<div class="now-map-popup"><strong>Romford</strong></div>')
+    {% for loc in site.data.locations.locations %}
+    L.marker([{{ loc.lat }}, {{ loc.lng }}], { icon: customIcon })
+        .bindPopup('<div class="now-map-popup"><strong>{{ loc.name | escape }}</strong></div>')
         .addTo(map);
-    /* Albrighton */
-    L.marker([52.6353685, -2.2781400], { icon: customIcon })
-        .bindPopup('<div class="now-map-popup"><strong>Albrighton</strong></div>')
-        .addTo(map);
-    /* Colorado Springs */
-    L.marker([38.8756732,-104.9168954], { icon: customIcon })
-        .bindPopup('<div class="now-map-popup"><strong>Colorado, US</strong></div>')
-        .addTo(map);
-    /* Cancun, MX */
-    L.marker([21.1230253,-86.9388049], { icon: customIcon })
-        .bindPopup('<div class="now-map-popup"><strong>Cancun, MX</strong></div>')
-        .addTo(map);
-    /* Todos Santos */
-    L.marker([23.4594298,-110.2566555], { icon: customIcon })
-        .bindPopup('<div class="now-map-popup"><strong>Todos Santos, MX</strong></div>')
-        .addTo(map);
-    /* Cuenca */
-    L.marker([-2.8922685,-79.0305797], { icon: customIcon })
-        .bindPopup('<div class="now-map-popup"><strong>Cuenca, EC</strong></div>')
-        .addTo(map);
-    /* Dota, CR */
-    L.marker([9.5850098,-84.0381806], { icon: customIcon })
-        .bindPopup('<div class="now-map-popup"><strong>Santa María, CR</strong></div>')
-        .addTo(map);
-    /* Exuma BS */
-    L.marker([24.1137938,-76.7958054], { icon: customIcon })
-        .bindPopup('<div class="now-map-popup"><strong>Exuma, BS</strong></div>')
-        .addTo(map);
-    /* La Fortuna */
-    L.marker([10.4731966,-85.0506821], { icon: customIcon })
-        .bindPopup('<div class="now-map-popup"><strong>La Fortuna, CR</strong></div>')
-        .addTo(map);
-    /* Manchester, VT */
-    L.marker([43.1656731,-73.1095669], { icon: customIcon })
-        .bindPopup('<div class="now-map-popup"><strong>Manchester, US</strong></div>')
-        .addTo(map);
-    /* Space Coast, FL */
-    L.marker([28.1924975,-80.5677636], { icon: customIcon })
-        .bindPopup('<div class="now-map-popup"><strong>Space Coast, US</strong></div>')
-        .addTo(map);
+    {% endfor %}
 </script>
 
 <style>
