@@ -898,6 +898,24 @@ em { font-style: italic; color: var(--gold-light); }
   margin-top: 0.5rem;
 }
 
+/* ── Testimonials see-more ── */
+.testi-extra { display: none; }
+.testimonials-list.expanded .testi-extra { display: flex; }
+.testi-toggle-wrap { text-align: center; margin-top: 1.5rem; }
+.testi-toggle {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--gold-light);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 0.6rem 1.6rem;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.testi-toggle:hover { border-color: var(--gold); background: rgba(255,255,255,0.04); }
+
 /* ── Sit summary badge (reuses .timeline / .tl-item) ── */
 .tl-flag { font-size: 1.1rem; margin-right: 0.4rem; }
 .tl-current-badge {
@@ -913,6 +931,107 @@ em { font-style: italic; color: var(--gold-light); }
   margin-left: 0.6rem;
   vertical-align: middle;
 }
+
+/* ── Sit photo (single, or crossfade pair) ── */
+.tl-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+.tl-header-text { flex: 1; min-width: 0; }
+.tl-photo {
+  position: relative;
+  flex-shrink: 0;
+  width: 140px;
+  height: 100px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  transition: width 0.35s ease, height 0.35s ease;
+}
+.tl-item.expanded .tl-photo { width: 100%; max-width: 420px; height: 260px; }
+.tl-photo-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.tl-photo-crossfade .tl-photo-img-2 {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.tl-photo-crossfade:hover .tl-photo-img-2 { opacity: 1; }
+
+/* ── Sit block expand/collapse ── */
+.tl-item { cursor: pointer; }
+.tl-item:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: var(--radius); }
+.tl-item.expanded .tl-header { flex-direction: column; }
+.tl-expand-icon {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  transition: transform 0.3s ease;
+  vertical-align: middle;
+}
+.tl-item.expanded .tl-expand-icon { transform: rotate(-180deg); }
+
+/* ── Animal gallery ── */
+.tl-animals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 0.6rem;
+}
+.tl-animal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60px;
+  text-align: center;
+}
+.tl-item.expanded .tl-animal { width: 120px; }
+.tl-animal-photo {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+  cursor: default;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+.tl-item.expanded .tl-animal-photo { width: 76px; height: 76px; }
+.tl-animal-photo-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.05);
+  color: var(--gold-light);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.tl-animal-name {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+  max-width: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tl-item.expanded .tl-animal-name { max-width: 120px; white-space: normal; font-weight: 600; color: var(--gold-light); }
+.tl-animal-caption {
+  display: none;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-top: 0.3rem;
+}
+.tl-item.expanded .tl-animal-caption { display: block; }
 
 /* ══════════════════════════════════════════
    RESPONSIVE
@@ -941,6 +1060,7 @@ em { font-style: italic; color: var(--gold-light); }
   .henry-now-body { flex-direction: column; text-align: center; }
   .henry-now-img { margin: 0 auto; }
   .passion-list { grid-template-columns: 1fr; }
+  .tl-photo { width: 96px; height: 72px; }
 }
 
 

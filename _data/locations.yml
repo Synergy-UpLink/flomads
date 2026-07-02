@@ -226,7 +226,7 @@ visits:
     type: sit
     start: "2025-04-01"
     end: "2025-08-01"
-    label: ""
+    label: "Our First Official Sit!"
     current: false
     blurb: ""
 
@@ -235,7 +235,7 @@ visits:
     type: sit
     start: "2025-07-01"
     end: "2025-10-01"
-    label: ""
+    label: "Baja Summer"
     current: false
     blurb: ""
 
@@ -273,7 +273,7 @@ visits:
     end: "2026-06-30"
     label: ""
     current: false
-    blurb: ""
+    blurb: "Our first short-term sit"
 
   - id: south-benfleet-2026
     location_id: south-benfleet-uk
@@ -291,4 +291,4 @@ visits:
     end: ""
     label: ""
     current: true
-    blurb: "A short one-week pet sit — a change of pace from the usual longer stays."
+    blurb: ""
