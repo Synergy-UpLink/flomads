@@ -1,9 +1,5 @@
 # ── Locations ────────────────────────────────────────────────
-# One entry per physical place. Coordinates copied over from the
-# old hardcoded now_map.html markers (now the single source of
-# truth for lat/lng — now_map.html, sits.yml, and profile/index.html
-# all read from here instead of each keeping their own copy).
-#
+# One entry per physical place
 # Fields:
 #   id:           unique slug
 #   name:         display name (kept intentionally general in a
@@ -17,7 +13,7 @@
 #                 (not any specific stay there)
 
 locations:
-  - id: albi-france
+  - id: albi-fr
     name: "Albi, France"
     country: "France"
     flag: "🇫🇷"
@@ -25,7 +21,7 @@ locations:
     lng: 5.7282172
     description: ""
 
-  - id: south-benfleet
+  - id: south-benfleet-uk
     name: "South Benfleet"
     country: "England, UK"
     flag: "🇬🇧"
@@ -33,7 +29,7 @@ locations:
     lng: 0.5389142
     description: ""
 
-  - id: romford
+  - id: romford-uk
     name: "Romford"
     country: "England, UK"
     flag: "🇬🇧"
@@ -41,7 +37,7 @@ locations:
     lng: 0.1845609
     description: ""
 
-  - id: albrighton
+  - id: albrighton-uk
     name: "Albrighton, Shropshire"
     country: "England, UK"
     flag: "🇬🇧"
@@ -49,7 +45,7 @@ locations:
     lng: -2.2781400
     description: ""
 
-  - id: colorado-springs
+  - id: colorado-springs-us
     name: "Colorado Springs, CO"
     country: "United States"
     flag: "🇺🇸"
@@ -121,6 +117,14 @@ locations:
     lng: -80.5677636
     description: ""
 
+  - id: fort-lauderdale-fl
+    name: "Fort Lauderdale, FL"
+    country: "United States"
+    flag: "🇺🇸"
+    lat: 26.1413462
+    lng: -80.2322054
+    description: ""
+
 # ── Visits ───────────────────────────────────────────────────
 # Flat list (not nested under locations) so it can be sorted
 # chronologically regardless of entry order, and so a location
@@ -142,110 +146,102 @@ locations:
 #   blurb:        optional short note about this specific stay
 
 visits:
-  - id: albi-france-2026
-    location_id: albi-france
-    type: sit
-    start: ""
-    end: ""
-    label: ""  # TODO: confirm exact dates — Now page says "short one week stay"
-    current: true
-    blurb: "A short one-week pet sit — a change of pace from the usual longer stays."
-
-  - id: south-benfleet-2026
-    location_id: south-benfleet
-    type: sit
-    start: ""
-    end: ""
-    label: ""  # TODO: confirm type + exact dates
-    current: false
-    blurb: ""
-
-  - id: romford-2026
-    location_id: romford
-    type: sit
-    start: ""
-    end: ""
-    label: ""  # TODO: confirm type + exact dates
-    current: false
-    blurb: ""
-
-  - id: albrighton-2026
-    location_id: albrighton
-    type: sit
-    start: "2026-02-01"
-    end: "2026-06-05"
-    label: "February - June 2026"
-    current: false
-    blurb: ""
 
   - id: colorado-springs-home
     location_id: colorado-springs
     type: home_base
     start: "2009-01-01"
     end: "2019-01-01"
-    label: "2009 – 2019"
+    label: "2009 - 2019"
     current: false
     blurb: "A decade in one place before the leap into full-time travel."
 
-  - id: cancun-mx-visit
+  - id: cancun-mx-visit-2018
     location_id: cancun-mx
     type: vacation
-    start: ""
-    end: ""
+    start: "2018-04-01"
+    end: "2018-05-01"
     label: ""  # TODO: confirm type + exact dates
     current: false
     blurb: ""
 
-  - id: todos-santos-2022
-    location_id: todos-santos-mx
-    type: sit
-    start: ""
-    end: ""
-    label: "Early 2022 (3 months)"
+  - id: cancun-mx-visit-2022
+    location_id: cancun-mx
+    type: vacation
+    start: "2022-08-01"
+    end: "2022-09-01"
+    label: ""  # TODO: confirm type + exact dates
     current: false
     blurb: ""
 
-  - id: cuenca-ec-2024
-    location_id: cuenca-ec
-    type: rental
-    start: ""
-    end: ""
-    label: "2024 (5 months)"
+  - id: fort-lauderdale-fl-2019
+    location_id: fort-lauderdale-fl
+    type: sailing
+    start: "2019-09-01"
+    end: "2020-04-01"
+    label: ""
     current: false
     blurb: ""
 
-  - id: santa-maria-dota-2021
-    location_id: santa-maria-de-dota-cr
-    type: sit
-    start: ""
-    end: ""
-    label: "2021 (3 months)"
+  - id: space-coast-fl-2020
+    location_id: space-coast-fl
+    type: sailing
+    start: "2020-04-01"
+    end: "2024-01-01"
+    label: "2025 (two stays)"
     current: false
     blurb: ""
 
   - id: exuma-bs-2023
     location_id: exuma-bs
     type: sailing
-    start: ""
-    end: ""
+    start: "2022-12-01"
+    end: "2023-12-01"
     label: "2023"
     current: false
     blurb: ""
 
-  - id: la-fortuna-cr-visit
-    location_id: la-fortuna-cr
+  - id: cuenca-ec-2024
+    location_id: cuenca-ec
     type: rental
-    start: ""
-    end: ""
-    label: "3 months"  # TODO: confirm year — see note to Jordan
+    start: "2024-06-01"
+    end: "2024-12-01"
+    label: ""
     current: false
     blurb: ""
 
-  - id: manchester-vt-2022
+  - id: la-fortuna-cr-2025
+    location_id: la-fortuna-cr
+    type: rental
+    start: "2025-02-01"
+    end: "2025-5-01"
+    label: "" 
+    current: false
+    blurb: ""
+
+  - id: santa-maria-dota-2025
+    location_id: santa-maria-de-dota-cr
+    type: sit
+    start: "2028-04-01"
+    end: "2025-08-01"
+    label: ""
+    current: false
+    blurb: ""
+
+  - id: todos-santos-2025
+    location_id: todos-santos-mx
+    type: sit
+    start: "2025-07-01"
+    end: "2025-10-01"
+    label: ""
+    current: false
+    blurb: ""
+
+  - id: manchester-vt-2025
     location_id: manchester-vt
     type: sit
-    start: ""
-    end: ""
+    start: "2025-09-01"
+    end: "2025-12-01"
     label: "2022 (3 months)"
     current: false
     blurb: ""
@@ -253,8 +249,44 @@ visits:
   - id: space-coast-fl-2025
     location_id: space-coast-fl
     type: sit
-    start: ""
-    end: ""
-    label: "2025 (two stays)"
+    start: "2025-12-01"
+    end: "2026-12-31"
+    label: ""
     current: false
     blurb: ""
+
+  - id: albrighton-2026
+    location_id: albrighton-uk
+    type: sit
+    start: "2026-02-01"
+    end: "2026-06-01"
+    label: ""
+    current: false
+    blurb: ""
+
+  - id: romford-2026
+    location_id: romford-uk
+    type: sit
+    start: "2026-06-01"
+    end: "2026-06-30"
+    label: ""
+    current: false
+    blurb: ""
+
+  - id: south-benfleet-2026
+    location_id: south-benfleet-uk
+    type: sit
+    start: "2026-06-01"
+    end: "2026-06-30"
+    label: ""
+    current: false
+    blurb: ""
+
+  - id: albi-france-2026
+    location_id: albi-fr
+    type: sit
+    start: "2026-06-01"
+    end: ""
+    label: ""
+    current: true
+    blurb: "A short one-week pet sit — a change of pace from the usual longer stays."
