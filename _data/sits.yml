@@ -18,27 +18,32 @@ platforms:
     blurb: "European-focused sits and reviews."
 
 # ── Sits ─────────────────────────────────────────────────────
-# Location/dates/lat/lng now live in _data/locations.yml. Each
-# sit's `id` here must match a visit `id` there — that's the
-# whole link, no separate foreign-key field needed.
+# Location/dates/lat/lng live in _data/locations.yml. Each sit's
+# `id` here must match a visit `id` there — that's the whole
+# link, no separate foreign-key field needed. Visit-level `blurb`
+# in locations.yml covers general context for the sit (e.g. no
+# public review yet); there's no top-level `notes` field here.
 #
 # Fields:
 #   id:           unique slug — MUST match a visit id in locations.yml
 #   owners:       first names of the homeowners
-#   notes:        optional freeform context, shown on the timeline when
-#                 there's no public review yet (sit in progress, review
-#                 not posted publicly, etc.)
 #   testimonial:
 #     quote:      their words (no surrounding quotes needed)
 #     name:       how they want to be credited
-#   photos:
-#     slideshow:  list of local image paths (relative to /assets/images/sits/)
-#     album_url:  link to a Google Photos / Flickr / etc. album
-#     album_label: button label for the album link
+#   photos:       array of 1-2 image paths (relative to
+#                 /assets/images/sits/) about the sit generally.
+#                 A second photo is only added when the weather
+#                 changed enough to be worth an arrival-vs-
+#                 departure comparison (cross-fade on hover).
 #   animals:      list of animal profiles (see schema below)
 #
 # Animal fields:
-#   name, species, breed, age, photo (path under /assets/images/sits/), notes
+#   name, species, breed — required
+#   age                  — optional
+#   photo                — path under /assets/images/sits/
+#   notes                — optional; used as the photo's hover/alt
+#                          text or caption. If blank, generate one
+#                          from the other animal fields at display time.
 
 sits:
   - id: albi-2026
@@ -52,7 +57,7 @@ sits:
 
   - id: south-benfleet-2026
     owners: "Terry & Becky"
-    testimonials:
+    testimonial:
       quote: "Christine and Jordan were very good sitters. Our Bertie took to them immediately which is a good sign that he was comfortable from the beginning. Our home was clean and tidy when we returned as well as the chores in garden of keeping our plants well watered during the hot weather."
       name: "Terry"
     photos: []
@@ -109,10 +114,9 @@ sits:
         photo: "albrighton/buddy.jpg"
         personality: "A glorious tail and some extreme snaggleteeth."
         care_notes: "Fed twice daily with Trixie. Easy on-leash. Enjoys a long sniff-walk more than a fast one."
-        challenges: "Buddy was prevoiusly scheduled for major dental work while we were there. We took him to the vet, handled the special diet, medication, and aftercare."
+        challenges: "Buddy was previously scheduled for major dental work while we were there. We took him to the vet, handled the special diet, medication, and aftercare."
 
   - id: space-coast-fl-2025
-    notes: "A homestead in the middle of the city. Galadriel was the primary responsibility, but we also took care of ducks, chickens, cows, and snakes."
     photos: []
     animals:
       - name: "Galadriel"
@@ -139,7 +143,7 @@ sits:
         species: "Dog"
         breed: "Gordon Setter"
         age: "9 years"
-        photo: "todos-sants/ruby.jpg"
+        photo: "todos-santos/ruby.jpg"
         notes: ""
 
   - id: manchester-vt-2025

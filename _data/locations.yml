@@ -148,7 +148,7 @@ locations:
 visits:
 
   - id: colorado-springs-home
-    location_id: colorado-springs
+    location_id: colorado-springs-us
     type: home_base
     start: "2009-01-01"
     end: "2019-01-01"
@@ -188,7 +188,7 @@ visits:
     type: sailing
     start: "2020-04-01"
     end: "2024-01-01"
-    label: "2025 (two stays)"
+    label: ""
     current: false
     blurb: ""
 
@@ -222,7 +222,7 @@ visits:
   - id: santa-maria-dota-2025
     location_id: santa-maria-de-dota-cr
     type: sit
-    start: "2028-04-01"
+    start: "2025-04-01"
     end: "2025-08-01"
     label: ""
     current: false
@@ -242,7 +242,7 @@ visits:
     type: sit
     start: "2025-09-01"
     end: "2025-12-01"
-    label: "2022 (3 months)"
+    label: ""
     current: false
     blurb: ""
 
@@ -251,9 +251,9 @@ visits:
     type: sit
     start: "2025-12-01"
     end: "2026-12-31"
-    label: ""
+    label: "2025 (two stays)"
     current: false
-    blurb: ""
+    blurb: "A homestead in the middle of the city. Galadriel was the primary responsibility, but we also took care of ducks, chickens, cows, and snakes."
 
   - id: albrighton-2026
     location_id: albrighton-uk
@@ -282,7 +282,7 @@ visits:
     current: false
     blurb: ""
 
-  - id: albi-france-2026
+  - id: albi-2026
     location_id: albi-fr
     type: sit
     start: "2026-06-01"

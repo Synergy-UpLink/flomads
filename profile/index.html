@@ -74,17 +74,17 @@ description: "Where to find the Flomads' sitter profiles, past sit history, and 
       <div class="tl-item{% if v.current %} active{% endif %}">
         <div class="tl-dot"></div>
         <div class="tl-content">
-          <span class="tl-date">{{ v.label }}</span>
+          <span class="tl-date">
+            {% if v.label and v.label != "" %}{{ v.label }}
+            {% else %}{{ v.start | date: "%b %Y" }}{% if v.end and v.end != "" %} – {{ v.end | date: "%b %Y" }}{% else %} – Present{% endif %}
+            {% endif %}
+          </span>
           <h4><span class="tl-flag">{{ loc.flag }}</span>{{ loc.name }}{% if v.current %}<span class="tl-current-badge">Current</span>{% endif %}</h4>
           {% if s.animals and s.animals.size > 0 %}
           <p class="tl-pets">Cared for {{ s.animals | map: "name" | join: ", " }}</p>
           {% endif %}
-          {% assign challenge_animal = s.animals | where_exp: "a", "a.challenges != ''" | first %}
-          {% if challenge_animal %}
-          <p class="tl-highlight">{{ challenge_animal.challenges }}</p>
-          {% endif %}
-          {% if s.notes and s.notes != "" %}
-          <p class="tl-notes"><em>{{ s.notes }}</em></p>
+          {% if v.blurb and v.blurb != "" %}
+          <p class="tl-notes"><em>{{ v.blurb }}</em></p>
           {% endif %}
         </div>
       </div>
