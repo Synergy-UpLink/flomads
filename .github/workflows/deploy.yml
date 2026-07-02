@@ -2,7 +2,7 @@ name: Deploy Flomads Jekyll site to Github Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, profile-page]
   workflow_dispatch:
 
 permissions:
