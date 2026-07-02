@@ -14,11 +14,39 @@ description: "Where to find the Flomads' sitter profiles, past sit history, and 
   </div>
 </section>
 
+<!-- PLATFORM PROFILES -->
+<section class="section" style="padding-top: 2.5rem; padding-bottom: 2.5rem;">
+  <div class="container">
+    <p class="platform-strip-label center">Find Us On</p>
+    <div class="platform-strip">
+      {% for p in site.data.sits.platforms %}
+      <a href="{{ p.url }}" class="platform-pill" target="_blank" rel="noopener" title="{{ p.blurb }}">
+        <span class="platform-pill-icon">{{ p.icon }}</span>
+        <span class="platform-pill-name">{{ p.name }}</span>
+        <span class="platform-pill-arrow">→</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
 <!-- REVIEWS -->
 <section class="section" style="background: var(--navy-mid);">
   <div class="container">
     <h2 class="section-title center">What Pet Parents Say</h2>
     <div class="testimonials-grid">
+      {% for s in site.data.sits.sits %}
+      {% if s.testimonial.quote and s.testimonial.quote != "" %}
+      <div class="testi-card">
+        <blockquote>{{ s.testimonial.quote }}</blockquote>
+        <div class="testi-meta">
+          <div class="testi-name">{{ s.testimonial.name }}</div>
+          <div class="testi-loc">{{ s.location }}</div>
+          <span class="testi-platform">Verified Sit</span>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
       {% for t in site.data.sits.testimonials %}
       <div class="testi-card">
         <blockquote>{{ t.quote }}</blockquote>
@@ -28,23 +56,6 @@ description: "Where to find the Flomads' sitter profiles, past sit history, and 
           <span class="testi-platform">{{ t.platform }}</span>
         </div>
       </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<!-- PLATFORM PROFILES -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title center">Find Us On</h2>
-    <div class="platform-grid">
-      {% for p in site.data.sits.platforms %}
-      <a href="{{ p.url }}" class="platform-card" target="_blank" rel="noopener">
-        <div class="platform-icon">{{ p.icon }}</div>
-        <h3>{{ p.name }}</h3>
-        <p>{{ p.blurb }}</p>
-        <span class="btn btn-ghost">View Profile →</span>
-      </a>
       {% endfor %}
     </div>
   </div>

@@ -212,26 +212,13 @@ sits:
         challenges: ""
 
 # ── Standalone testimonials ──────────────────────────────────
-# These appear in the dedicated testimonials section.
-# Can duplicate a per-sit quote here or add extras
-# (e.g. from TrustedHouseSitters reviews).
+# For reviews NOT tied to a documented sit above (e.g. an extra
+# TrustedHouseSitters/Nomador review, or a sit you haven't
+# written up yet). If a testimonial already lives on a sit's
+# `testimonial:` field, don't duplicate it here — the Profile
+# page pulls sit-linked testimonials automatically.
 testimonials:
-  - quote: "Lovely pupdates. The dogs were so happy and cared for and the house was lovely when I got home. The contact before and during the stay was excellent! ❤️"
-    name: "Fiona"
-    location: "Albrighton, Shropshire"
-    platform: "TrustedHouseSitters"
-  
-  - quote: "Christine and Jordan stayed with our pets for two months and they were fantastic! We loved getting the wonderful photos of all their hiking adventures with June Bug. They left the house in beautiful condition and did a great job helping the property transition from fall to winter. I highly recommend them and we hope to have them back for another stay."
-    name: "Caren"
-    location: "Dorset, VT, USA"
-    platform: "TrustedHouseSitters"
-
-  - quote: "Christine and her partner Jordan were absolutely fantastic. I can't say enough about how great they were with our two Gordon Setters, Ruby -9 years old and Duncan-18 months old. Several weeks before they arrive, Duncan was neutered and there were complications that required us to apply raw sugar to his testicles several times a day to reduce the swelling. We let Christine and Jordan know that while we hoped we would have the situation resolved before they came, they might have to take over for a day or two. Their response was immediate and afirmative. Talk about going above and beyond! During  our 9 week absence, we received timely updates with photos of the dogs. When we returned, our house was spotless, sheets and towels washed. The dogs clearly loved them, which is really important to us. We would have them back in a heart beat."
-    name: "Susan"
-    location: "Todos Santos, Mexico"
-    platform: "TrustedHouseSitters"
-
-  - quote: "Christine and Jordan are both relaxed and reliable. They love animals and know how care for them and train them. Christine was always quick to respond and take care of anything that needed to be done. Communication was great. She was always proactive which took the worry away from us. She was attentive to medication, vet visits and getting food for the dogs along with anything else that needed to be done. We feel very lucky to have had them taking care of our animals and home! Thank you so much!"
-    name: "Tom & Alethia"
-    location: "Santa Maria, Costa Rica"
-    platform: "TrustedHouseSitters"
+  - quote: "I've known Christine for over 25 years. She has watched my house and pets (cats and birds) numerous times. She's caring, clean and trustworthy!! Five stars all around!! I have also seen how well she treated her own pets and home over the years. I am extremely comfortable handing her my house keys and not worrying about my home. I know my pets will be loved and well taken care of!!"
+    name: "Heather Baker"
+    location: "Colorado Springs, CO, USA"
+    platform: "Direct"
