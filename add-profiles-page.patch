@@ -1,0 +1,248 @@
+From ac8fe66421cdb5cbf86a53266ee8749c8a416633 Mon Sep 17 00:00:00 2001
+From: Jordan <jordan@flomads.com>
+Date: Thu, 2 Jul 2026 08:30:12 +0000
+Subject: [PATCH] Add public Profiles page consolidating reviews, sit history,
+ and platform links
+
+---
+ _data/sits.yml       | 19 +++++++++
+ _includes/nav.html   |  1 +
+ assets/css/style.css | 93 ++++++++++++++++++++++++++++++++++++++++++++
+ profiles/index.html  | 72 ++++++++++++++++++++++++++++++++++
+ 4 files changed, 185 insertions(+)
+ create mode 100644 profiles/index.html
+
+diff --git a/_data/sits.yml b/_data/sits.yml
+index 8f4e15c..e5640ca 100644
+--- a/_data/sits.yml
++++ b/_data/sits.yml
+@@ -37,6 +37,25 @@ contact:
+   #   value: "https://facebook.com/theflomads"
+   #   primary: false
+ 
++# ── Sitting platform profiles ──────────────────────────────────
++# Shown as cards on the public /profiles/ page.
++# icon: any emoji; url: link to our profile on that platform.
++platforms:
++  - name: "TrustedHouseSitters"
++    icon: "🐾"
++    url: "https://www.trustedhousesitters.com/house-and-pet-sitters/united-states-of-america/colorado-springs/"
++    blurb: "Our primary platform — full sit history and verified homeowner reviews."
++
++  - name: "MindMyHouse"
++    icon: "🏠"
++    url: "https://www.mindmyhouse.com/owners/sitter_listing/63981"
++    blurb: "Additional listing and references."
++
++  - name: "Nomador"
++    icon: "🗺️"
++    url: "https://www.nomador.com/profile/388334"
++    blurb: "European-focused sits and reviews."
++
+ # ── Sits ─────────────────────────────────────────────────────
+ # Fields:
+ #   id:           unique slug (used for anchor links)
+diff --git a/_includes/nav.html b/_includes/nav.html
+index e9f1dbb..6773619 100644
+--- a/_includes/nav.html
++++ b/_includes/nav.html
+@@ -8,6 +8,7 @@
+       <li><a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="active"{% endif %}>Home</a></li>
+       <li><a href="{{ '/about/' | relative_url }}"{% if page.url contains '/about' %} class="active"{% endif %}>About</a></li>
+       <li><a href="{{ '/now/' | relative_url }}"{% if page.url contains '/now' %} class="active"{% endif %}>Now</a></li>
++      <li><a href="{{ '/profiles/' | relative_url }}"{% if page.url contains '/profiles' %} class="active"{% endif %}>Profiles</a></li>
+     </ul>
+     <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+   </div>
+diff --git a/assets/css/style.css b/assets/css/style.css
+index 2fd325e..b0c3a05 100644
+--- a/assets/css/style.css
++++ b/assets/css/style.css
+@@ -787,6 +787,98 @@ em { font-style: italic; color: var(--gold-light); }
+   border-top: 1px solid rgba(255,255,255,0.07);
+ }
+ 
++/* ══════════════════════════════════════════
++   PROFILES PAGE
++══════════════════════════════════════════ */
++
++/* ── Platform cards ── */
++.platform-grid {
++  display: grid;
++  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
++  gap: 1.5rem;
++}
++.platform-card {
++  background: rgba(255,255,255,0.03);
++  border: 1px solid var(--border);
++  border-radius: var(--radius-lg);
++  padding: 2rem;
++  text-align: center;
++  transition: all var(--transition);
++}
++.platform-card:hover {
++  border-color: var(--gold);
++  background: rgba(255,255,255,0.05);
++  transform: translateY(-4px);
++}
++.platform-icon { font-size: 2.2rem; margin-bottom: 1rem; }
++.platform-card h3 { margin-bottom: 0.5rem; }
++.platform-card p { font-size: 0.92rem; margin-bottom: 1.5rem; }
++
++/* ── Testimonials ── */
++.testimonials-grid {
++  display: grid;
++  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
++  gap: 1.5rem;
++}
++.testi-card {
++  background: rgba(255,255,255,0.03);
++  border: 1px solid rgba(255,255,255,0.08);
++  border-radius: var(--radius-lg);
++  padding: 2rem;
++  position: relative;
++  transition: all var(--transition);
++}
++.testi-card:hover { border-color: var(--border); background: rgba(255,255,255,0.06); }
++.testi-card::before {
++  content: '\201C';
++  font-family: var(--font-display);
++  font-size: 4rem;
++  color: var(--gold);
++  opacity: 0.3;
++  position: absolute;
++  top: 0.5rem; left: 1.2rem;
++  line-height: 1;
++}
++.testi-card blockquote {
++  font-family: var(--font-display);
++  font-style: italic;
++  font-size: 1rem;
++  line-height: 1.7;
++  color: var(--cream);
++  margin-bottom: 1.2rem;
++  padding-top: 1.5rem;
++}
++.testi-meta { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 0.8rem; }
++.testi-name { font-weight: 600; font-size: 0.9rem; color: var(--gold-light); }
++.testi-loc { font-size: 0.8rem; color: var(--text-muted); }
++.testi-platform {
++  display: inline-block;
++  font-size: 0.72rem;
++  letter-spacing: 0.05em;
++  text-transform: uppercase;
++  color: var(--navy);
++  background: var(--gold);
++  border-radius: 20px;
++  padding: 0.15rem 0.6rem;
++  margin-top: 0.4rem;
++}
++
++/* ── Sit summary badge (reuses .timeline / .tl-item) ── */
++.tl-flag { font-size: 1.1rem; margin-right: 0.4rem; }
++.tl-current-badge {
++  display: inline-block;
++  font-size: 0.68rem;
++  font-weight: 600;
++  letter-spacing: 0.06em;
++  text-transform: uppercase;
++  color: var(--navy);
++  background: var(--gold);
++  border-radius: 20px;
++  padding: 0.15rem 0.6rem;
++  margin-left: 0.6rem;
++  vertical-align: middle;
++}
++
+ /* ══════════════════════════════════════════
+    RESPONSIVE
+ ══════════════════════════════════════════ */
+@@ -801,6 +893,7 @@ em { font-style: italic; color: var(--gold-light); }
+   .what-grid { grid-template-columns: 1fr; gap: 2rem; }
+   .what-cards { max-width: 400px; }
+   .crew-grid { grid-template-columns: 1fr; }
++  .platform-grid, .testimonials-grid { grid-template-columns: 1fr; }
+   .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+ }
+ @media (max-width: 640px) {
+diff --git a/profiles/index.html b/profiles/index.html
+new file mode 100644
+index 0000000..838bbd2
+--- /dev/null
++++ b/profiles/index.html
+@@ -0,0 +1,72 @@
++---
++layout: default
++title: "Profiles"
++description: "Where to find the Flomads' sitter profiles, past sit history, and reviews from homeowners we've sat for."
++---
++
++<!-- PAGE HERO -->
++<section class="page-hero">
++  <div class="page-hero-bg"></div>
++  <div class="container">
++    <p class="page-eyebrow">Track Record</p>
++    <h1 class="page-title">Our Sitter Profiles</h1>
++    <p class="page-subtitle">Everywhere you can find us, and what homeowners have said after we've left.</p>
++  </div>
++</section>
++
++<!-- PLATFORM PROFILES -->
++<section class="section">
++  <div class="container">
++    <h2 class="section-title center">Find Us On</h2>
++    <div class="platform-grid">
++      {% for p in site.data.sits.platforms %}
++      <a href="{{ p.url }}" class="platform-card" target="_blank" rel="noopener">
++        <div class="platform-icon">{{ p.icon }}</div>
++        <h3>{{ p.name }}</h3>
++        <p>{{ p.blurb }}</p>
++        <span class="btn btn-ghost">View Profile →</span>
++      </a>
++      {% endfor %}
++    </div>
++  </div>
++</section>
++
++<!-- REVIEWS -->
++<section class="section" style="background: var(--navy-mid);">
++  <div class="container">
++    <h2 class="section-title center">What Homeowners Say</h2>
++    <div class="testimonials-grid">
++      {% for t in site.data.sits.testimonials %}
++      <div class="testi-card">
++        <blockquote>{{ t.quote }}</blockquote>
++        <div class="testi-meta">
++          <div class="testi-name">{{ t.name }}</div>
++          <div class="testi-loc">{{ t.location }}</div>
++          <span class="testi-platform">{{ t.platform }}</span>
++        </div>
++      </div>
++      {% endfor %}
++    </div>
++  </div>
++</section>
++
++<!-- SIT HISTORY -->
++<section class="section history-section">
++  <div class="container">
++    <h2 class="section-title center">Where We've Sat</h2>
++    <div class="timeline">
++      {% for s in site.data.sits.sits %}
++      <div class="tl-item{% if s.current %} active{% endif %}">
++        <div class="tl-dot"></div>
++        <div class="tl-content">
++          <span class="tl-date">{{ s.dates }}</span>
++          <h4><span class="tl-flag">{{ s.flag }}</span>{{ s.location }}{% if s.current %}<span class="tl-current-badge">Current</span>{% endif %}</h4>
++          {% if s.testimonial.quote != "" %}
++          <p><em>"{{ s.testimonial.quote | truncatewords: 28 }}"</em> — {{ s.testimonial.name }}</p>
++          {% endif %}
++        </div>
++      </div>
++      {% endfor %}
++    </div>
++  </div>
++</section>
+-- 
+2.43.0
+

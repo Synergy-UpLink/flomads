@@ -5,13 +5,8 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
 <script>
-<<<<<<< Updated upstream
-    // Initialize map centered on Albrighton, Shropshire
-    const map = L.map('now-map').setView([51.57462, 0.1845609], 12);
-=======
     // Initialize map centered on current location
     const map = L.map('now-map').setView([43.8918908,5.7282172], 12);
->>>>>>> Stashed changes
 
 	// OPTION 2: OpenStreetMap Standard (clean, neutral)
 	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -40,17 +35,6 @@
         popupAnchor: [18, -50], // ← offset popup rightward to compensate
         className: 'now-custom-marker'
     });
-<<<<<<< Updated upstream
-    // /*Albi, France*/
-    // L.marker([43.8918908,5.7282172], { icon: customIcon })
-    //     .bindPopup('<div class="now-map-popup"><strong>Albi, France</strong></div>')
-    //     .addTo(map);
-    // /* Southend-On-Sea*/
-    // L.marker([51.540674, 0.6947366], { icon: customIcon })
-    //     .bindPopup('<div class="now-map-popup"><strong>Southend-On-Sea</strong></div>')
-    //     .addTo(map);    
-    /* Southend-On-Sea*/
-=======
     /*Albi, France*/
     L.marker([43.8918908,5.7282172], { icon: customIcon })
          .bindPopup('<div class="now-map-popup"><strong>Albi, France</strong></div>')
@@ -60,7 +44,6 @@
         .bindPopup('<div class="now-map-popup"><strong>South Benfleet</strong></div>')
         .addTo(map);    
     /* Romford*/
->>>>>>> Stashed changes
     L.marker([51.57462, 0.1845609], { icon: customIcon })
         .bindPopup('<div class="now-map-popup"><strong>Romford</strong></div>')
         .addTo(map);
