@@ -9,8 +9,10 @@
 #   country:      country name
 #   flag:         emoji flag
 #   lat/lng:      coordinates, used by the map marker
-#   description:  optional short blurb about the PLACE itself
-#                 (not any specific stay there)
+#   description:  general geographic description of the PLACE
+#                 itself (facts about the location — not a
+#                 personal account of a specific stay there;
+#                 that belongs on the visit's `blurb` instead)
 
 locations:
   - id: albi-fr
@@ -19,7 +21,7 @@ locations:
     flag: "🇫🇷"
     lat: 43.8918908
     lng: 5.7282172
-    description: ""
+    description: "A city in the Tarn department of southern France's Occitanie region, on the banks of the Tarn River. Its brick-built old town and cathedral form the Cité Épiscopale, a UNESCO World Heritage Site."
 
   - id: south-benfleet-uk
     name: "South Benfleet"
@@ -27,7 +29,7 @@ locations:
     flag: "🇬🇧"
     lat: 51.5604991
     lng: 0.5389142
-    description: ""
+    description: "A town in the Castle Point district of Essex, England, on the edge of the Thames Estuary marshes northeast of London."
 
   - id: romford-uk
     name: "Romford"
@@ -35,7 +37,7 @@ locations:
     flag: "🇬🇧"
     lat: 51.57462
     lng: 0.1845609
-    description: ""
+    description: "A town in the London Borough of Havering, on the eastern edge of Greater London — historically a market town, now a suburban hub with rail links into central London."
 
   - id: albrighton-uk
     name: "Albrighton, Shropshire"
@@ -43,7 +45,7 @@ locations:
     flag: "🇬🇧"
     lat: 52.6353685
     lng: -2.2781400
-    description: ""
+    description: "A village in Shropshire, England, a few miles northeast of Telford and Wolverhampton in the West Midlands countryside."
 
   - id: colorado-springs-us
     name: "Colorado Springs, CO"
@@ -51,7 +53,7 @@ locations:
     flag: "🇺🇸"
     lat: 38.8756732
     lng: -104.9168954
-    description: "Home base before the nomad years began."
+    description: "A city in El Paso County, Colorado, at the eastern foot of Pikes Peak in the Rocky Mountains, roughly 60 miles south of Denver."
 
   - id: cancun-mx
     name: "Cancun, MX"
@@ -59,7 +61,7 @@ locations:
     flag: "🇲🇽"
     lat: 21.1230253
     lng: -86.9388049
-    description: ""
+    description: "A resort city on the northeastern tip of Mexico's Yucatán Peninsula, in Quintana Roo, fronting the Caribbean Sea."
 
   - id: todos-santos-mx
     name: "Todos Santos, Baja California Sur"
@@ -67,7 +69,7 @@ locations:
     flag: "🇲🇽"
     lat: 23.4594298
     lng: -110.2566555
-    description: ""
+    description: "A small town on the Pacific coast of the Baja California Sur peninsula, midway between Cabo San Lucas and La Paz — designated a Pueblo Mágico for its arts and surf culture."
 
   - id: cuenca-ec
     name: "Cuenca, EC"
@@ -75,7 +77,7 @@ locations:
     flag: "🇪🇨"
     lat: -2.8922685
     lng: -79.0305797
-    description: "Cloud-forest city in the Andes; five months of remote work and the first real 'maybe we could live somewhere like this' feeling."
+    description: "A colonial-era city in the Andean highlands of Ecuador's Azuay Province, roughly 2,500 meters above sea level. Its historic center is a UNESCO World Heritage Site."
 
   - id: santa-maria-de-dota-cr
     name: "Santa María de Dota"
@@ -83,7 +85,7 @@ locations:
     flag: "🇨🇷"
     lat: 9.5850098
     lng: -84.0381806
-    description: ""
+    description: "A mountain town in Costa Rica's Los Santos region, in the Talamanca foothills south of San José, known as one of the country's premier coffee-growing areas."
 
   - id: exuma-bs
     name: "Exuma, BS"
@@ -91,7 +93,7 @@ locations:
     flag: "🇧🇸"
     lat: 24.1137938
     lng: -76.7958054
-    description: "A year living aboard Encantado in the Bahamas — glassy flats, absurd stars, and the high point of the liveaboard years."
+    description: "An archipelago in the Bahamas southeast of Nassau, made up of over 365 small cays known for shallow turquoise water and the swimming pigs of Big Major Cay."
 
   - id: la-fortuna-cr
     name: "La Fortuna, CR"
@@ -99,7 +101,7 @@ locations:
     flag: "🇨🇷"
     lat: 10.4731966
     lng: -85.0506821
-    description: ""
+    description: "A town in Costa Rica's Alajuela Province, at the base of the (currently dormant) Arenal Volcano in the country's northern lowlands."
 
   - id: manchester-vt
     name: "Manchester, VT"
@@ -107,7 +109,7 @@ locations:
     flag: "🇺🇸"
     lat: 43.1656731
     lng: -73.1095669
-    description: ""
+    description: "A town in Bennington County, Vermont, in the Green Mountains, historically a resort town for hiking, skiing, and fly-fishing."
 
   - id: space-coast-fl
     name: "Space Coast, FL"
@@ -115,7 +117,7 @@ locations:
     flag: "🇺🇸"
     lat: 28.1924975
     lng: -80.5677636
-    description: ""
+    description: "The stretch of Florida's Atlantic coast in Brevard County, named for its proximity to Kennedy Space Center and Cape Canaveral."
 
   - id: fort-lauderdale-fl
     name: "Fort Lauderdale, FL"
@@ -123,7 +125,7 @@ locations:
     flag: "🇺🇸"
     lat: 26.1413462
     lng: -80.2322054
-    description: ""
+    description: "A city on Florida's southeastern coast in Broward County, known for its extensive canal system and marine industry — a common jumping-off point for the Bahamas."
 
 # ── Visits ───────────────────────────────────────────────────
 # Flat list (not nested under locations) so it can be sorted
@@ -199,7 +201,7 @@ visits:
     end: "2023-12-01"
     label: "2023"
     current: false
-    blurb: ""
+    blurb: "A year living aboard Encantado in the Bahamas — glassy flats, absurd stars, and the high point of the liveaboard years."
 
   - id: cuenca-ec-2024
     location_id: cuenca-ec
@@ -208,7 +210,7 @@ visits:
     end: "2024-12-01"
     label: ""
     current: false
-    blurb: ""
+    blurb: "Five months of remote work and the first real 'maybe we could live somewhere like this' feeling."
 
   - id: la-fortuna-cr-2025
     location_id: la-fortuna-cr
@@ -250,7 +252,7 @@ visits:
     location_id: space-coast-fl
     type: sit
     start: "2025-12-01"
-    end: "2026-12-31"
+    end: "2025-12-31"
     label: "2025 (two stays)"
     current: false
     blurb: "A homestead in the middle of the city. Galadriel was the primary responsibility, but we also took care of ducks, chickens, cows, and snakes."
