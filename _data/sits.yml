@@ -48,11 +48,11 @@ platforms:
 sits:
   - id: albi-2026
     owners: "Lucas & Alionka"
-    photos: []
+    photos: [albi/albi.jpg]
     animals:
       - name: "Mimi"
         species: "Cat"
-        breed: "Domestic Shorthair"
+        breed: "Domestic Shorthair Void"
         photo: "albi/mimi.jpg"
 
   - id: south-benfleet-2026
