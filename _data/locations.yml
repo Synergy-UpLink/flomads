@@ -21,14 +21,14 @@ locations:
     flag: "🇫🇷"
     lat: 48.8589385
     lng: 2.264634
-    description: "A city in the Tarn department of southern France's Occitanie region, on the banks of the Tarn River. Its brick-built old town and cathedral form the Cité Épiscopale, a UNESCO World Heritage Site."
+    description: "The capital of France, in the Île-de-France region on the banks of the Seine River. Home to global landmarks like the Eiffel Tower, Notre-Dame, and the Louvre, and one of the most visited cities in the world."
   - id: limoges-fr
     name: "Limoges, France"
     country: "France"
     flag: "🇫🇷"
     lat: 45.8586117
     lng: 1.1494863
-    description: "A city in the Tarn department of southern France's Occitanie region, on the banks of the Tarn River. Its brick-built old town and cathedral form the Cité Épiscopale, a UNESCO World Heritage Site."
+    description: "A city in the Haute-Vienne department of France's Nouvelle-Aquitaine region, on the banks of the Vienne River. Renowned since the 18th century for its fine porcelain."
   - id: albi-fr
     name: "Albi, France"
     country: "France"
@@ -305,4 +305,22 @@ visits:
     end: ""
     label: ""
     current: true
+    blurb: ""
+
+  - id: limoges-2026
+    location_id: limoges-fr
+    type: rental
+    start: "2026-07-01"
+    end: "2026-07-31"
+    label: ""
+    current: false
+    blurb: ""
+
+  - id: paris-2026
+    location_id: paris-fr
+    type: sit
+    start: "2026-07-01"
+    end: ""
+    label: ""
+    current: false
     blurb: ""
