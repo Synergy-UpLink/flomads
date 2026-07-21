@@ -15,6 +15,20 @@
 #                 that belongs on the visit's `blurb` instead)
 
 locations:
+  - id: paris-fr
+    name: "Paris, France"
+    country: "France"
+    flag: "🇫🇷"
+    lat: 48.8589385
+    lng: 2.264634
+    description: "A city in the Tarn department of southern France's Occitanie region, on the banks of the Tarn River. Its brick-built old town and cathedral form the Cité Épiscopale, a UNESCO World Heritage Site."
+  - id: limoges-fr
+    name: "Limoges, France"
+    country: "France"
+    flag: "🇫🇷"
+    lat: 45.8586117
+    lng: 1.1494863
+    description: "A city in the Tarn department of southern France's Occitanie region, on the banks of the Tarn River. Its brick-built old town and cathedral form the Cité Épiscopale, a UNESCO World Heritage Site."
   - id: albi-fr
     name: "Albi, France"
     country: "France"
@@ -253,7 +267,7 @@ visits:
     type: sit
     start: "2025-12-01"
     end: "2025-12-31"
-    label: "2025 (two stays)"
+    label: ""
     current: false
     blurb: "A homestead in the middle of the city. Galadriel was the primary responsibility, but we also took care of ducks, chickens, cows, and snakes."
 
