@@ -1,0 +1,326 @@
+# ── Locations ────────────────────────────────────────────────
+# One entry per physical place
+# Fields:
+#   id:           unique slug
+#   name:         display name (kept intentionally general in a
+#                 couple of spots — e.g. "Space Coast, FL" instead
+#                 of the exact town — to avoid pinpointing exactly
+#                 where homeowners live)
+#   country:      country name
+#   flag:         emoji flag
+#   lat/lng:      coordinates, used by the map marker
+#   description:  general geographic description of the PLACE
+#                 itself (facts about the location — not a
+#                 personal account of a specific stay there;
+#                 that belongs on the visit's `blurb` instead)
+
+locations:
+  - id: paris-fr
+    name: "Paris, France"
+    country: "France"
+    flag: "🇫🇷"
+    lat: 48.8589385
+    lng: 2.264634
+    description: "The capital of France, in the Île-de-France region on the banks of the Seine River. Home to global landmarks like the Eiffel Tower, Notre-Dame, and the Louvre, and one of the most visited cities in the world."
+  - id: limoges-fr
+    name: "Limoges, France"
+    country: "France"
+    flag: "🇫🇷"
+    lat: 45.8400687
+    lng: 1.2550871
+    description: "A city in the Haute-Vienne department of France's Nouvelle-Aquitaine region, on the banks of the Vienne River. Renowned since the 18th century for its fine porcelain."
+  - id: albi-fr
+    name: "Albi, France"
+    country: "France"
+    flag: "🇫🇷"
+    lat: 43.8918908
+    lng: 5.7282172
+    description: "A city in the Tarn department of southern France's Occitanie region, on the banks of the Tarn River. Its brick-built old town and cathedral form the Cité Épiscopale, a UNESCO World Heritage Site."
+
+  - id: south-benfleet-uk
+    name: "South Benfleet"
+    country: "England, UK"
+    flag: "🇬🇧"
+    lat: 51.5604991
+    lng: 0.5389142
+    description: "A town in the Castle Point district of Essex, England, on the edge of the Thames Estuary marshes northeast of London."
+
+  - id: romford-uk
+    name: "Romford"
+    country: "England, UK"
+    flag: "🇬🇧"
+    lat: 51.57462
+    lng: 0.1845609
+    description: "A town in the London Borough of Havering, on the eastern edge of Greater London — historically a market town, now a suburban hub with rail links into central London."
+
+  - id: albrighton-uk
+    name: "Albrighton, Shropshire"
+    country: "England, UK"
+    flag: "🇬🇧"
+    lat: 52.6353685
+    lng: -2.2781400
+    description: "A village in Shropshire, England, a few miles northeast of Telford and Wolverhampton in the West Midlands countryside."
+
+  - id: colorado-springs-us
+    name: "Colorado Springs, CO"
+    country: "United States"
+    flag: "🇺🇸"
+    lat: 38.8756732
+    lng: -104.9168954
+    description: "A city in El Paso County, Colorado, at the eastern foot of Pikes Peak in the Rocky Mountains, roughly 60 miles south of Denver."
+
+  - id: cancun-mx
+    name: "Cancun, MX"
+    country: "Mexico"
+    flag: "🇲🇽"
+    lat: 21.1230253
+    lng: -86.9388049
+    description: "A resort city on the northeastern tip of Mexico's Yucatán Peninsula, in Quintana Roo, fronting the Caribbean Sea."
+
+  - id: todos-santos-mx
+    name: "Todos Santos, Baja California Sur"
+    country: "Mexico"
+    flag: "🇲🇽"
+    lat: 23.4594298
+    lng: -110.2566555
+    description: "A small town on the Pacific coast of the Baja California Sur peninsula, midway between Cabo San Lucas and La Paz — designated a Pueblo Mágico for its arts and surf culture."
+
+  - id: cuenca-ec
+    name: "Cuenca, EC"
+    country: "Ecuador"
+    flag: "🇪🇨"
+    lat: -2.8922685
+    lng: -79.0305797
+    description: "A colonial-era city in the Andean highlands of Ecuador's Azuay Province, roughly 2,500 meters above sea level. Its historic center is a UNESCO World Heritage Site."
+
+  - id: santa-maria-de-dota-cr
+    name: "Santa María de Dota"
+    country: "Costa Rica"
+    flag: "🇨🇷"
+    lat: 9.5850098
+    lng: -84.0381806
+    description: "A mountain town in Costa Rica's Los Santos region, in the Talamanca foothills south of San José, known as one of the country's premier coffee-growing areas."
+
+  - id: exuma-bs
+    name: "Exuma, BS"
+    country: "Bahamas"
+    flag: "🇧🇸"
+    lat: 24.1137938
+    lng: -76.7958054
+    description: "An archipelago in the Bahamas southeast of Nassau, made up of over 365 small cays known for shallow turquoise water and the swimming pigs of Big Major Cay."
+
+  - id: la-fortuna-cr
+    name: "La Fortuna, CR"
+    country: "Costa Rica"
+    flag: "🇨🇷"
+    lat: 10.4731966
+    lng: -85.0506821
+    description: "A town in Costa Rica's Alajuela Province, at the base of the (currently dormant) Arenal Volcano in the country's northern lowlands."
+
+  - id: manchester-vt
+    name: "Manchester, VT"
+    country: "United States"
+    flag: "🇺🇸"
+    lat: 43.1656731
+    lng: -73.1095669
+    description: "A town in Bennington County, Vermont, in the Green Mountains, historically a resort town for hiking, skiing, and fly-fishing."
+
+  - id: space-coast-fl
+    name: "Space Coast, FL"
+    country: "United States"
+    flag: "🇺🇸"
+    lat: 28.1924975
+    lng: -80.5677636
+    description: "The stretch of Florida's Atlantic coast in Brevard County, named for its proximity to Kennedy Space Center and Cape Canaveral."
+
+  - id: fort-lauderdale-fl
+    name: "Fort Lauderdale, FL"
+    country: "United States"
+    flag: "🇺🇸"
+    lat: 26.1413462
+    lng: -80.2322054
+    description: "A city on Florida's southeastern coast in Broward County, known for its extensive canal system and marine industry — a common jumping-off point for the Bahamas."
+
+# ── Visits ───────────────────────────────────────────────────
+# Flat list (not nested under locations) so it can be sorted
+# chronologically regardless of entry order, and so a location
+# can rack up multiple non-contiguous visits over time.
+#
+# Fields:
+#   id:           unique slug. Sit-type visits use the SAME id as
+#                 the matching entry in sits.yml — that shared id
+#                 IS the foreign key, no separate field needed.
+#   location_id:  which location (see above)
+#   type:         sit | rental | sailing | vacation | home_base
+#                 (freeform — add types as needed)
+#   start / end:  YYYY-MM-DD when known. Leave "" if unknown/TBD.
+#   label:        optional human-readable override for display
+#                 (e.g. "2025 (two stays)") when start/end alone
+#                 doesn't tell the right story. Falls back to
+#                 start/end if blank.
+#   current:      true = this is the present-day visit
+#   blurb:        optional short note about this specific stay
+
+visits:
+
+  - id: colorado-springs-home
+    location_id: colorado-springs-us
+    type: home_base
+    start: "2009-01-01"
+    end: "2019-01-01"
+    label: "2009 - 2019"
+    current: false
+    blurb: "A decade in one place before the leap into full-time travel."
+
+  - id: cancun-mx-visit-2018
+    location_id: cancun-mx
+    type: vacation
+    start: "2018-04-01"
+    end: "2018-05-01"
+    label: ""  # TODO: confirm type + exact dates
+    current: false
+    blurb: ""
+
+  - id: cancun-mx-visit-2022
+    location_id: cancun-mx
+    type: vacation
+    start: "2022-08-01"
+    end: "2022-09-01"
+    label: ""  # TODO: confirm type + exact dates
+    current: false
+    blurb: ""
+
+  - id: fort-lauderdale-fl-2019
+    location_id: fort-lauderdale-fl
+    type: sailing
+    start: "2019-09-01"
+    end: "2020-04-01"
+    label: ""
+    current: false
+    blurb: ""
+
+  - id: space-coast-fl-2020
+    location_id: space-coast-fl
+    type: sailing
+    start: "2020-04-01"
+    end: "2024-01-01"
+    label: ""
+    current: false
+    blurb: ""
+
+  - id: exuma-bs-2023
+    location_id: exuma-bs
+    type: sailing
+    start: "2022-12-01"
+    end: "2023-12-01"
+    label: "2023"
+    current: false
+    blurb: "A year living aboard Encantado in the Bahamas — glassy flats, absurd stars, and the high point of the liveaboard years."
+
+  - id: cuenca-ec-2024
+    location_id: cuenca-ec
+    type: rental
+    start: "2024-06-01"
+    end: "2024-12-01"
+    label: ""
+    current: false
+    blurb: "Five months of remote work and the first real 'maybe we could live somewhere like this' feeling."
+
+  - id: la-fortuna-cr-2025
+    location_id: la-fortuna-cr
+    type: rental
+    start: "2025-02-01"
+    end: "2025-5-01"
+    label: "" 
+    current: false
+    blurb: ""
+
+  - id: santa-maria-dota-2025
+    location_id: santa-maria-de-dota-cr
+    type: sit
+    start: "2025-04-01"
+    end: "2025-08-01"
+    label: "Our First Official Sit!"
+    current: false
+    blurb: ""
+
+  - id: todos-santos-2025
+    location_id: todos-santos-mx
+    type: sit
+    start: "2025-07-01"
+    end: "2025-10-01"
+    label: "Baja Summer"
+    current: false
+    blurb: ""
+
+  - id: manchester-vt-2025
+    location_id: manchester-vt
+    type: sit
+    start: "2025-09-01"
+    end: "2025-12-01"
+    label: ""
+    current: false
+    blurb: ""
+
+  - id: space-coast-fl-2025
+    location_id: space-coast-fl
+    type: sit
+    start: "2025-12-01"
+    end: "2025-12-31"
+    label: ""
+    current: false
+    blurb: "A homestead in the middle of the city. Galadriel was the primary responsibility, but we also took care of ducks, chickens, cows, and snakes."
+
+  - id: albrighton-2026
+    location_id: albrighton-uk
+    type: sit
+    start: "2026-02-01"
+    end: "2026-06-01"
+    label: ""
+    current: false
+    blurb: ""
+
+  - id: romford-2026
+    location_id: romford-uk
+    type: sit
+    start: "2026-06-01"
+    end: "2026-06-30"
+    label: ""
+    current: false
+    blurb: "Our first short-term sit"
+
+  - id: south-benfleet-2026
+    location_id: south-benfleet-uk
+    type: sit
+    start: "2026-06-01"
+    end: "2026-06-30"
+    label: ""
+    current: false
+    blurb: ""
+
+  - id: albi-2026
+    location_id: albi-fr
+    type: sit
+    start: "2026-06-01"
+    end: "2026-07-31"
+    label: ""
+    current: false
+    blurb: ""
+
+  - id: limoges-2026
+    location_id: limoges-fr
+    type: rental
+    start: "2026-07-31"
+    end: "2026-08-10"
+    label: ""
+    current: true
+    blurb: ""
+
+  - id: paris-2026
+    location_id: paris-fr
+    type: sit
+    start: "2026-07-01"
+    end: ""
+    label: ""
+    current: false
+    blurb: ""

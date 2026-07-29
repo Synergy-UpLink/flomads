@@ -39,7 +39,7 @@ Pricklesworth III."
   <div class="container">
     <h2 class="section-title center">Meet the Crew</h2>
     <div class="crew-grid">
-      <div class="crew-card">
+      <div class="crew-card" id="Jordan">
         <div class="crew-avatar" style="background: linear-gradient(135deg, #1a3a5c, #2e6a9e);">
           <img src="{{ '/assets/images/jordan.png' | relative_url }}" alt="Jordan" />
 
@@ -58,11 +58,11 @@ Pricklesworth III."
         </div>
       </div>
 
-      <div class="crew-card featured-card">
+      <div class="crew-card featured-card" id="Christine">
         <div class="crew-avatar" style="background: linear-gradient(135deg, #5c2d1a, #9e5a2e);">
           <img src="{{ '/assets/images/admiral.png' | relative_url }}" alt="The Admiral" />
         </div>
-        <h3>The Admiral</h3>
+        <h3>Christine - The Admiral</h3>
         <p class="crew-role">Artist · Carver · Copy Editor · Digital Designer</p>
         <p>Where there is wood, stone, or an empty jar, there will eventually be art. The Admiral carves animals and
           etches glass at every stop, leaving small sentinels behind — little guardians in gardens and on bookshelves
@@ -76,7 +76,7 @@ Pricklesworth III."
         </div>
       </div>
 
-      <div class="crew-card">
+      <div class="crew-card" id="Henry">
         <div class="crew-avatar henry-avatar">
           <img src="{{ '/assets/images/henry-profile.png' | relative_url }}" alt="Henry S. Pricklesworth III" />
         </div>
@@ -103,7 +103,7 @@ Pricklesworth III."
   <div class="container">
     <h2 class="section-title center">Where We've Been</h2>
     <div class="timeline">
-      <div class="tl-item">
+      <div class="tl-item" data-locations="colorado-springs-us">
         <div class="tl-dot"></div>
         <div class="tl-content">
           <span class="tl-date">2009-2019</span>
@@ -112,16 +112,17 @@ Pricklesworth III."
             world looked like when home wasn't fixed to one address.</p>
         </div>
       </div>
-      <div class="tl-item">
+      <div class="tl-item" data-locations="fort-lauderdale-fl">
         <div class="tl-dot"></div>
         <div class="tl-content">
           <span class="tl-date">2019-2024</span>
           <h4>The Liveaboard Years</h4>
           <p>A 36-foot ketch became home. Florida anchorages, Caribbean flats, the rhythm of tides and wind. They
-            learned that the ocean is patient and unforgiving in equal measure. At sea-level, sunrises and sunsets are equally awe-inspiring.</p>
+            learned that the ocean is patient and unforgiving in equal measure. At sea-level, sunrises and sunsets are
+            equally awe-inspiring.</p>
         </div>
       </div>
-      <div class="tl-item">
+      <div class="tl-item" data-locations="exuma-bs">
         <div class="tl-dot"></div>
         <div class="tl-content">
           <span class="tl-date">2023</span>
@@ -131,7 +132,7 @@ Pricklesworth III."
             Earth's most beautiful places long enough to understand why.</p>
         </div>
       </div>
-      <div class="tl-item">
+      <div class="tl-item" data-locations="cuenca-ec">
         <div class="tl-dot"></div>
         <div class="tl-content">
 
@@ -143,7 +144,7 @@ Pricklesworth III."
             Spanish improved. The dream of a finca took root.</p>
         </div>
       </div>
-      <div class="tl-item">
+      <div class="tl-item" data-locations="la-fortuna-cr,santa-maria-de-dota-cr,todos-santos-mx">
         <div class="tl-dot"></div>
         <div class="tl-content">
           <span class="tl-date">2025</span>
@@ -152,7 +153,7 @@ Pricklesworth III."
             Mexico showed desert coastal living. Each place left them with carvings given and memories earned.</p>
         </div>
       </div>
-      <div class="tl-item">
+      <div class="tl-item" data-locations="manchester-vt,space-coast-fl">
         <div class="tl-dot"></div>
         <div class="tl-content">
           <span class="tl-date">2025-2026</span>
@@ -163,14 +164,26 @@ Pricklesworth III."
             remote income that lets them stay in each place long enough to truly belong.</p>
         </div>
       </div>
-      <div class="tl-item active">
+      <div class="tl-item" data-locations="albrighton-uk,romford-uk,south-benfleet-uk">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <span class="tl-date">2026</span>
+          <h4>England</h4>
+          <p>The English countryside, caring for dogs, working remotely, and walking to a proper pub and
+            figuring out what a carvery is. This is what slow travel looks like: no rushing, no checking boxes, just
+            living in a place and letting it become part of the story.
+          </p>
+        </div>
+      </div>
+      <div class="tl-item active" data-locations="albi-fr,limoges-fr,paris-fr">
         <div class="tl-dot"></div>
         <div class="tl-content">
           <span class="tl-date">2026 - </span>
-          <h4>England & Beyond</h4>
-          <p>Currently in the English countryside, caring for dogs, working remotely, and walking to a proper pub and
-            figuring out what a carvery is. This is what slow travel looks like: no rushing, no checking boxes, just
-            living in a place and letting it become part of the story. What comes next? Still unwritten, still calling.
+          <h4>France</h4>
+          <p>From the English countryside to the south of France: a cat sit in Albi traded dog walks for a lazy
+            feline routine and a front-row seat to the pink-brick Cité Épiscopale. Up next, a couple of cat sits in
+            Paris — swapping village mornings for the Métro, the Seine, and considerably more
+            reasonable temperatures. What comes next? Still unwritten, still calling.
           </p>
         </div>
       </div>
