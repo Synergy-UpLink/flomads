@@ -48,6 +48,9 @@ platforms:
 sits:
   - id: albi-2026
     owners: "Lucas & Alionka"
+    testimonial:
+      quote: "Christine et Jordan sont des homesitters très discrets mais très fiables. La maison était niquel est ils ont pris soin de Mimi! Merci à vous 2!    (Translated) Christine and Jordan are very discreet but very reliable house-sitters. The house was spotless and they took great care of Mimi! Thank you both!"
+      name: "Lucas"
     photos: [albi/albi.jpg]
     animals:
       - name: "Mimi"
@@ -116,6 +119,24 @@ sits:
         care_notes: "Fed twice daily with Trixie. Easy on-leash. Enjoys a long sniff-walk more than a fast one."
         challenges: "Buddy was previously scheduled for major dental work while we were there. We took him to the vet, handled the special diet, medication, and aftercare."
 
+  - id: manchester-vt-2025
+    owners: "Joe & Caren"
+    testimonial:
+      quote: "Christine and Jordan stayed with our pets for two months and they were fantastic! We loved getting the wonderful photos of all their hiking adventures with June Bug. They left the house in beautiful condition and did a great job helping the property transition from fall to winter. I highly recommend them and we hope to have them back for another stay."
+      name: "Joe & Caren"
+    photos: ["manchester/manchester-leafs.jpg","manchester/manchester-snow.jpg"]
+    animals:
+      - name: "June"
+        species: "Dog"
+        breed: "Chihuahua Mix"
+        age: "7 years (at time of sit)"
+        photo: "manchester/june.jpg"
+      - name: "Mr. Stone"
+        species: "Cat"
+        breed: "Barn Cat (Domestic Shorthair)"
+        age: "Unknown (at time of sit)"
+        photo: "manchester/mrstone.jpg"     
+
   - id: space-coast-fl-2025
     photos: [space-coast/space-coast.jpg]
     animals:
@@ -145,24 +166,6 @@ sits:
         age: "9 years"
         photo: "todos-santos/ruby.jpg"
         notes: ""
-
-  - id: manchester-vt-2025
-    owners: "Joe & Caren"
-    testimonial:
-      quote: "Christine and Jordan stayed with our pets for two months and they were fantastic! We loved getting the wonderful photos of all their hiking adventures with June Bug. They left the house in beautiful condition and did a great job helping the property transition from fall to winter. I highly recommend them and we hope to have them back for another stay."
-      name: "Joe & Caren"
-    photos: ["manchester/manchester-leafs.jpg","manchester/manchester-snow.jpg"]
-    animals:
-      - name: "June"
-        species: "Dog"
-        breed: "Chihuahua Mix"
-        age: "7 years (at time of sit)"
-        photo: "manchester/june.jpg"
-      - name: "Mr. Stone"
-        species: "Cat"
-        breed: "Barn Cat (Domestic Shorthair)"
-        age: "Unknown (at time of sit)"
-        photo: "manchester/mrstone.jpg"     
 
   - id: santa-maria-dota-2025
     owners: "Tom & Alethia"

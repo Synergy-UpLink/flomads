@@ -26,8 +26,8 @@ locations:
     name: "Limoges, France"
     country: "France"
     flag: "🇫🇷"
-    lat: 45.8586117
-    lng: 1.1494863
+    lat: 45.8400687
+    lng: 1.2550871
     description: "A city in the Haute-Vienne department of France's Nouvelle-Aquitaine region, on the banks of the Vienne River. Renowned since the 18th century for its fine porcelain."
   - id: albi-fr
     name: "Albi, France"
@@ -302,18 +302,18 @@ visits:
     location_id: albi-fr
     type: sit
     start: "2026-06-01"
-    end: ""
+    end: "2026-07-31"
     label: ""
-    current: true
+    current: false
     blurb: ""
 
   - id: limoges-2026
     location_id: limoges-fr
     type: rental
-    start: "2026-07-01"
-    end: "2026-07-31"
+    start: "2026-07-31"
+    end: "2026-08-10"
     label: ""
-    current: false
+    current: true
     blurb: ""
 
   - id: paris-2026
