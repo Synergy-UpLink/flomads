@@ -143,6 +143,9 @@ Two lists:
   `flag`, `lat`, `lng`, and `description` (facts about the place itself, not a
   personal account of a stay). Names are kept deliberately general in places
   (e.g. "Space Coast, FL") so homeowners' exact locations aren't pinpointed.
+  `lat` / `lng` are kept to two decimal places (about 1 km) for the same
+  reason; the coordinates are published in the page source, so use a town or
+  city centre, never an exact address.
 - `visits` — a flat, chronological list of stays: `id`, `location_id` (must
   match a `locations` id), `type` (`sit`, `rental`, `sailing`, `vacation`,
   `home_base`; freeform), `start` / `end` (`YYYY-MM-DD`, or `""` if unknown),

@@ -8,7 +8,9 @@
 #                 where homeowners live)
 #   country:      country name
 #   flag:         emoji flag
-#   lat/lng:      coordinates, used by the map marker
+#   lat/lng:      coordinates, used by the map marker. Kept to 2 decimal
+#                 places (about 1 km) on purpose: the map is public, so
+#                 use a town or city centre, never an exact address
 #   description:  general geographic description of the PLACE
 #                 itself (facts about the location — not a
 #                 personal account of a specific stay there;
@@ -19,156 +21,152 @@ locations:
     name: "Hà Nội, Vietnam"
     country: "Vietnam"
     flag: "🇻🇳"
-    lat: 21.0783242
-    lng: 105.8137701
-    description: "West Lake is a serene freshwater lake in Hanoi, Vietnam, surrounded by historic pagodas, upscale neighborhoods, and scenic walking paths. It serves as a cultural and recreational hub, offering boat rides, lakeside cafes, and stunning views of the city's skyline."
+    lat: 21.08
+    lng: 105.81
+    description: "The capital of Vietnam, in the north of the country on the Red River delta. A city of more than a thousand years, it combines the narrow streets of the Old Quarter, French colonial boulevards, and centuries-old temples and pagodas with a cityscape of lakes, including Hoàn Kiếm Lake in the centre and the much larger West Lake (Hồ Tây) to the north. Known for its street food, egg coffee, and dense motorbike traffic."
+
   - id: bangkok-thailand
     name: "Bangkok, Thailand"
     country: "Thailand"
     flag: "🇹🇭"
-    lat: 13.7541445
-    lng: 100.5723513
+    lat: 13.75
+    lng: 100.57
     description: "Bangkok, the capital of Thailand, is a vibrant metropolis known for its ornate shrines, bustling street life, and floating markets along the Chao Phraya River. It serves as a major gateway to Southeast Asia, blending rich cultural heritage with modern urban energy."
-  - id: savigny-le-temple-fr
-    name: "Savigny-le-Temple, France"
-    country: "France"
-    flag: "🇫🇷"
-    lat: 48.5846941
-    lng: 2.5288352
-    description: "Savigny-le-Temple is a commune in the Seine-et-Marne department, about 35 kilometers southeast of Paris, France. It is part of the Sénart urban area and features residential neighborhoods, green spaces, and convenient rail connections to the capital. The town has grown considerably since the 20th century while retaining elements of its older village heritage."
+
   - id: ris-orangis-fr
     name: "Ris-Orangis, France"
     country: "France"
     flag: "🇫🇷"
-    lat: 48.6457133
-    lng: 2.3898276
+    lat: 48.65
+    lng: 2.39
     description: "Ris-Orangis is a commune in the Essonne department, about 25 kilometers southeast of Paris and part of the Paris metropolitan area. It is known for its residential neighborhoods, parks, and transport links. The town combines suburban amenities with a long history dating back to the medieval period."
-    
+
   - id: paris-fr
     name: "Paris, France"
     country: "France"
     flag: "🇫🇷"
-    lat: 48.8588549
-    lng: 2.3470341
+    lat: 48.86
+    lng: 2.35
     description: "The capital of France, in the Île-de-France region on the banks of the Seine River. Home to global landmarks like the Eiffel Tower, Notre-Dame, and the Louvre, and one of the most visited cities in the world."
+
   - id: limoges-fr
     name: "Limoges, France"
     country: "France"
     flag: "🇫🇷"
-    lat: 45.8400687
-    lng: 1.2550871
+    lat: 45.84
+    lng: 1.26
     description: "A city in the Haute-Vienne department of France's Nouvelle-Aquitaine region, on the banks of the Vienne River. Renowned since the 18th century for its fine porcelain."
 
   - id: albi-fr
     name: "Albi, France"
     country: "France"
     flag: "🇫🇷"
-    lat: 43.8918908
-    lng: 5.7282172
+    lat: 43.89
+    lng: 5.73
     description: "A city in the Tarn department of southern France's Occitanie region, on the banks of the Tarn River. Its brick-built old town and cathedral form the Cité Épiscopale, a UNESCO World Heritage Site."
 
   - id: south-benfleet-uk
     name: "South Benfleet"
     country: "England, UK"
     flag: "🇬🇧"
-    lat: 51.5604991
-    lng: 0.5389142
+    lat: 51.56
+    lng: 0.54
     description: "A town in the Castle Point district of Essex, England, on the edge of the Thames Estuary marshes northeast of London."
 
   - id: romford-uk
     name: "Romford"
     country: "England, UK"
     flag: "🇬🇧"
-    lat: 51.57462
-    lng: 0.1845609
+    lat: 51.57
+    lng: 0.18
     description: "A town in the London Borough of Havering, on the eastern edge of Greater London — historically a market town, now a suburban hub with rail links into central London."
 
   - id: albrighton-uk
     name: "Albrighton, Shropshire"
     country: "England, UK"
     flag: "🇬🇧"
-    lat: 52.6353685
-    lng: -2.2781400
+    lat: 52.64
+    lng: -2.28
     description: "A village in Shropshire, England, a few miles northeast of Telford and Wolverhampton in the West Midlands countryside."
 
   - id: colorado-springs-us
     name: "Colorado Springs, CO"
     country: "United States"
     flag: "🇺🇸"
-    lat: 38.8756732
-    lng: -104.9168954
+    lat: 38.88
+    lng: -104.92
     description: "A city in El Paso County, Colorado, at the eastern foot of Pikes Peak in the Rocky Mountains, roughly 60 miles south of Denver."
 
   - id: cancun-mx
     name: "Cancun, MX"
     country: "Mexico"
     flag: "🇲🇽"
-    lat: 21.1230253
-    lng: -86.9388049
+    lat: 21.12
+    lng: -86.94
     description: "A resort city on the northeastern tip of Mexico's Yucatán Peninsula, in Quintana Roo, fronting the Caribbean Sea."
 
   - id: todos-santos-mx
     name: "Todos Santos, Baja California Sur"
     country: "Mexico"
     flag: "🇲🇽"
-    lat: 23.4594298
-    lng: -110.2566555
+    lat: 23.46
+    lng: -110.26
     description: "A small town on the Pacific coast of the Baja California Sur peninsula, midway between Cabo San Lucas and La Paz — designated a Pueblo Mágico for its arts and surf culture."
 
   - id: cuenca-ec
     name: "Cuenca, EC"
     country: "Ecuador"
     flag: "🇪🇨"
-    lat: -2.8922685
-    lng: -79.0305797
+    lat: -2.89
+    lng: -79.03
     description: "A colonial-era city in the Andean highlands of Ecuador's Azuay Province, roughly 2,500 meters above sea level. Its historic center is a UNESCO World Heritage Site."
 
   - id: santa-maria-de-dota-cr
     name: "Santa María de Dota"
     country: "Costa Rica"
     flag: "🇨🇷"
-    lat: 9.5850098
-    lng: -84.0381806
+    lat: 9.59
+    lng: -84.04
     description: "A mountain town in Costa Rica's Los Santos region, in the Talamanca foothills south of San José, known as one of the country's premier coffee-growing areas."
 
   - id: exuma-bs
     name: "Exuma, BS"
     country: "Bahamas"
     flag: "🇧🇸"
-    lat: 24.1137938
-    lng: -76.7958054
+    lat: 24.11
+    lng: -76.80
     description: "An archipelago in the Bahamas southeast of Nassau, made up of over 365 small cays known for shallow turquoise water and the swimming pigs of Big Major Cay."
 
   - id: la-fortuna-cr
     name: "La Fortuna, CR"
     country: "Costa Rica"
     flag: "🇨🇷"
-    lat: 10.4731966
-    lng: -85.0506821
+    lat: 10.47
+    lng: -85.05
     description: "A town in Costa Rica's Alajuela Province, at the base of the (currently dormant) Arenal Volcano in the country's northern lowlands."
 
   - id: manchester-vt
     name: "Manchester, VT"
     country: "United States"
     flag: "🇺🇸"
-    lat: 43.1656731
-    lng: -73.1095669
+    lat: 43.17
+    lng: -73.11
     description: "A town in Bennington County, Vermont, in the Green Mountains, historically a resort town for hiking, skiing, and fly-fishing."
 
   - id: space-coast-fl
     name: "Space Coast, FL"
     country: "United States"
     flag: "🇺🇸"
-    lat: 28.1924975
-    lng: -80.5677636
+    lat: 28.19
+    lng: -80.57
     description: "The stretch of Florida's Atlantic coast in Brevard County, named for its proximity to Kennedy Space Center and Cape Canaveral."
 
   - id: fort-lauderdale-fl
     name: "Fort Lauderdale, FL"
     country: "United States"
     flag: "🇺🇸"
-    lat: 26.1413462
-    lng: -80.2322054
+    lat: 26.14
+    lng: -80.23
     description: "A city on Florida's southeastern coast in Broward County, known for its extensive canal system and marine industry — a common jumping-off point for the Bahamas."
 
 # ── Visits ───────────────────────────────────────────────────
@@ -260,8 +258,8 @@ visits:
     location_id: la-fortuna-cr
     type: rental
     start: "2025-02-01"
-    end: "2025-5-01"
-    label: "" 
+    end: "2025-05-01"
+    label: ""
     current: false
     blurb: ""
 
@@ -354,18 +352,30 @@ visits:
     label: ""
     current: false
     blurb: ""
+
   - id: ris-orangis-2026
     location_id: ris-orangis-fr
     type: rental
     start: "2026-08-01"
     end: "2026-08-30"
+    label: ""
+    current: false
+    blurb: ""
+
   - id: bangkok-2026
     location_id: bangkok-thailand
     type: rental
     start: "2026-09-01"
     end: "2026-10-31"
+    label: ""
+    current: false
+    blurb: ""
+
   - id: hanoi-2026
     location_id: hanoi-vietnam
     type: rental
     start: "2026-11-01"
+    end: ""
+    label: ""
     current: true
+    blurb: ""
