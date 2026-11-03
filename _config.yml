@@ -25,11 +25,6 @@ defaults:
     values:
       layout: "default"
   - scope:
-      path: "sit-with-us"
-    values:
-      sitemap: false
-      robots: "noindex, nofollow"
-  - scope:
       path: ""
       type: "blog"
     values:
@@ -43,10 +38,6 @@ defaults:
       layout: "post"
       collection_label: "Articles"
       collection_path: "/articles/"
-
-# Exclude hidden reference page from sitemap
-defaults_sitemap_exclude:
-  - sit-with-us
 
 # Build settings
 markdown: kramdown

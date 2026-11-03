@@ -1,4 +1,6 @@
+---
+---
 User-agent: *
-Disallow: /sit-with-us/
+Allow: /
 
 Sitemap: {{ site.url }}/sitemap.xml
