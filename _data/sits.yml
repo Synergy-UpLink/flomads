@@ -46,6 +46,17 @@ platforms:
 #                          from the other animal fields at display time.
 
 sits:
+  - id: paris-2026
+    owners: "Mikalla"
+    testimonial:
+      quote: "Christine and Jordan have been pet sitting our 11 years old cat and taking care of our many plants. They stayed in our home for 3 weeks and left it clean and tidy with a happy cat and plants in full bloom. They have been excellent pet sitters, reliable, friendly and always available when needed. We spent great holidays knowing our cat and home were in very good hands. I would definitely welcome them again."
+      name: "Mikalla"
+    animals:
+      - name: "Bouli"
+        species: "Cat"
+        breed: "Orange"
+        photo: "paris/bouli.jpg"
+        notes: "An orange cat"
   - id: albi-2026
     owners: "Lucas & Alionka"
     testimonial:

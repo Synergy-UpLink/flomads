@@ -15,12 +15,41 @@
 #                 that belongs on the visit's `blurb` instead)
 
 locations:
+  - id: hanoi-vietnam
+    name: "Hà Nội, Vietnam"
+    country: "Vietnam"
+    flag: "🇻🇳"
+    lat: 21.0783242
+    lng: 105.8137701
+    description: "West Lake is a serene freshwater lake in Hanoi, Vietnam, surrounded by historic pagodas, upscale neighborhoods, and scenic walking paths. It serves as a cultural and recreational hub, offering boat rides, lakeside cafes, and stunning views of the city's skyline."
+  - id: bangkok-thailand
+    name: "Bangkok, Thailand"
+    country: "Thailand"
+    flag: "🇹🇭"
+    lat: 13.7541445
+    lng: 100.5723513
+    description: "Bangkok, the capital of Thailand, is a vibrant metropolis known for its ornate shrines, bustling street life, and floating markets along the Chao Phraya River. It serves as a major gateway to Southeast Asia, blending rich cultural heritage with modern urban energy."
+  - id: savigny-le-temple-fr
+    name: "Savigny-le-Temple, France"
+    country: "France"
+    flag: "🇫🇷"
+    lat: 48.5846941
+    lng: 2.5288352
+    description: "Savigny-le-Temple is a commune in the Seine-et-Marne department, about 35 kilometers southeast of Paris, France. It is part of the Sénart urban area and features residential neighborhoods, green spaces, and convenient rail connections to the capital. The town has grown considerably since the 20th century while retaining elements of its older village heritage."
+  - id: ris-orangis-fr
+    name: "Ris-Orangis, France"
+    country: "France"
+    flag: "🇫🇷"
+    lat: 48.6457133
+    lng: 2.3898276
+    description: "Ris-Orangis is a commune in the Essonne department, about 25 kilometers southeast of Paris and part of the Paris metropolitan area. It is known for its residential neighborhoods, parks, and transport links. The town combines suburban amenities with a long history dating back to the medieval period."
+    
   - id: paris-fr
     name: "Paris, France"
     country: "France"
     flag: "🇫🇷"
-    lat: 48.8589385
-    lng: 2.264634
+    lat: 48.8588549
+    lng: 2.3470341
     description: "The capital of France, in the Île-de-France region on the banks of the Seine River. Home to global landmarks like the Eiffel Tower, Notre-Dame, and the Louvre, and one of the most visited cities in the world."
   - id: limoges-fr
     name: "Limoges, France"
@@ -29,6 +58,7 @@ locations:
     lat: 45.8400687
     lng: 1.2550871
     description: "A city in the Haute-Vienne department of France's Nouvelle-Aquitaine region, on the banks of the Vienne River. Renowned since the 18th century for its fine porcelain."
+
   - id: albi-fr
     name: "Albi, France"
     country: "France"
@@ -313,14 +343,29 @@ visits:
     start: "2026-07-31"
     end: "2026-08-10"
     label: ""
-    current: true
+    current: false
     blurb: ""
 
   - id: paris-2026
     location_id: paris-fr
     type: sit
     start: "2026-07-01"
-    end: ""
+    end: "2026-08-01"
     label: ""
     current: false
     blurb: ""
+  - id: ris-orangis-2026
+    location_id: ris-orangis-fr
+    type: rental
+    start: "2026-08-01"
+    end: "2026-08-30"
+  - id: bangkok-2026
+    location_id: bangkok-thailand
+    type: rental
+    start: "2026-09-01"
+    end: "2026-10-31"
+  - id: hanoi-2026
+    location_id: hanoi-vietnam
+    type: rental
+    start: "2026-11-01"
+    current: true
