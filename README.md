@@ -13,7 +13,6 @@ Pages by a GitHub Actions workflow.
 flomads/
 ├── _config.yml               # Site config, collections, front-matter defaults
 ├── Gemfile                   # jekyll + sitemap, feed, seo-tag, kramdown-parser-gfm
-├── Dockerfile                # Local dev image (ruby:3.2-slim)
 ├── .devcontainer/            # VS Code dev container (expects image local-jekyll:latest)
 ├── .github/workflows/
 │   └── deploy.yml            # Build + deploy to GitHub Pages on push to main
@@ -54,13 +53,9 @@ flomads/
 Either use the dev container, or run Jekyll directly.
 
 **Dev container (VS Code):** the container uses an image tagged
-`local-jekyll:latest`, built from the `Dockerfile` in this repo:
-
-```
-docker build -t local-jekyll .
-```
-
-Then "Reopen in Container". On start it runs `bundle install` if needed and
+`local-jekyll:latest`. The repo does not include a Dockerfile for it, so the
+image must already exist on your machine before you "Reopen in Container".
+On start it runs `bundle install` if needed and
 serves the site on port 4000 with LiveReload (35729).
 
 **Directly:**
