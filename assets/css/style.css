@@ -774,6 +774,16 @@ em { font-style: italic; color: var(--gold-light); }
   margin-bottom: 0.8rem;
 }
 .location-block { border-color: rgba(201,146,42,0.3); background: rgba(201,146,42,0.06); }
+.location-block blockquote {
+  margin: 1rem 0 0;
+  padding-left: 1.2rem;
+  border-left: 2px solid var(--gold);
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--cream);
+}
+.location-block blockquote footer { margin-top: 0.5rem; font-size: 0.9rem; font-style: normal; opacity: 0.8; }
+.location-block blockquote cite { font-style: italic; }
 
 .now-sub-items { display: flex; flex-direction: column; gap: 1.2rem; }
 .now-sub { padding-bottom: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
