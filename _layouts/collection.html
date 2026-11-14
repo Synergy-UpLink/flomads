@@ -34,7 +34,7 @@ layout: default
     {% endif %}
 
     {% assign view = page.collection_view | default: 'grid' %}
-    <div class="collection-items l-{{ view }}" id="collection-items">
+    <div class="collection-items collection-{{ view }}" id="collection-items">
       {% for post in all_posts %}
         {% if view == 'list' %}
           {% include collection-row.html post=post %}
