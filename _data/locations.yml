@@ -22,6 +22,7 @@ locations:
     lat: 21.0783242
     lng: 105.8137701
     description: "The capital of Vietnam, in the north of the country on the Red River delta. A city of more than a thousand years, it combines the narrow streets of the Old Quarter, French colonial boulevards, and centuries-old temples and pagodas with a cityscape of lakes, including Hoàn Kiếm Lake in the centre and the much larger West Lake (Hồ Tây) to the north. Known for its street food, egg coffee, and dense motorbike traffic."
+    
   - id: bangkok-thailand
     name: "Bangkok, Thailand"
     country: "Thailand"
@@ -29,6 +30,7 @@ locations:
     lat: 13.7541445
     lng: 100.5723513
     description: "Bangkok, the capital of Thailand, is a vibrant metropolis known for its ornate shrines, bustling street life, and floating markets along the Chao Phraya River. It serves as a major gateway to Southeast Asia, blending rich cultural heritage with modern urban energy."
+
   - id: savigny-le-temple-fr
     name: "Savigny-le-Temple, France"
     country: "France"
@@ -36,6 +38,7 @@ locations:
     lat: 48.5846941
     lng: 2.5288352
     description: "Savigny-le-Temple is a commune in the Seine-et-Marne department, about 35 kilometers southeast of Paris, France. It is part of the Sénart urban area and features residential neighborhoods, green spaces, and convenient rail connections to the capital. The town has grown considerably since the 20th century while retaining elements of its older village heritage."
+
   - id: ris-orangis-fr
     name: "Ris-Orangis, France"
     country: "France"
@@ -51,6 +54,7 @@ locations:
     lat: 48.8588549
     lng: 2.3470341
     description: "The capital of France, in the Île-de-France region on the banks of the Seine River. Home to global landmarks like the Eiffel Tower, Notre-Dame, and the Louvre, and one of the most visited cities in the world."
+
   - id: limoges-fr
     name: "Limoges, France"
     country: "France"
