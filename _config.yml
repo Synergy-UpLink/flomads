@@ -1,5 +1,5 @@
 title: "The Flomads"
-tagline: "noMADS going with the FLO"
+tagline: "noMADS going with the FLOw"
 description: "Two humans, one pirate hedgehog, and the open road — living full-time across the globe one petsit at a time."
 url: "https://flomads.com"
 baseurl: ""
@@ -56,4 +56,14 @@ exclude:
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-feed
 
+# Atom feed for the blog collection.
+# jekyll-feed always builds a feed for the built-in "posts" collection, which this
+# site doesn't use, so that empty one is parked at /feed/posts.xml and the blog
+# collection is published at /feed.xml. Entries per feed: feed.posts_limit (default 10).
+feed:
+  path: /feed/posts.xml
+  collections:
+    blog:
+      path: /feed.xml

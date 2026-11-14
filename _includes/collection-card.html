@@ -1,5 +1,5 @@
 {%- assign post = include.post -%}
-<article class="collection-item collection-card" data-tags="{% for tag in post.tags %}{{ tag | slugify }} {% endfor %}">
+<article class="collection-item collection-card" data-categories="{% for category in post.categories %}{{ category | slugify }} {% endfor %}" data-tags="{% for tag in post.tags %}{{ tag | slugify }} {% endfor %}">
   {% if post.cover_image %}
   <a href="{{ post.url | relative_url }}" class="collection-card-media">
     <img src="{{ post.cover_image | relative_url }}" alt="{{ post.title }}" loading="lazy" />

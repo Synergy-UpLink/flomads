@@ -30,8 +30,11 @@ layout: default
         <span class="post-location">📍 {{ page.location }}</span>
         {% endif %}
       </div>
-      {% if page.tags and page.tags.size > 0 %}
+      {% if page.categories.size > 0 or page.tags.size > 0 %}
       <div class="post-tags">
+        {% for category in page.categories %}
+        <a href="{{ page.collection_path | default: '/blog/' | relative_url }}?category={{ category | slugify }}" class="tag tag-category">{{ category }}</a>
+        {% endfor %}
         {% for tag in page.tags %}
         <a href="{{ page.collection_path | default: '/blog/' | relative_url }}?tag={{ tag | slugify }}" class="tag">{{ tag }}</a>
         {% endfor %}
