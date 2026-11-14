@@ -1,6 +1,6 @@
 ---
 title: "The Exumas, Bahamas"
-date: 2026-11-03
+date: 2022-12-01
 author: "The Navigator"
 location: "Exuma, Bahamas"
 location_id: exuma-bs

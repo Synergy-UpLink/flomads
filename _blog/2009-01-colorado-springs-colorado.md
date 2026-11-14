@@ -1,6 +1,6 @@
 ---
 title: "Colorado Springs, Colorado"
-date: 2026-11-03
+date: 2009-01-01
 author: "The Navigator"
 location: "Colorado Springs, Colorado"
 location_id: colorado-springs-us

@@ -1,6 +1,6 @@
 ---
 title: "Albi, France"
-date: 2026-11-03
+date: 2026-07-01
 author: "The Navigator"
 location: "Albi, France"
 location_id: albi-fr

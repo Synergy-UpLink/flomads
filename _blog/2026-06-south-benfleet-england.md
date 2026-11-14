@@ -1,6 +1,6 @@
 ---
 title: "South Benfleet, England"
-date: 2026-11-03
+date: 2026-06-12
 author: "The Navigator"
 location: "South Benfleet, Essex"
 location_id: south-benfleet-uk

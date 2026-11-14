@@ -1,6 +1,6 @@
 ---
 title: "Limoges, France"
-date: 2026-11-03
+date: 2026-07-25
 author: "The Navigator"
 location: "Limoges, France"
 location_id: limoges-fr

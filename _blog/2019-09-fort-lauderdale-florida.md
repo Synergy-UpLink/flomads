@@ -1,6 +1,6 @@
 ---
 title: "Fort Lauderdale, Florida"
-date: 2026-11-03
+date: 2019-09-01
 author: "The Navigator"
 location: "Fort Lauderdale, Florida"
 location_id: fort-lauderdale-fl

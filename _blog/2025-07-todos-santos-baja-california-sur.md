@@ -1,6 +1,6 @@
 ---
 title: "Todos Santos, Baja California Sur"
-date: 2026-11-03
+date: 2025-07-01
 author: "The Navigator"
 location: "Todos Santos, Baja California Sur"
 location_id: todos-santos-mx

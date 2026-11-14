@@ -1,6 +1,6 @@
 ---
 title: "Hà Nội, Vietnam"
-date: 2026-11-03
+date: 2026-11-01
 author: "The Navigator"
 location: "Hà Nội, Vietnam"
 location_id: hanoi-vietnam

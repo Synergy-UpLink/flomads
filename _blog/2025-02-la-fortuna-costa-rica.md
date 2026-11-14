@@ -1,6 +1,6 @@
 ---
 title: "La Fortuna, Costa Rica"
-date: 2026-11-03
+date: 2025-02-01
 author: "The Navigator"
 location: "La Fortuna, Costa Rica"
 location_id: la-fortuna-cr

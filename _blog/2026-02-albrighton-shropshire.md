@@ -1,6 +1,6 @@
 ---
 title: "Albrighton, Shropshire"
-date: 2026-11-03
+date: 2026-02-01
 author: "The Navigator"
 location: "Albrighton, Shropshire"
 location_id: albrighton-uk

@@ -1,6 +1,6 @@
 ---
 title: "Cuenca, Ecuador"
-date: 2026-11-03
+date: 2024-06-01
 author: "The Navigator"
 location: "Cuenca, Ecuador"
 location_id: cuenca-ec

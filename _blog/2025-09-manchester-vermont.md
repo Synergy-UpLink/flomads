@@ -1,6 +1,6 @@
 ---
 title: "Manchester, Vermont"
-date: 2026-11-03
+date: 2025-09-01
 author: "The Navigator"
 location: "Manchester, Vermont"
 location_id: manchester-vt

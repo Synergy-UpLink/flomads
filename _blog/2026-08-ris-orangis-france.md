@@ -1,6 +1,6 @@
 ---
 title: "Ris-Orangis, France"
-date: 2026-11-03
+date: 2026-08-20
 author: "The Navigator"
 location: "Ris-Orangis, France"
 location_id: ris-orangis-fr

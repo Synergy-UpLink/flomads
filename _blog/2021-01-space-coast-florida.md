@@ -1,6 +1,6 @@
 ---
 title: "The Space Coast, Florida"
-date: 2026-11-03
+date: 2021-01-01
 author: "The Navigator"
 location: "Space Coast, Florida"
 location_id: space-coast-fl

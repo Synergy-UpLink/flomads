@@ -1,6 +1,6 @@
 ---
 title: "Cancún, Mexico"
-date: 2026-11-03
+date: 2018-04-01
 author: "The Navigator"
 location: "Cancún, Mexico"
 location_id: cancun-mx

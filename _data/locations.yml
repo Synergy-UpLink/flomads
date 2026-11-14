@@ -222,15 +222,15 @@ visits:
     location_id: fort-lauderdale-fl
     type: sailing
     start: "2019-09-01"
-    end: "2020-04-01"
+    end: "2020-12-01"
     label: ""
     current: false
     blurb: ""
 
-  - id: space-coast-fl-2020
+  - id: space-coast-fl-2021
     location_id: space-coast-fl
     type: sailing
-    start: "2020-04-01"
+    start: "2021-01-01"
     end: "2024-01-01"
     label: ""
     current: false

@@ -1,6 +1,6 @@
 ---
 title: "Paris, France"
-date: 2026-11-03
+date: 2026-08-01
 author: "The Navigator"
 location: "Paris, France"
 location_id: paris-fr

@@ -1,6 +1,6 @@
 ---
 title: "Santa María de Dota, Costa Rica"
-date: 2026-11-03
+date: 2025-04-01
 author: "The Navigator"
 location: "Santa María de Dota, Costa Rica"
 location_id: santa-maria-de-dota-cr

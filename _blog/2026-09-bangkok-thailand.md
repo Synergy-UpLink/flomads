@@ -1,6 +1,6 @@
 ---
 title: "Bangkok, Thailand"
-date: 2026-11-03
+date: 2026-09-01
 author: "The Navigator"
 location: "Bangkok, Thailand"
 location_id: bangkok-thailand
