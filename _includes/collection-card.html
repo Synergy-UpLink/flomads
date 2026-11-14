@@ -1,0 +1,32 @@
+{%- assign post = include.post -%}
+<article class="collection-item collection-card" data-tags="{% for tag in post.tags %}{{ tag | slugify }} {% endfor %}">
+  {% if post.cover_image %}
+  <a href="{{ post.url | relative_url }}" class="collection-card-media">
+    <img src="{{ post.cover_image | relative_url }}" alt="{{ post.title }}" loading="lazy" />
+  </a>
+  {% else %}
+  <a href="{{ post.url | relative_url }}" class="collection-card-media is-placeholder">
+    <span>{{ page.collection_placeholder | default: '✍️' }}</span>
+  </a>
+  {% endif %}
+  <div class="collection-card-body">
+    <div class="collection-card-meta">
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+      {% if post.location %}
+      <span class="meta-sep">·</span>
+      <span>📍 {{ post.location }}</span>
+      {% endif %}
+    </div>
+    <h2 class="collection-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+    {% if post.excerpt_text %}
+    <p class="collection-card-excerpt">{{ post.excerpt_text }}</p>
+    {% endif %}
+    {% if post.tags and post.tags.size > 0 %}
+    <div class="collection-card-tags">
+      {% for tag in post.tags %}
+      <span class="tag tag-sm">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</article>

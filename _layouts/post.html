@@ -4,12 +4,12 @@ layout: default
 <article class="post-page">
 
   <!-- Post hero -->
-  <header class="post-hero {% if page.cover_image %}post-hero--image{% endif %}">
+  <header class="post-hero {% if page.cover_image %}has-image{% endif %}">
     {% if page.cover_image %}
     <div class="post-hero-bg" style="background-image: url('{{ page.cover_image | relative_url }}')"></div>
     <div class="post-hero-overlay"></div>
     {% else %}
-    <div class="post-hero-bg post-hero-bg--plain"></div>
+    <div class="post-hero-bg is-plain"></div>
     {% endif %}
     <div class="container post-hero-content">
       <div class="post-breadcrumb">
@@ -23,10 +23,10 @@ layout: default
       {% endif %}
       <div class="post-meta">
         {% if page.author %}<span class="post-author">{{ page.author }}</span>{% endif %}
-        {% if page.author and page.date %}<span class="post-meta-sep">·</span>{% endif %}
+        {% if page.author and page.date %}<span class="meta-sep">·</span>{% endif %}
         <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
         {% if page.location %}
-        <span class="post-meta-sep">·</span>
+        <span class="meta-sep">·</span>
         <span class="post-location">📍 {{ page.location }}</span>
         {% endif %}
       </div>

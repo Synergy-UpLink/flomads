@@ -25,47 +25,22 @@ layout: default
   <div class="container">
 
     {% if all_tags.size > 0 %}
-    <div class="tag-filter" id="tag-filter">
-      <button class="tag tag--filter tag--active" data-tag="all">All</button>
+    <div class="collection-filter" id="collection-filter">
+      <button class="tag tag-filter is-active" data-tag="all">All</button>
       {% for tag in all_tags %}
-      <button class="tag tag--filter" data-tag="{{ tag | slugify }}">{{ tag }}</button>
+      <button class="tag tag-filter" data-tag="{{ tag | slugify }}">{{ tag }}</button>
       {% endfor %}
     </div>
     {% endif %}
 
-    <div class="post-grid" id="post-grid">
+    {% assign view = page.collection_view | default: 'grid' %}
+    <div class="collection-items l-{{ view }}" id="collection-items">
       {% for post in all_posts %}
-      <article class="post-card" data-tags="{% for tag in post.tags %}{{ tag | slugify }} {% endfor %}">
-        {% if post.cover_image %}
-        <a href="{{ post.url | relative_url }}" class="post-card-img-wrap">
-          <img src="{{ post.cover_image | relative_url }}" alt="{{ post.title }}" loading="lazy" />
-        </a>
+        {% if view == 'list' %}
+          {% include collection-row.html post=post %}
         {% else %}
-        <a href="{{ post.url | relative_url }}" class="post-card-img-wrap post-card-img-placeholder">
-          <span>{{ page.collection_placeholder | default: '✍️' }}</span>
-        </a>
+          {% include collection-card.html post=post %}
         {% endif %}
-        <div class="post-card-body">
-          <div class="post-card-meta">
-            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-            {% if post.location %}
-            <span class="post-meta-sep">·</span>
-            <span>📍 {{ post.location }}</span>
-            {% endif %}
-          </div>
-          <h2 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-          {% if post.excerpt_text %}
-          <p class="post-card-excerpt">{{ post.excerpt_text }}</p>
-          {% endif %}
-          {% if post.tags and post.tags.size > 0 %}
-          <div class="post-card-tags">
-            {% for tag in post.tags %}
-            <span class="tag tag--sm">{{ tag }}</span>
-            {% endfor %}
-          </div>
-          {% endif %}
-        </div>
-      </article>
       {% endfor %}
     </div>
 
@@ -78,8 +53,8 @@ layout: default
 
 <script>
 (function() {
-  var filterBtns = document.querySelectorAll('.tag--filter');
-  var cards = document.querySelectorAll('.post-card');
+  var filterBtns = document.querySelectorAll('.tag-filter');
+  var cards = document.querySelectorAll('.collection-item');
   var activeTag = 'all';
 
   // Read tag from URL ?tag=
@@ -90,7 +65,7 @@ layout: default
   function applyFilter(tag) {
     activeTag = tag;
     filterBtns.forEach(function(b) {
-      b.classList.toggle('tag--active', b.getAttribute('data-tag') === tag);
+      b.classList.toggle('is-active', b.getAttribute('data-tag') === tag);
     });
     cards.forEach(function(card) {
       var cardTags = card.getAttribute('data-tags') || '';
