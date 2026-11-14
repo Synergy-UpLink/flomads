@@ -1,8 +1,6 @@
 ---
 layout: default
 ---
-<link rel="stylesheet" href="{{ '/assets/css/blog-articles.css' | relative_url }}?v={{ site.time }}" />
-
 <article class="post-page">
 
   <!-- Post hero -->
@@ -59,7 +57,8 @@ layout: default
       {% endfor %}
 
       {% if current_index and current_index > 0 %}
-        {% assign prev_post = collection_docs[current_index | minus: 1] %}
+        {% assign prev_index = current_index | minus: 1 %}
+        {% assign prev_post = collection_docs[prev_index] %}
         <a href="{{ prev_post.url | relative_url }}" class="post-nav-link post-nav-prev">
           <span class="post-nav-label">← Older</span>
           <span class="post-nav-title">{{ prev_post.title }}</span>

@@ -10,6 +10,9 @@
 
 <!-- Styles -->
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time }}" />
+{% if page.layout == 'post' or page.layout == 'collection' %}
+<link rel="stylesheet" href="{{ '/assets/css/blog-articles.css' | relative_url }}?v={{ site.time }}" />
+{% endif %}
 
 <!-- Favicons -->
 <link rel="icon" type="image/png" href="{{ '/favicon-96x96.png' | relative_url }}" sizes="96x96" />
