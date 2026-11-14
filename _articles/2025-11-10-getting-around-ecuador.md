@@ -4,7 +4,7 @@ date: 2025-11-10
 author: "The Navigator"
 location: "Ecuador"
 tags: ["Ecuador", "transport", "practical", "Latin America"]
-cover_image: ""
+cover_image: "https://upload.wikimedia.org/wikipedia/commons/7/7e/%5Esalta_-_panoramio.jpg"
 excerpt_text: "Ecuador has an excellent intercity bus network, cheap taxis, and one genuinely confusing system for buying tickets. Here's what actually works."
 ---
 

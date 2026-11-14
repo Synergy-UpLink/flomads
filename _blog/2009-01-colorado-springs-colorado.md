@@ -6,7 +6,7 @@ location: "Colorado Springs, Colorado"
 location_id: colorado-springs-us
 categories: [places]
 tags: ["United States", "Colorado", "Rocky Mountains"]
-cover_image: ""
+cover_image: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Pikes_Peak_Cog_Railroad_near_the_Summit.jpg"
 excerpt_text: "A mountain-edge city at the foot of Pikes Peak, home to the Air Force Academy and a very red set of rocks."
 ---
 
