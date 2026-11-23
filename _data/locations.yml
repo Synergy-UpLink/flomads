@@ -3,14 +3,14 @@
 # Fields:
 #   id:           unique slug
 #   name:         display name (kept intentionally general in a
-#                 couple of spots — e.g. "Space Coast, FL" instead
-#                 of the exact town — to avoid pinpointing exactly
+#                 couple of spots ((e.g. "Space Coast, FL" instead
+#                 of the exact town)) to avoid pinpointing exactly
 #                 where homeowners live)
 #   country:      country name
 #   flag:         emoji flag
 #   lat/lng:      coordinates, used by the map marker
 #   description:  general geographic description of the PLACE
-#                 itself (facts about the location — not a
+#                 itself (facts about the location, not a
 #                 personal account of a specific stay there;
 #                 that belongs on the visit's `blurb` instead)
 
@@ -85,7 +85,7 @@ locations:
     flag: "🇬🇧"
     lat: 51.57462
     lng: 0.1845609
-    description: "A town in the London Borough of Havering, on the eastern edge of Greater London — historically a market town, now a suburban hub with rail links into central London."
+    description: "A town in the London Borough of Havering, on the eastern edge of Greater London. Historically a market town, now a suburban hub with rail links into central London."
 
   - id: albrighton-uk
     name: "Albrighton, Shropshire"
@@ -117,7 +117,7 @@ locations:
     flag: "🇲🇽"
     lat: 23.4594298
     lng: -110.2566555
-    description: "A small town on the Pacific coast of the Baja California Sur peninsula, midway between Cabo San Lucas and La Paz — designated a Pueblo Mágico for its arts and surf culture."
+    description: "A small town on the Pacific coast of the Baja California Sur peninsula, midway between Cabo San Lucas and La Paz. It is designated a Pueblo Mágico for its arts and surf culture."
 
   - id: cuenca-ec
     name: "Cuenca, EC"
@@ -173,7 +173,7 @@ locations:
     flag: "🇺🇸"
     lat: 26.1413462
     lng: -80.2322054
-    description: "A city on Florida's southeastern coast in Broward County, known for its extensive canal system and marine industry — a common jumping-off point for the Bahamas."
+    description: "A city on Florida's southeastern coast in Broward County, known for its extensive canal system and marine industry. A common jumping-off point for the Bahamas."
 
 # ── Visits ───────────────────────────────────────────────────
 # Flat list (not nested under locations) so it can be sorted
@@ -182,11 +182,10 @@ locations:
 #
 # Fields:
 #   id:           unique slug. Sit-type visits use the SAME id as
-#                 the matching entry in sits.yml — that shared id
-#                 IS the foreign key, no separate field needed.
+#                 the matching entry in sits.yml.
 #   location_id:  which location (see above)
 #   type:         sit | rental | sailing | vacation | home_base
-#                 (freeform — add types as needed)
+#                 (add types as needed, it's just a string)
 #   start / end:  YYYY-MM-DD when known. Leave "" if unknown/TBD.
 #   label:        optional human-readable override for display
 #                 (e.g. "2025 (two stays)") when start/end alone
@@ -249,7 +248,7 @@ visits:
     end: "2023-12-01"
     label: "2023"
     current: false
-    blurb: "A year living aboard Encantado in the Bahamas — glassy flats, absurd stars, and the high point of the liveaboard years."
+    blurb: "A year living aboard Encantado in the Bahamas. Pristine beaches, glassy flats, incredible sunrises/sunsets, and absurd stars."
 
   - id: cuenca-ec-2024
     location_id: cuenca-ec

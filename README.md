@@ -1,4 +1,4 @@
-# The Flomads — Jekyll Site
+# The Flomads - Jekyll Site
 
 noMADS going with the FLO · [flomads.com](https://flomads.com)
 
@@ -130,34 +130,34 @@ The map on the Now page centres on the visit marked `current: true` in
 `false` and the new one's to `true`. Only one visit should be current. If none
 is, the map falls back to the first location in the list.
 
-### Locations and visits — `_data/locations.yml`
+### Locations and visits - `_data/locations.yml`
 
 Two lists:
 
-- `locations` — one entry per physical place: `id` (slug), `name`, `country`,
+- `locations` - one entry per physical place: `id` (slug), `name`, `country`,
   `flag`, `lat`, `lng`, and `description` (facts about the place itself, not a
   personal account of a stay). Names are kept deliberately general in places
   (e.g. "Space Coast, FL") so homeowners' exact locations aren't pinpointed.
   `lat` / `lng` are kept to two decimal places (about 1 km) for the same
   reason; the coordinates are published in the page source, so use a town or
   city centre, never an exact address.
-- `visits` — a flat, chronological list of stays: `id`, `location_id` (must
+- `visits` - a flat, chronological list of stays: `id`, `location_id` (must
   match a `locations` id), `type` (`sit`, `rental`, `sailing`, `vacation`,
   `home_base`; freeform), `start` / `end` (`YYYY-MM-DD`, or `""` if unknown),
   `label` (optional display override for the date range), `current`, and
   `blurb` (optional note about that stay).
 
-### Sits, animals, and reviews — `_data/sits.yml`
+### Sits, animals, and reviews - `_data/sits.yml`
 
 Three top-level keys, all rendered on the public Profile page:
 
-- `platforms` — cards linking to our sitter profiles: `name`, `icon`, `url`,
+- `platforms` - cards linking to our sitter profiles: `name`, `icon`, `url`,
   `blurb`.
-- `sits` — one entry per documented sit. `id` **must match** the `id` of a
+- `sits` - one entry per documented sit. `id` **must match** the `id` of a
   `visits` entry in `locations.yml`; that shared id is the only link between
   the two files. Fields: `owners`, `testimonial` (`quote`, `name`), `photos`,
   `animals`.
-- `testimonials` — standalone reviews not tied to a documented sit: `quote`,
+- `testimonials` - standalone reviews not tied to a documented sit: `quote`,
   `name`, `location`, `platform`. Don't duplicate a review that already lives
   on a sit's `testimonial`; the Profile page pulls those in automatically.
 
@@ -201,5 +201,5 @@ fails, the form shows a fallback `mailto:` link.
 
 ## Third-party resources
 
-- Google Fonts (Playfair Display, DM Sans, Cinzel Decorative) — `head.html`
-- Leaflet 1.9.4 from unpkg and OpenStreetMap tiles — `now_map.html`
+- Google Fonts (Playfair Display, DM Sans, Cinzel Decorative) - `head.html`
+- Leaflet 1.9.4 from unpkg and OpenStreetMap tiles - `now_map.html`
