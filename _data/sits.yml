@@ -5,7 +5,7 @@ platforms:
   - name: "TrustedHouseSitters"
     icon: "🐾"
     url: "https://www.trustedhousesitters.com/house-and-pet-sitters/costa-rica/alajuela/la-fortuna/l/6259113/"
-    blurb: "Our primary platform — full sit history and verified homeowner reviews."
+    blurb: "Our first and most commonly used platform."
 
   - name: "MindMyHouse"
     icon: "🏠"
@@ -19,13 +19,12 @@ platforms:
 
 # ── Sits ─────────────────────────────────────────────────────
 # Location/dates/lat/lng live in _data/locations.yml. Each sit's
-# `id` here must match a visit `id` there — that's the whole
-# link, no separate foreign-key field needed. Visit-level `blurb`
+# `id` here must match a visit `id` there. Visit-level `blurb`
 # in locations.yml covers general context for the sit (e.g. no
 # public review yet); there's no top-level `notes` field here.
 #
 # Fields:
-#   id:           unique slug — MUST match a visit id in locations.yml
+#   id:           unique slug same as a visit id in locations.yml
 #   owners:       first names of the homeowners
 #   testimonial:
 #     quote:      their words (no surrounding quotes needed)
@@ -38,10 +37,10 @@ platforms:
 #   animals:      list of animal profiles (see schema below)
 #
 # Animal fields:
-#   name, species, breed — required
-#   age                  — optional
-#   photo                — path under /assets/images/sits/
-#   notes                — optional; used as the photo's hover/alt
+#   name, species, breed - required
+#   age                  - optional
+#   photo                - path under /assets/images/sits/
+#   notes                - optional; used as the photo's hover/alt
 #                          text or caption. If blank, generate one
 #                          from the other animal fields at display time.
 
@@ -119,7 +118,7 @@ sits:
         age: "4 years"
         photo: "albrighton/trixie.jpg"
         personality: "Opinionated, vocal, and absolutely convinced she is a lapdog."
-        care_notes: "Fed twice daily (7am / 5pm). Wears a harness for walks — pulls enthusiastically. Needs a good 45-min walk each morning."
+        care_notes: "Fed twice daily (7am / 5pm). Wears a harness for walks and pulls enthusiastically. Needs a good 45-min walk each morning."
         challenges: "When we arrived, Trixie had a stomach bug. Combined with new humans, she didn't have much of an appetite. We switched up her food to boiled chicken and rice for ease of digestion, and she recovered within 4 days without needing to go to the vet."
       - name: "Buddy"
         species: "Dog"
@@ -204,7 +203,7 @@ sits:
 # For reviews NOT tied to a documented sit above (e.g. an extra
 # TrustedHouseSitters/Nomador review, or a sit you haven't
 # written up yet). If a testimonial already lives on a sit's
-# `testimonial:` field, don't duplicate it here — the Profile
+# `testimonial:` field, don't duplicate it here as the Profile
 # page pulls sit-linked testimonials automatically.
 testimonials:
   - quote: "I've known Christine for over 25 years. She has watched my house and pets (cats and birds) numerous times. She's caring, clean and trustworthy!! Five stars all around!! I have also seen how well she treated her own pets and home over the years. I am extremely comfortable handing her my house keys and not worrying about my home. I know my pets will be loved and well taken care of!!"
