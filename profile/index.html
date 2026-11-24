@@ -110,9 +110,9 @@ description: "Where to find the Flomads' sitter profiles, past sit history, and 
             {% if a.notes and a.notes != "" %}
               {% assign a_caption = a.notes %}
             {% elsif a.age and a.age != "" %}
-              {% assign a_caption = a.name | append: " — a " | append: a.age | append: " " | append: a.breed | append: " " | append: a.species %}
+              {% assign a_caption = a.name | append: " - a " | append: a.age | append: " " | append: a.breed | append: " " | append: a.species %}
             {% else %}
-              {% assign a_caption = a.name | append: " — a " | append: a.breed | append: " " | append: a.species %}
+              {% assign a_caption = a.name | append: " - a " | append: a.breed | append: " " | append: a.species %}
             {% endif %}
             <div class="tl-animal">
               {% if a.photo and a.photo != "" %}

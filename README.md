@@ -9,7 +9,7 @@ Pages by a GitHub Actions workflow.
 
 ## Structure
 
-```
+```bash
 flomads/
 ├── _config.yml               # Site config, collections, front-matter defaults
 ├── Gemfile                   # jekyll + sitemap, feed, seo-tag, kramdown-parser-gfm
@@ -60,7 +60,7 @@ serves the site on port 4000 with LiveReload (35729).
 
 **Directly:**
 
-```
+```bash
 bundle install
 bundle exec jekyll serve --livereload
 ```
@@ -83,7 +83,7 @@ The repository's Pages source must be set to **GitHub Actions**
 
 Create a directory with an `index.html`:
 
-```
+```yaml
 ---
 layout: default
 title: "Page Title"
@@ -103,7 +103,7 @@ Add a Markdown file named `YYYY-MM-DD-slug.md` to `_blog/` or `_articles/`.
 The `post` layout and the collection label/path are applied automatically by
 the defaults in `_config.yml`. Front matter:
 
-```
+```yaml
 ---
 title: "Post title"
 date: 2026-02-20
@@ -119,7 +119,7 @@ excerpt_text: "One or two sentences shown under the title."
 
 Edit `now/index.html` and update `now_updated` in the front matter:
 
-```
+```yaml
 ---
 now_updated: "July 2026"
 ---

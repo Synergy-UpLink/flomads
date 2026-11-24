@@ -1,5 +1,5 @@
 /* ============================================================
-   FLOMADS.COM — Nautical Adventure Theme
+   FLOMADS.COM - Nautical Adventure Theme
    Deep navy / charcoal base · Warm cream text · Gold & red accents
    Playfair Display display · DM Sans body
    ============================================================ */
@@ -558,7 +558,7 @@ em { font-style: italic; color: var(--gold-light); }
 .page-subtitle a { color: var(--gold-light); }
 
 /* ══════════════════════════════════════════
-   ABOUT — PROSE
+   ABOUT - PROSE
 ══════════════════════════════════════════ */
 .prose-container {
   max-width: 740px;
@@ -571,7 +571,7 @@ em { font-style: italic; color: var(--gold-light); }
 }
 
 /* ══════════════════════════════════════════
-   ABOUT — CREW
+   ABOUT - CREW
 ══════════════════════════════════════════ */
 .crew-section { background: var(--navy-mid); }
 .crew-grid {
@@ -653,7 +653,7 @@ em { font-style: italic; color: var(--gold-light); }
 }
 
 /* ══════════════════════════════════════════
-   ABOUT — TIMELINE
+   ABOUT - TIMELINE
 ══════════════════════════════════════════ */
 .history-section { background: var(--navy); }
 .timeline {
@@ -718,7 +718,7 @@ em { font-style: italic; color: var(--gold-light); }
 }
 
 /* ══════════════════════════════════════════
-   ABOUT — DREAM SECTION
+   ABOUT - DREAM SECTION
 ══════════════════════════════════════════ */
 .dream-section { background: var(--navy-mid); }
 
