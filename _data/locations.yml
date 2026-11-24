@@ -15,8 +15,16 @@
 #                 that belongs on the visit's `blurb` instead)
 
 locations:
+  - id: tam-coc-vietnam
+    name: "Tam Cốc - Ninh Bình, Việt Nam"
+    country: "Vietnam"
+    flag: "🇻🇳"
+    lat: 20.2185089
+    lng: 105.9149739
+    description: "Tam Cốc is a scenic area in Ninh Bình province, northern Vietnam, known for its limestone karsts, rice fields, and the winding Ngô Đồng River. Visitors often take small boats through the river’s caves and countryside, earning the area its nickname, “Ha Long Bay on land.” It is part of the Tràng An Scenic Landscape Complex, a UNESCO World Heritage site, and offers a blend of natural beauty and nearby cultural landmarks."
+
   - id: hanoi-vietnam
-    name: "Hà Nội, Vietnam"
+    name: "Hà Nội, Việt Nam"
     country: "Vietnam"
     flag: "🇻🇳"
     lat: 21.0783242
@@ -380,7 +388,14 @@ visits:
     location_id: hanoi-vietnam
     type: rental
     start: "2026-11-01"
-    end: ""
+    end: "2026-11-21"
     label: ""
-    current: true
+    current: false
     blurb: ""
+
+  - id: tam-coc-2026
+    location_id: tam-coc-vietnam
+    type: homestay
+    start: "2026-11-21"
+    end: ""
+    current: true
