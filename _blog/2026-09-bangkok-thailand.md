@@ -8,6 +8,7 @@ categories: [places]
 tags: ["Thailand", "Southeast Asia", "city"]
 cover_image: ""
 excerpt_text: "Thailand's capital: a sprawling river city with a ceremonial name long enough to win a record, and a street food scene to match."
+published: false
 ---
 
 Bangkok is the capital and largest city of Thailand, on the Chao Phraya River near the Gulf of Thailand. Roughly 10 million people live in the city proper, and the wider metropolitan area is considerably larger.

@@ -8,6 +8,7 @@ categories: [places]
 tags: ["Mexico", "Quintana Roo", "Caribbean"]
 cover_image: ""
 excerpt_text: "A purpose-built Caribbean resort city on the tip of the Yucatán Peninsula, shaped like a number seven."
+published: false
 ---
 
 Cancún is a city in the Mexican state of Quintana Roo, on the northeastern tip of the Yucatán Peninsula, fronting the Caribbean Sea. It has close to 900,000 residents.

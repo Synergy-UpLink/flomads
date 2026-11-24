@@ -8,6 +8,7 @@ categories: [places]
 tags: ["France", "Nouvelle-Aquitaine", "porcelain"]
 cover_image: ""
 excerpt_text: "A river city in central France with a Gothic cathedral and a world-famous porcelain industry."
+published: false
 ---
 
 Limoges is a city in central France, on the Vienne River, and the capital of the Haute-Vienne department in the Nouvelle-Aquitaine region. It has roughly 130,000 residents.

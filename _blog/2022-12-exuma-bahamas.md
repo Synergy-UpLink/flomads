@@ -8,6 +8,7 @@ categories: [places]
 tags: ["Bahamas", "Caribbean", "islands"]
 cover_image: ""
 excerpt_text: "Over 365 cays southeast of Nassau, home to the world's first land-and-sea park and a famous colony of swimming pigs."
+published: false
 ---
 
 Exuma is a district of the Bahamas made up of more than 365 islands and cays, strung out over about 120 miles of the Atlantic southeast of Nassau. It had around 7,300 residents at the 2022 census, most of them on Great Exuma, the largest island.

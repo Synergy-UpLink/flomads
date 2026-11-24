@@ -8,6 +8,7 @@ categories: [places]
 tags: ["United States", "Florida", "NASA"]
 cover_image: ""
 excerpt_text: "Florida's Atlantic coast in Brevard County, named for the rockets that have launched from Cape Canaveral for more than sixty years."
+published: false
 ---
 
 The Space Coast is the stretch of Florida's Atlantic shoreline in Brevard County, roughly 70 miles long, between Titusville in the north and Palm Bay in the south. It gets its nickname from the launch facilities at Cape Canaveral and Kennedy Space Center.

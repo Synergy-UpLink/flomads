@@ -8,6 +8,7 @@ categories: [places]
 tags: ["Costa Rica", "Los Santos", "coffee"]
 cover_image: ""
 excerpt_text: "A mountain town in Costa Rica's Los Santos coffee country, the head town of Dota canton."
+published: false
 ---
 
 Santa María de Dota is the head town of Dota canton in San José Province, Costa Rica, up in the Talamanca mountains south of the capital. The Santa María district is at roughly 1,500 meters (about 5,000 feet) and had around 4,600 residents at the 2011 census. The canton as a whole is higher and larger, with just under 7,000 people in 2011.

@@ -8,6 +8,7 @@ categories: [places]
 tags: ["France", "Île-de-France", "city"]
 cover_image: ""
 excerpt_text: "The capital of France, on the Seine: two thousand years of history, twenty arrondissements, and a very famous tower."
+published: false
 ---
 
 Paris is the capital of France, in the north of the country on the Seine. About 2 million people live within the city limits and around 12 million in the greater Paris region, which makes it one of the largest urban areas in Europe.

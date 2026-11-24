@@ -8,6 +8,7 @@ categories: [places]
 tags: ["England", "London", "market town"]
 cover_image: ""
 excerpt_text: "A market town on the eastern edge of Greater London, named for a wide ford and still holding a market first licensed in 1247."
+published: false
 ---
 
 Romford is a town in the London Borough of Havering, on the eastern edge of Greater London. It was historically part of Essex and became part of Greater London in 1965.

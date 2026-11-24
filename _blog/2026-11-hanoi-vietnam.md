@@ -8,6 +8,7 @@ categories: [places]
 tags: ["Vietnam", "Southeast Asia", "city"]
 cover_image: ""
 excerpt_text: "The capital of Vietnam: a thousand-year-old city of lakes, narrow streets, and more motorbikes than seems physically reasonable."
+published: false
 ---
 
 Hà Nội (Hanoi) is the capital of Vietnam, in the north of the country on the Red River delta. More than 8 million people live in the city, which makes it the country's second largest after Ho Chi Minh City.

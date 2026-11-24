@@ -8,6 +8,7 @@ categories: [places]
 tags: ["Ecuador", "Andes", "UNESCO"]
 cover_image: ""
 excerpt_text: "A colonial city in the Ecuadorian Andes with four rivers, blue cathedral domes, and a UNESCO-listed historic center."
+published: false
 ---
 
 Cuenca (officially Santa Ana de los Cuatro Ríos de Cuenca) is a city in the Andean highlands of southern Ecuador and the capital of Azuay Province. It sits at roughly 2,500 meters (about 8,200 feet) above sea level, has well over 300,000 residents, and is Ecuador's third-largest city after Guayaquil and Quito.

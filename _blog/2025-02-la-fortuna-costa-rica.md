@@ -8,6 +8,7 @@ categories: [places]
 tags: ["Costa Rica", "Arenal", "volcano"]
 cover_image: ""
 excerpt_text: "A lowland town at the base of Arenal Volcano, with hot springs, a big waterfall, and a very quiet volcano."
+published: false
 ---
 
 La Fortuna is a district in San Carlos canton, Alajuela Province, in the northern lowlands of Costa Rica. It sits at about 250 meters above sea level and had a little over 15,000 residents at the 2011 census.

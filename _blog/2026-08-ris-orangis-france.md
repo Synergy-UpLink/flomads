@@ -8,6 +8,7 @@ categories: [places]
 tags: ["France", "Île-de-France", "Paris suburbs"]
 cover_image: ""
 excerpt_text: "A Seine-side commune in the southern suburbs of Paris, born from two villages that merged during the Revolution."
+published: false
 ---
 
 Ris-Orangis is a commune in the Essonne department, in the southern suburbs of Paris. It sits on the Seine about 22 kilometers from the center of the capital and has roughly 30,000 residents. People from Ris-Orangis are called *Rissois*.

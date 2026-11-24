@@ -8,6 +8,7 @@ categories: [places]
 tags: ["United States", "Florida", "boating"]
 cover_image: ""
 excerpt_text: "A canal-laced city on Florida's southeast coast known as the 'Venice of America' and a world capital of yachting."
+published: false
 ---
 
 Fort Lauderdale is a city on Florida's southeastern coast and the county seat of Broward County, between Miami and Palm Beach. It has around 180,000 residents within the city limits.

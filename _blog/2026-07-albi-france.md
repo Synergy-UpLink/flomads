@@ -8,6 +8,7 @@ categories: [places]
 tags: ["France", "Occitanie", "UNESCO"]
 cover_image: ""
 excerpt_text: "A red-brick city on the Tarn River with a fortress-like cathedral, a UNESCO-listed old town, and the world's largest collection of Toulouse-Lautrec."
+published: false
 ---
 
 Albi is a city in southern France and the prefecture of the Tarn department, in the Occitanie region. It sits on the Tarn River about 85 kilometers northeast of Toulouse and has roughly 50,000 residents.

@@ -8,6 +8,7 @@ categories: [places]
 tags: ["England", "Shropshire", "village"]
 cover_image: ""
 excerpt_text: "A large village in the easternmost corner of Shropshire, with a Domesday Book entry, a Victorian-era railway station, and a king-in-the-oak story nearby."
+published: false
 ---
 
 Albrighton is a large village in Shropshire, England, about 8 miles northwest of Wolverhampton and 11 miles northeast of Bridgnorth. It has a little over 4,000 residents and is the most easterly settlement in the county.

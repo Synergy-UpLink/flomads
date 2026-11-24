@@ -8,6 +8,7 @@ categories: [places]
 tags: ["England", "Essex", "Thames Estuary"]
 cover_image: ""
 excerpt_text: "A small Essex town on the edge of the Thames Estuary marshes, with a Viking battle in its past and a very old church in its present."
+published: false
 ---
 
 South Benfleet is a town in the Castle Point district of Essex, about 30 miles east of London, on the edge of the Thames Estuary marshes. Benfleet Creek separates it from Canvey Island.

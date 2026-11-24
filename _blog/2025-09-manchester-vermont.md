@@ -8,6 +8,7 @@ categories: [places]
 tags: ["United States", "Vermont", "Green Mountains"]
 cover_image: ""
 excerpt_text: "A Green Mountains resort town with a Lincoln family estate, a historic inn, and a famous fly-fishing company."
+published: false
 ---
 
 Manchester is a town in Bennington County, in southwestern Vermont, with the Green Mountains to the east and the Taconic range to the west. It has a little over 4,000 residents and has long been a resort town for hiking, skiing, and fly-fishing.

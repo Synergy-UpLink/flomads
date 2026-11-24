@@ -8,6 +8,7 @@ categories: [places]
 tags: ["United States", "Colorado", "Rocky Mountains"]
 cover_image: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Pikes_Peak_Cog_Railroad_near_the_Summit.jpg"
 excerpt_text: "A mountain-edge city at the foot of Pikes Peak, home to the Air Force Academy and a very red set of rocks."
+published: false
 ---
 
 Colorado Springs is the county seat of El Paso County, Colorado, at the eastern foot of the Rocky Mountains about 60 miles south of Denver. It sits at roughly 6,000 feet above sea level, and with about 480,000 residents it is the second most populous city in the state.

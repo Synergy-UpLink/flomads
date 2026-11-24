@@ -8,6 +8,7 @@ categories: [places]
 tags: ["Mexico", "Baja California Sur", "Pueblo Mágico"]
 cover_image: ""
 excerpt_text: "An oasis town on Baja's Pacific coast with a mission-era past, a thriving art scene, and surf nearby."
+published: false
 ---
 
 Todos Santos is a small town on the Pacific coast of the Baja California Sur peninsula in Mexico, about midway between Cabo San Lucas and La Paz. It had roughly 7,000 residents at the 2020 census.
