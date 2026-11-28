@@ -2,9 +2,8 @@
 title: "These feet are made for walking"
 date: 2026-11-14
 author: "Jordan"
-cover_image: "https://upload.wikimedia.org/wikipedia/commons/7/7e/%5Esalta_-_panoramio.jpg"
-excerpt_text: "Ecuador has an excellent intercity bus network, cheap taxis, and one genuinely confusing system for buying tickets. Here's what actually works."
-published: false
+cover_image: "https://upload.wikimedia.org/wikipedia/commons/0/03/Walking_around_Madrid_-_Puma_Sneakers_and_Lucky_Brand_Jeans.JPG"
+excerpt_text: "A bit of a peak into how we get around a new place, and why we review aspects of a place the way we do."
 ---
 
-Every single place we go, we start to travel via the feet. 
+
